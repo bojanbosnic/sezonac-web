@@ -38,8 +38,8 @@ const Interface = ({ toggleFun, toggleValue }) => {
                   textColor="color-white"
                   bgColor="bg-transparent"
                   hover="hover:bg-sky-700"
-                  paddingY="py-4"
-                  paddingX="px-6"
+                  paddingY="py-3"
+                  paddingX="px-5"
                 />
               </a>
             </Link>
