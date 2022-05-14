@@ -2,22 +2,25 @@ module.exports = {
   content: ["./pages/**/*.{html,js}", "./components/**/*.{html,js}"],
   theme: {
     container: {
-      padding: "2rem",
+      padding: "3rem",
     },
     screens: {
-      tablet: "768px",
-      // => @media (min-width: 640px) { ... }
+      xl: { max: "1200px" },
+      // => @media (max-width: 1279px) { ... }
 
-      laptop: "992px",
-      // => @media (min-width: 1024px) { ... }
+      lg: { max: "992px" },
+      // => @media (max-width: 1023px) { ... }
 
-      desktop: "1200px",
-      // => @media (min-width: 1280px) { ... }
+      md: { max: "768px" },
+      // => @media (max-width: 767px) { ... }
+
+      sm: { max: "639px" },
+      // => @media (max-width: 639px) { ... }
     },
     extend: {
       colors: {
         primary: "#00214A",
-        secondary:'#707070',
+        secondary: "#707070",
         white: "#fff",
       },
     },

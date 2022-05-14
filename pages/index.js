@@ -1,10 +1,12 @@
 import Head from "next/head";
+import { useState } from "react";
 import Image from "next/image";
 import job from "../assets/ilustrations/job.png";
 import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 
 export default function Home() {
+  const [isNavOpen, setIsNavOpen] = useState(false);
   return (
     <>
       <Head>
@@ -13,8 +15,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container mx-auto">
-        <Navbar />
-        <main className=" h-screen flex justify-between items-center flex-wrap	">
+        <Navbar/>
+        <main className="h-screen flex justify-between items-center flex-wrap	lg:flex-col">
           <div className="text-left">
             <div>
               <h1 className="text-5xl font-bold leading-normal">
@@ -34,7 +36,9 @@ export default function Home() {
                 paddingY="py-5"
                 paddingX="px-8"
               />
-              <p className="mx-4">ili</p>
+              <p className="mx-4">
+                ili
+              </p>
               <Button
                 name="Potraži posao"
                 textColor="color-white"
@@ -52,4 +56,6 @@ export default function Home() {
       </div>
     </>
   );
+
+
 }
