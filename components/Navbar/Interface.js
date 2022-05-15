@@ -14,7 +14,9 @@ const Interface = ({ toggleFun, toggleValue }) => {
       <div className="siteNavbar md:w-full md:min-w-min">
         <ul
           className={classNames(
-            `${toggleValue && `open`} my-5 flex p-0 items-center list-none`
+            `${
+              toggleValue && `open`
+            } my-5 flex p-0 items-center list-none md:my-0`
           )}
         >
           <li className="text-white mr-4">
@@ -121,12 +123,14 @@ const Interface = ({ toggleFun, toggleValue }) => {
 
     .siteNavbar .open {
     max-height: 100vh;
+    height: 100vh;
     overflow: visible;
     position: fixed;
     top: 0;
     display: flex;
     justify-content: center;
     z-index: 1;
+    padding-top: 50px;
   }
 
 }

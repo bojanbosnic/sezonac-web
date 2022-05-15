@@ -1,3 +1,4 @@
+
 module.exports = {
   content: ["./pages/**/*.{html,js}", "./components/**/*.{html,js}"],
   theme: {
@@ -16,6 +17,8 @@ module.exports = {
 
       sm: { max: "639px" },
       // => @media (max-width: 639px) { ... }
+      xs: { max: "475px" },
+
     },
     extend: {
       colors: {
