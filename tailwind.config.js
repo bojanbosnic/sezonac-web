@@ -3,7 +3,7 @@ module.exports = {
   content: ["./pages/**/*.{html,js}", "./components/**/*.{html,js}"],
   theme: {
     container: {
-      padding: "3rem",
+      padding: "4rem",
     },
     screens: {
       xl: { max: "1200px" },
@@ -17,9 +17,8 @@ module.exports = {
 
       sm: { max: "639px" },
       // => @media (max-width: 639px) { ... }
-      xs: { max: "475px" },
-
     },
+   
     extend: {
       colors: {
         primary: "#00214A",

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useState } from "react";
 import Image from "next/image";
-import job from "../assets/ilustrations/job.png";
+import homepage_pic from "../assets/ilustrations/search_job1.svg";
 import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 
@@ -16,7 +16,7 @@ export default function Home() {
       </Head>
       <div className="container mx-auto">
         <Navbar/>
-        <main className="h-screen flex justify-between items-center flex-wrap	lg:flex-col">
+        <main className="h-screen flex items-center flex-wrap	justify-between sm:h-full   ">
           <div className="text-left">
             <div>
               <h1 className="text-5xl font-bold leading-normal">
@@ -50,7 +50,7 @@ export default function Home() {
             </div>
           </div>
           <div className="block w-96">
-            <Image src={job} alt="find-job-image" className="items-center" />
+            <Image src={homepage_pic} alt="find-job-image" className="items-center" />
           </div>
         </main>
       </div>

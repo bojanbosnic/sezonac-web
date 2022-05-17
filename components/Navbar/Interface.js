@@ -11,7 +11,7 @@ const Interface = ({ toggleFun, toggleValue }) => {
       <Link href="/">
         <Image src={logo} alt="sezonac-logo" />
       </Link>
-      <div className="siteNavbar md:w-full md:min-w-min">
+      <div className="siteNavbar md:w-full md:min-wi-min ">
         <ul
           className={classNames(
             `${
@@ -30,7 +30,7 @@ const Interface = ({ toggleFun, toggleValue }) => {
             </Link>
           </li>
           <li>
-            <div className="block border-l-2 border-secondary h-8 mx-2 md:border-r-0 md:border-t-1 md:border-secondary md:h-0 md:m-r-0"></div>
+          <div className="block border-l-2 border-secondary h-8 mx-2 md:border-r-0 md:border-t-1 md:border-secondary md:h-0 md:m-r-0"></div>
           </li>
           <li className="mx-3">
             <Link href="#">
@@ -57,7 +57,7 @@ const Interface = ({ toggleFun, toggleValue }) => {
         className={classNames(
           `${
             toggleValue && `togglerOpen`
-          } border-3 border-white m-3 bg-transparent cursor-pointer h-9 hidden z-10 md:block `
+          } border-3 border-white m-3 bg-transparent cursor-pointer h-9  z-10 hidden  md:block `
         )}
         onClick={toggleFun}
       >
@@ -99,7 +99,9 @@ const Interface = ({ toggleFun, toggleValue }) => {
   transform: translateY(-3px) rotate(-45deg);
 }
 
-@media (max-width: 768px){
+  @media(max-width: 767px){
+
+
   .siteNavbar ul {
     position: absolute;
     width: 100%;
@@ -132,8 +134,10 @@ const Interface = ({ toggleFun, toggleValue }) => {
     z-index: 1;
     padding-top: 50px;
   }
-
 }
+
+
+
 `}
       </style>
     </nav>
