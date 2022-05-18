@@ -5,7 +5,7 @@ function Button({ name, bgColor, textColor, hover, paddingY, paddingX }) {
   return (
     <button
       className={classnames(
-        `${bgColor} ${textColor} ${hover} ${paddingY} ${paddingX} font-bold  rounded border-2`
+        `${bgColor} ${textColor} ${hover} ${paddingY} ${paddingX} font-bold  rounded border-2 sm:w-full`
       )}
     >
       {name}

@@ -30,7 +30,7 @@ const Interface = ({ toggleFun, toggleValue }) => {
             </Link>
           </li>
           <li>
-          <div className="block border-l-2 border-secondary h-8 mx-2 md:border-r-0 md:border-t-1 md:border-secondary md:h-0 md:m-r-0"></div>
+            <div className="block border-l-2 border-secondary h-8 mx-2 md:border-r-0 md:border-t-1 md:border-secondary md:h-0 md:m-r-0"></div>
           </li>
           <li className="mx-3">
             <Link href="#">
@@ -64,7 +64,8 @@ const Interface = ({ toggleFun, toggleValue }) => {
         <span className="spanAnimation togglerOpen w-7 h-1 bg-white block ease-in-out duration-300 "></span>
       </button>
       <style>
-        {`.spanAnimation::before {
+        {`      
+        .spanAnimation::before {
   width: 28px;
   height: 3px;
   background-color: #fff;
@@ -141,6 +142,7 @@ const Interface = ({ toggleFun, toggleValue }) => {
 `}
       </style>
     </nav>
+    
   );
 };
 
