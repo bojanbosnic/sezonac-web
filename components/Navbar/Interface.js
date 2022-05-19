@@ -3,6 +3,7 @@ import logo from "../../assets/logos/logo.png";
 import Link from "next/link";
 import Image from "next/image";
 import classNames from "classnames";
+import styles from "./styles.module.css";
 import Button from "../../components/Button";
 
 const Interface = ({ toggleFun, toggleValue }) => {
@@ -11,11 +12,11 @@ const Interface = ({ toggleFun, toggleValue }) => {
       <Link href="/">
         <Image src={logo} alt="sezonac-logo" />
       </Link>
-      <div className="siteNavbar md:w-full md:min-wi-min ">
+      <div className={`${styles.siteNavbar} md:w-full md:min-wi-min`}>
         <ul
           className={classNames(
             `${
-              toggleValue && `open`
+              toggleValue && styles.open
             } my-5 flex p-0 items-center list-none md:my-0`
           )}
         >
@@ -56,93 +57,14 @@ const Interface = ({ toggleFun, toggleValue }) => {
       <button
         className={classNames(
           `${
-            toggleValue && `togglerOpen`
+            toggleValue && styles.togglerOpen
           } border-3 border-white m-3 bg-transparent cursor-pointer h-9  z-10 hidden  md:block `
         )}
         onClick={toggleFun}
       >
-        <span className="spanAnimation togglerOpen w-7 h-1 bg-white block ease-in-out duration-300 "></span>
+        <span className={`${styles.spanAnimation} togglerOpen w-7 h-1 bg-white block ease-in-out duration-300`}></span>
       </button>
-      <style>
-        {`      
-        .spanAnimation::before {
-  width: 28px;
-  height: 3px;
-  background-color: #fff;
-  display: block;
-  transition: 0.3s;
-}
-.spanAnimation::after {
-  width: 28px;
-  height: 3px;
-  background-color: #fff;
-  display: block;
-  transition: 0.3s;
-}
-
-.spanAnimation::before {
-  content: "";
-  transform: translateY(-9px);
-}
-
-.spanAnimation::after {
-  content: "";
-  transform: translateY(6px);
-}
-
-.togglerOpen span {
-  background-color: transparent;
-}
-.togglerOpen span:before {
-  transform: translateY(0px) rotate(45deg);
-}
-.togglerOpen span:after {
-  transform: translateY(-3px) rotate(-45deg);
-}
-
-  @media(max-width: 767px){
-
-
-  .siteNavbar ul {
-    position: absolute;
-    width: 100%;
-    height: calc(100vh - 60px);
-    left: 0;
-    top: 60px;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.95);
-    max-height: 0;
-    overflow: hidden;
-    transition: 0.3s;
-  }
-
-    .siteNavbar ul li {
-    width: 100%;
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 2rem;
-  }
-
-    .siteNavbar .open {
-    max-height: 100vh;
-    height: 100vh;
-    overflow: visible;
-    position: fixed;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    z-index: 1;
-    padding-top: 50px;
-  }
-}
-
-
-
-`}
-      </style>
     </nav>
-    
   );
 };
 

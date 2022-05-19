@@ -1,5 +1,5 @@
 import React from "react";
-import classnames from 'classnames';
+import classnames from "classnames";
 
 function Button({ name, bgColor, textColor, hover, paddingY, paddingX }) {
   return (
@@ -11,6 +11,6 @@ function Button({ name, bgColor, textColor, hover, paddingY, paddingX }) {
       {name}
     </button>
   );
-};
+}
 
 export default Button;
