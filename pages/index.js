@@ -6,7 +6,6 @@ import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 
 export default function Home() {
-  const [isNavOpen, setIsNavOpen] = useState(false);
   return (
     <>
       <Head>
@@ -15,11 +14,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container mx-auto sm:px-8">
-        <Navbar/>
-        <main className="h-screen flex items-center flex-wrap	justify-between lg:justify-center sm:w-full">
-          <div className="text-left">
+        <Navbar />
+        <main className="h-screen flex items-center flex-wrap justify-between lg:justify-center   sm:h-screen">
+          <div className="text-left  md:my-8">
             <div>
-              <h1 className="text-5xl font-bold leading-normal sm:text-4xl">
+              <h1 className="text-5xl font-semibold leading-normal sm:text-4xl">
                 Tražiš sezonski posao?
                 <span className="block">Tražiš radnike?</span>
               </h1>
@@ -33,12 +32,10 @@ export default function Home() {
                 textColor="color-white"
                 bgColor="bg-blue-500"
                 hover="hover:bg-sky-700"
-                paddingY="py-5 sm:py-4"
+                paddingY="py-5 md:py-4"
                 paddingX="px-8"
               />
-              <p className="m-4">
-                ili
-              </p>
+              <p className="m-4">ili</p>
               <Button
                 name="Potraži posao"
                 textColor="color-white"
@@ -49,13 +46,15 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="block w-96 sm:hidden">
-            <Image src={homepage_pic} alt="find-job-image" className="items-center" />
+          <div className="block w-96  md:my-8 sm:hidden">
+            <Image
+              src={homepage_pic}
+              alt="find-job-image"
+              className="items-center"
+            />
           </div>
         </main>
       </div>
     </>
   );
-
-
 }
