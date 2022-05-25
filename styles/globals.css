@@ -3,6 +3,7 @@
   body {
     @apply bg-primary text-white;
   }
+ 
   h1 {
     @apply text-5xl font-semibold my-8;
   }
@@ -11,6 +12,11 @@
   }
   h3 {
     @apply text-lg my-8;
+  }
+
+  .input_filed_contact{
+  @apply w-full pl-10 outline-none border text-black border-secondary rounded-lg py-3
+
   }
 }
 @tailwind components;

@@ -16,7 +16,7 @@ export default function ContactUs() {
   return (
     <div className="container">
       <Navbar />
-      <main className="flex flex-wrap justify-between items-center my-20">
+      <main className="flex flex-wrap justify-between items-center my-20 md:my-10">
         <section className="w-[calc(50%-40px)] md:w-full">
           <h1>Kontaktiraj Nas</h1>
           <h2>Popuni formu i naš tim će ti odgovoriti u roku 24 sata.</h2>
@@ -63,18 +63,18 @@ export default function ContactUs() {
           </address>
         </section>
         <section className="w-[calc(50%-40px)] md:w-full">
-          <form className="flex flex-col outline-0 py-20 px-12 bg-white rounded-lg md:mt-12">
+          <form className="flex flex-col outline-0 py-20 px-12 bg-white text-black rounded-lg md:mt-12">
             <div>
               <label htmlFor="name_id">Ime</label>
               <div className="relative">
                 <BsFillPersonFill
-                  className="absolute my-5 mx-4"
+                  className="absolute my-6 mx-4"
                   color="#707070"
                 />
                 <input
                   id="name_id"
                   type="text"
-                  className="w-full pl-10 outline-none border text-black border-secondary rounded-lg py-3 px-5 my-2"
+                  className="input_filed_contact my-2"
                   placeholder="Ime"
                 />
               </div>
@@ -82,11 +82,11 @@ export default function ContactUs() {
             <div className="my-6">
               <label htmlFor="email_id">Email</label>
               <div className="relative">
-                <HiOutlineMail className="absolute my-5 mx-4" color="#707070" />
+                <HiOutlineMail className="absolute my-6 mx-4" color="#707070" />
                 <input
                   id="email_id"
                   type="text"
-                  className="w-full pl-10 outline-none border text-black border-secondary rounded-lg py-3 px-5 my-2"
+                  className="input_filed_contact my-2"
                   placeholder="Email"
                 />
               </div>
@@ -95,18 +95,18 @@ export default function ContactUs() {
               <label htmlFor="msg_id">Poruka</label>
               <div className="relative">
                 <BiMessageRounded
-                  className="absolute my-5 mx-4"
+                  className="absolute my-6 mx-4"
                   color="#707070"
                 />
                 <input
                   id="msg_id"
                   type="text"
-                  className="w-full pl-10 outline-none border text-black border-secondary rounded-lg py-3 px-6"
+                  className="input_filed_contact my-2"
                   placeholder="Poruka"
                 />
               </div>
             </div>
-            <button className="py-4 px-8 border-none mt-12 bg-secondary text-white pointer rounded-lg">
+            <button className="py-4 px-8 border-none mt-12 bg-secondary text-white pointer rounded-lg hover:bg-primary">
               Pošalji poruku
             </button>
           </form>
