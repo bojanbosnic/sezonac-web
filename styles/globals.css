@@ -14,8 +14,8 @@
     @apply text-lg my-8;
   }
 
-  .input_filed_contact{
-  @apply w-full pl-10 outline-none border text-black border-secondary rounded-lg py-3
+  .input_field_contact{
+  @apply w-full pl-10 relative outline-none z-20 border bg-transparent text-black border-secondary rounded-lg py-3
 
   }
 }
