@@ -1,8 +1,8 @@
 import "tailwindcss/tailwind.css";
-
+import '../styles/globals.css';
 function MyApp({ Component, pageProps }) {
   return (
-    <div className="bg-primary text-white">
+    <div>
       <Component {...pageProps} />
     </div>
   );
