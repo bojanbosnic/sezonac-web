@@ -13,14 +13,23 @@
   h3 {
     @apply text-lg my-8;
   }
+  a:hover{
+    @apply underline
+  }
 
   .input_field_contact{
   @apply w-full pl-10 relative outline-none z-20 border bg-transparent text-black border-secondary rounded-lg py-3
 
   }
+
+  .input_field_login{
+    @apply w-full outline-none bg-transparent text-white border border-secondary rounded-lg py-5 px-6 my-2
+  }
+
+  
 }
 @tailwind components;
+
 @tailwind utilities;
 
-@layer components {
-}
+
