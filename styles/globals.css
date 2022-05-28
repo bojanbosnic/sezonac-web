@@ -26,6 +26,10 @@
     @apply w-full outline-none bg-transparent text-white border border-secondary rounded-lg py-5 px-6 my-2
   }
 
+  .input_field_registration{
+  @apply w-full outline-none bg-transparent text-white border border-secondary rounded-lg py-5 px-6 my-2
+  }
+
   
 }
 @tailwind components;
