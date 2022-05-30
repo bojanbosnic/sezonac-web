@@ -9,7 +9,7 @@ export default function Jobs() {
     <div className="container sm:p-4">
       <Navbar />
       <main>
-        <div className="flex justify-center my-12">
+        <div className="flex justify-center my-12"> 
           <div className="w-1/2 relative lg:w-full">
             <input
               className="input_field_login border-white z-20 relative pl-12 "
