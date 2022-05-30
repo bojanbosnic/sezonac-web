@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     container: {
       padding: "4rem",
+   
     },
     screens: {
       xl: { max: "1200px" },
@@ -18,14 +19,13 @@ module.exports = {
       sm: { max: "639px" },
       // => @media (max-width: 639px) { ... }
     },
-   
+
     extend: {
       colors: {
         primary: "#00214A",
         secondary: "#707070",
         white: "#fff",
       },
-     
     },
   },
   variants: {
