@@ -34,6 +34,12 @@
 }
 @tailwind components;
 
+@layer components{
+.card{
+  @apply bg-primary border relative p-6 w-[calc(50%-40px)] text-white rounded-2xl lg:w-full
+}
+}
+
 @tailwind utilities;
 
 
