@@ -1,13 +1,14 @@
 import React from "react";
-import Navbar from "../components/Navbar";
+import Navbar2 from "../components/Navbar2";
 import Card from "../components/Card";
+import MyJobs from "../components/MyJobs";
 import Link from "next/link";
 import { AiOutlineSearch } from "react-icons/ai";
 
 export default function Profile() {
   return (
     <div className="container lg:px-8 sm:p-4">
-      <Navbar />
+      <Navbar2 />
       <main className="flex justify-between  mt-12">
         <sidebar className="w-1/4 my-8 mr-8 block md:hidden">
           <div className="h-full">
@@ -48,35 +49,14 @@ export default function Profile() {
             </div>
           </div>
         </sidebar>
-        <section className="w-3/4">
+        <section className="w-3/4 md:w-full">
           <div className="hidden md:block">
-            <Link href={`/probica`}>
+            <Link href={`/`}>
               <a>Profil</a>
             </Link>
           </div>
-          <div className="h-full border border-white">
-            <div>
-              <nav className="flex justify-between flex-row  text-white">
-                <ul className="">
-                  <li className="text-white mr-4">
-                    <Link href="/probica">
-                      <a>O Nama</a>
-                    </Link>
-                  </li>
-                  <li className="text-white mr-4">
-                    <Link href="#">
-                      <a>Kontakt</a>
-                    </Link>
-                  </li>
-                </ul>
-
-                <button>halo</button>
-              </nav>
-              {/* <h3>Moji poslovi</h3>
-              <h3>Sačuvani Poslovi</h3>
-              <h3>Inbox</h3>
-              <button>Objavi Posao</button> */}
-            </div>
+          <div className="h-full border border-white px-6">
+            <MyJobs />
           </div>
         </section>
       </main>
