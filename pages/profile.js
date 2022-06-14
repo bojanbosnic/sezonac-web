@@ -1,14 +1,18 @@
-import React from "react";
-import Navbar2 from "../components/Navbar2";
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
 import Card from "../components/Card";
 import MyJobs from "../components/MyJobs";
 import Link from "next/link";
 import { AiOutlineSearch } from "react-icons/ai";
 
 export default function Profile() {
+  const [loadingPage, setLodaingPage] = useState(false);
+  useEffect(() => {
+    setLodaingPage(true);
+  }, []);
   return (
     <div className="container lg:px-8 sm:p-4">
-      <Navbar2 />
+      <Navbar loadingPage={loadingPage} />
       <main className="flex justify-between  mt-12">
         <sidebar className="w-1/4 my-8 mr-8 block md:hidden">
           <div className="h-full">
@@ -26,26 +30,26 @@ export default function Profile() {
             </div>
             <Link href={"#"}>
               <a>
-                <h3>Postavke</h3>
+                <p className="heading3">Podešavanje</p>
               </a>
             </Link>
             <div>
-              <h3>Ime: Marko</h3>
+              <p className="heading3">Ime: Marko</p>
             </div>
             <div>
-              <h3>Prezime: Markovic</h3>
+              <p className="heading3">Prezime: Markovic</p>
             </div>
             <div>
-              <h3>Spol: M</h3>
+              <p className="heading3">Spol: M</p>
             </div>
             <div>
-              <h3>Lokacija: Gradiska</h3>
+              <p className="heading3">Lokacija: Gradiska</p>
             </div>
             <div>
-              <h3>Datum registracije: 12.11.2020</h3>
+              <p className="heading3">Datum registracije: 12.11.2020</p>
             </div>
             <div>
-              <h3>ID korisnika: #12432522</h3>
+              <p className="heading3">ID korisnika: #12432522</p>
             </div>
           </div>
         </sidebar>

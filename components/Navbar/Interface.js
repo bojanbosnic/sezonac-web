@@ -6,7 +6,46 @@ import classNames from "classnames";
 import styles from "./styles.module.css";
 import Button from "../../components/Button";
 
-const Interface = ({ toggleFun, toggleValue }) => {
+const Interface = ({ toggleFun, toggleValue, loadingPage }) => {
+  const loadPage = () => {
+    if (loadingPage) {
+      return (
+        <li>
+          <Link href="#">
+            <a>Ime kompanije</a>
+          </Link>
+        </li>
+      );
+    } else {
+      return (
+         <>
+          <li className="mx-3">
+            <Link href="#">
+              <a>
+                <Button
+                  name="Prijavi se"
+                  textColor="color-white"
+                  bgColor="bg-transparent"
+                  hover="hover:bg-sky-700"
+                  paddingY="py-3"
+                  paddingX="px-5"
+                />
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link href="#">
+              <a>ili se registruj</a>
+            </Link>
+          </li>
+        </>
+      );
+    }
+  };
+
+    
+
+
   return (
     <nav className="flex justify-between items-center text-white border-b-2 border-secondary">
       <Link href="/">
@@ -33,25 +72,7 @@ const Interface = ({ toggleFun, toggleValue }) => {
           <li>
             <div className="block border-l-2 border-secondary h-8 mx-2 md:border-r-0 md:border-t-1 md:border-secondary md:h-0 md:m-r-0"></div>
           </li>
-          <li className="mx-3">
-            <Link href="#">
-              <a>
-                <Button
-                  name="Prijavi se"
-                  textColor="color-white"
-                  bgColor="bg-transparent"
-                  hover="hover:bg-sky-700"
-                  paddingY="py-3"
-                  paddingX="px-5"
-                />
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href="#">
-              <a>ili se registruj</a>
-            </Link>
-          </li>
+          {loadPage()}
         </ul>
       </div>
       <button
@@ -62,7 +83,9 @@ const Interface = ({ toggleFun, toggleValue }) => {
         )}
         onClick={toggleFun}
       >
-        <span className={`${styles.spanAnimation} togglerOpen w-7 h-1 bg-white block ease-in-out duration-300`}></span>
+        <span
+          className={`${styles.spanAnimation} togglerOpen w-7 h-1 bg-white block ease-in-out duration-300`}
+        ></span>
       </button>
     </nav>
   );
