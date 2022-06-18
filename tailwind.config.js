@@ -25,6 +25,7 @@ module.exports = {
         primary: "#00214A",
         secondary: "#707070",
         white: "#fff",
+        dark:  'rgb(0 0 0 / 93%)',
       },
     },
   },

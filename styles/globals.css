@@ -3,7 +3,7 @@
   body {
     @apply bg-primary text-white;
   }
- 
+
   h1 {
     @apply text-5xl font-semibold my-8;
   }
@@ -13,33 +13,34 @@
   h3 {
     @apply text-lg my-8;
   }
-  a:hover{
-    @apply underline
+  a:hover {
+    @apply underline;
   }
 
-  .input_field_contact{
-  @apply w-full pl-10 relative outline-none z-20 border bg-transparent text-black border-secondary rounded-lg py-3
-
+  .heading3 {
+    @apply text-lg ;
   }
 
-  .input_field_login{
-    @apply w-full outline-none bg-transparent text-white border border-secondary rounded-lg py-5 px-6 my-2
+  .input_field_contact {
+    @apply w-full pl-10 relative outline-none z-20 border bg-transparent text-black border-secondary rounded-lg py-3;
   }
 
-  .input_field_registration{
-  @apply w-full outline-none bg-transparent text-white border border-secondary rounded-lg py-5 px-6 my-2
+  .input_field_login {
+    @apply w-full outline-none bg-transparent text-white border border-secondary rounded-lg py-5 px-6 my-2;
   }
 
-  
+  .input_field_registration {
+    @apply w-full outline-none bg-transparent text-white border border-secondary rounded-lg py-5 px-6 my-2;
+  }
 }
 @tailwind components;
 
-@layer components{
-.card{
-  @apply bg-primary border relative p-6 w-[calc(50%-40px)] text-white rounded-2xl lg:w-full
-}
+@layer components {
+  .card {
+    @apply bg-primary border relative p-6 w-[calc(50%-40px)] text-white rounded-2xl lg:w-full;
+  }
+
+ 
 }
 
 @tailwind utilities;
-
-
