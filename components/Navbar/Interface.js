@@ -5,6 +5,7 @@ import Image from "next/image";
 import classNames from "classnames";
 import styles from "./styles.module.css";
 import Button from "../../components/Button";
+import Card from "../Card";
 
 const Interface = ({ toggleFun, toggleValue, loadingPage }) => {
   const loadPage = () => {
@@ -18,7 +19,7 @@ const Interface = ({ toggleFun, toggleValue, loadingPage }) => {
       );
     } else {
       return (
-         <>
+        <>
           <li className="mx-3">
             <Link href="#">
               <a>
@@ -42,9 +43,6 @@ const Interface = ({ toggleFun, toggleValue, loadingPage }) => {
       );
     }
   };
-
-    
-
 
   return (
     <nav className="flex justify-between items-center text-white border-b-2 border-secondary">

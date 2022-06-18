@@ -18,7 +18,7 @@
   }
 
   .heading3 {
-    @apply text-lg my-8;
+    @apply text-lg ;
   }
 
   .input_field_contact {
@@ -40,9 +40,7 @@
     @apply bg-primary border relative p-6 w-[calc(50%-40px)] text-white rounded-2xl lg:w-full;
   }
 
-  .delete_wrapp {
-    @apply mb-28 absolute right-[6%];
-  }
+ 
 }
 
 @tailwind utilities;

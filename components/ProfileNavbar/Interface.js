@@ -4,9 +4,8 @@ import React from "react";
 const Interface = ({ setPage, myPages }) => {
   return (
     <div>
-      
-      <nav className="flex justify-between items-center  border-b-2 border-secondary  text-white">
-        <ul className="my-5 flex p-0 items-center list-none md:my-0">
+      <nav className="flex justify-between items-center border-secondary  text-white ">
+        <ul className="my-5 flex p-0 items-center list-none md:my-0 sm:flex-wrap">
           <li
             className="text-white mr-8 cursor-pointer "
             onClick={() => setPage("page1")}
