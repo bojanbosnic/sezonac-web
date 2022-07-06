@@ -21,7 +21,7 @@ const Interface = ({ toggleFun, toggleValue, loadingPage }) => {
       return (
         <>
           <li className="mx-3">
-            <Link href="#">
+            <Link href="/login">
               <a>
                 <Button
                   name="Prijavi se"
@@ -35,7 +35,7 @@ const Interface = ({ toggleFun, toggleValue, loadingPage }) => {
             </Link>
           </li>
           <li>
-            <Link href="#">
+            <Link href="/register">
               <a>ili se registruj</a>
             </Link>
           </li>
@@ -58,12 +58,12 @@ const Interface = ({ toggleFun, toggleValue, loadingPage }) => {
           )}
         >
           <li className="text-white mr-4">
-            <Link href="#">
+            <Link href="/about">
               <a>O Nama</a>
             </Link>
           </li>
           <li className="text-white mr-4">
-            <Link href="#">
+            <Link href="/contact">
               <a>Kontakt</a>
             </Link>
           </li>

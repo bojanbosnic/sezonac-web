@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import homepage_pic from "../assets/ilustrations/search_job1.svg";
 import Button from "../components/Button";
 import Navbar from "../components/Navbar";
@@ -36,14 +37,18 @@ export default function Home() {
                 paddingX="px-8"
               />
               <p className="m-4">ili</p>
-              <Button
-                name="Potraži posao"
-                textColor="color-white"
-                bgColor="bg-transparent"
-                hover="hover:bg-sky-700"
-                paddingY="py-5"
-                paddingX="px-8"
-              />
+              <Link href="/jobs">
+                <a>
+                  <Button
+                    name="Potraži posao"
+                    textColor="color-white"
+                    bgColor="bg-transparent"
+                    hover="hover:bg-sky-700"
+                    paddingY="py-5"
+                    paddingX="px-8"
+                  />
+                </a>
+              </Link>
             </div>
           </div>
           <div className="block w-96  md:my-8 sm:hidden">
