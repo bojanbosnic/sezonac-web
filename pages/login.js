@@ -55,9 +55,11 @@ export default function LogIn() {
           </button>
           <div style={{ textAlign: "center" }}>
             Nemaš nalog?{" "}
-            <a href="#stranicaRegistracije">
-              <span style={{ color: "red" }}> Registruj se besplatno </span>
-            </a>
+            <Link href='/register'>
+              <a>
+                <span style={{ color: "red" }}> Registruj se besplatno </span>
+              </a>
+            </Link>
           </div>
         </form>
       </main>

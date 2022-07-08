@@ -1,5 +1,5 @@
 import React from "react";
-import { HiOutlineMail } from "react-icons/hi";
+import { AiOutlineMail } from "react-icons/ai";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { MdLocationOn } from "react-icons/md";
 
@@ -10,7 +10,7 @@ export default function Card(props) {
       <div className="card my-12">
         <div className="flex items-center absolute right-[3%] top-[5%]">
           <button className="card_save and msg">
-            <HiOutlineMail className="text-2xl" />
+            <AiOutlineMail className="text-2xl" />
           </button>
           <button className="ml-2">
             <BsFillBookmarkFill className="text-xl" />
