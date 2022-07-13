@@ -1,54 +1,37 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
-import { useAuth } from "../Context/AuthContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { auth } from "../firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
-const register = () => {
-  const { register, currentUser } = useContext(AuthContext);
+const Register = () => {
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmed, setConfirmed] = useState(true);
   const router = useRouter();
 
-
-
   const handleRegister = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setConfirmed(false);
+      return;
+    }
+    setConfirmed(true);
+
     try {
-      if (password === confirmPassword) {
-        setConfirmed(true);
-        await register(email, password);
-        router.push("/profile");
-      } else {
-        setConfirmed(false);
-      }
-      // router.push('/profile')
+      await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(auth.currentUser, { displayName });
+      setCurrentUser({ ...currentUser, displayName });
+
+      router.push("/profile");
     } catch (error) {
       console.log(error);
     }
   };
-
-  const displayUser = async () => {
-    try {
-      if (currentUser) {
-        await updateProfile(currentUser, { displayName: displayName });
-        router.push("/profile");
-      }
-    } catch (error) {
-      console.log("displayName error:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (currentUser) {
-      displayUser();
-      router.push("/profile");
-    }
-  }, []);
 
   return (
     <div className="container">
@@ -139,4 +122,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default Register;

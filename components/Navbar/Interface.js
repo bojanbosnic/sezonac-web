@@ -8,6 +8,9 @@ import Button from "../../components/Button";
 import Card from "../Card";
 
 const Interface = ({ toggleFun, toggleValue, loadingPage }) => {
+  // Todo: Handle accessToken
+  const accessToken = localStorage.getItem("Token");
+
   const loadPage = () => {
     if (loadingPage) {
       return (

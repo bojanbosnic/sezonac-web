@@ -9,10 +9,6 @@ import { auth } from "../firebase";
 
 export const AuthContext = createContext();
 
-const register = (email, password) => {
-  return createUserWithEmailAndPassword(auth, email, password);
-};
-
 const login = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password);
 };
@@ -21,27 +17,32 @@ const logout = () => {
   return signOut(auth);
 };
 
-
 const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState({});
 
   const value = {
-    register,
     logout,
     login,
     currentUser,
+    setCurrentUser,
   };
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
+      console.log("auth state changed", user);
+      setCurrentUser({
+        accessToken: user.accessToken,
+        displayName: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        uid: user.uid,
+      });
       localStorage.setItem("Token", user?.accessToken);
     });
-    return unsub;
-  }, [currentUser]);
+    return () => unsub();
+  }, []);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-
 };
 
 export default AuthProvider;
