@@ -1,8 +1,11 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 
 export default function LogIn() {
+const [email, setEmail] = useState()
+const [password, setPassword] = useState()
+
   return (
     <div className="container">
       <main className="flex justify-center items-center flex-col">
@@ -15,6 +18,8 @@ export default function LogIn() {
             <label htmlFor="email_id">Email</label>
             <div>
               <input
+              onChange={(e)=> setEmail(e.target.value)}
+              value={email}
                 id="email_id"
                 className="input_field_login"
                 type="email"
@@ -27,6 +32,8 @@ export default function LogIn() {
             <label htmlFor="password_id">Lozinka</label>
             <div>
               <input
+              onChange={(e)=> setPassword(e.target.value)}
+              value={password}
                 id="password_id"
                 className="input_field_login"
                 type="password"
