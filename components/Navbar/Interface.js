@@ -1,49 +1,36 @@
 import React from "react";
 import logo from "../../assets/logos/logo.png";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
 import Link from "next/link";
 import Image from "next/image";
 import classNames from "classnames";
+import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import Button from "../../components/Button";
-import Card from "../Card";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthContext";
 
-const Interface = ({ toggleFun, toggleValue, loadingPage }) => {
-  // Todo: Handle accessToken
-  const accessToken = localStorage.getItem("Token");
+const Interface = ({ toggleFun, toggleValue }) => {
+  const { currentUser } = useContext(AuthContext);
+  const { displayName } = currentUser;
+  const router = useRouter();
 
-  const loadPage = () => {
-    if (loadingPage) {
-      return (
-        <li>
-          <Link href="#">
-            <a>Ime kompanije</a>
-          </Link>
-        </li>
-      );
-    } else {
-      return (
-        <>
-          <li className="mx-3">
-            <Link href="/login">
-              <a>
-                <Button
-                  name="Prijavi se"
-                  textColor="color-white"
-                  bgColor="bg-transparent"
-                  hover="hover:bg-sky-700"
-                  paddingY="py-3"
-                  paddingX="px-5"
-                />
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/register">
-              <a>ili se registruj</a>
-            </Link>
-          </li>
-        </>
-      );
+
+
+if (typeof window !== "undefined") {
+
+  var token = localStorage.getItem("Token");
+}
+  
+
+  const handleLogOut = async (e) => {
+    try {
+      localStorage.removeItem("Token");
+      await signOut(auth);
+      router.push("/");
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -73,7 +60,40 @@ const Interface = ({ toggleFun, toggleValue, loadingPage }) => {
           <li>
             <div className="block border-l-2 border-secondary h-8 mx-2 md:border-r-0 md:border-t-1 md:border-secondary md:h-0 md:m-r-0"></div>
           </li>
-          {loadPage()}
+          {token ? (
+            <>
+              <li style={{ margin: "1rem" }}>
+                <Link href="/profile">
+                  <a>{displayName}</a>
+                </Link>
+              </li>
+              <li>
+                <button onClick={handleLogOut}>Log Out</button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="mx-3">
+                <Link href="/login">
+                  <a>
+                    <Button
+                      name="Prijavi se"
+                      textColor="color-white"
+                      bgColor="bg-transparent"
+                      hover="hover:bg-sky-700"
+                      paddingY="py-3"
+                      paddingX="px-5"
+                    />
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/register">
+                  <a>ili se registruj</a>
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
       <button

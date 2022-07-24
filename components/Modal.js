@@ -18,7 +18,7 @@ const Modal = ({ show, onClose, children }) => {
     e.preventDefault();
     onClose();
   };
-  console.log("Use effect=>", isBrowser);
+  // console.log("Use effect=>", isBrowser);
 
   const modalContent = show ? (
     <div className="z-20 fixed w-full h-full top-0 left-0 bg-dark">

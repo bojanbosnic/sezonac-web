@@ -25,7 +25,13 @@ const Interface = ({ setPage, myPages }) => {
             Inbox
           </li>
         </ul>
-        <button>Objavi Posao</button>
+        <li>
+          <Link href="/postthejob">
+            <a>
+              Objavi Posao
+            </a>
+          </Link>
+        </li>
       </nav>
       <div>{myPages()}</div>
     </div>

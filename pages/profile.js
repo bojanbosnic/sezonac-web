@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, {  useContext } from "react";
 import Navbar from "../components/Navbar";
-
 import ProfileNavbar from "../components/ProfileNavbar";
 import Link from "next/link";
 import { AuthContext } from "../Context/AuthContext";
@@ -8,17 +7,13 @@ import { AuthContext } from "../Context/AuthContext";
 export default function Profile() {
   const { currentUser } = useContext(AuthContext);
 
-  const [loadingPage, setLoadingPage] = useState(false);
 
-  useEffect(() => {
-    setLoadingPage(true);
-  }, []);
 
   return (
     <div className="container lg:px-8 sm:p-4">
-      <Navbar loadingPage={loadingPage} />
+      <Navbar/>
       <main className="flex justify-between lg:flex-wrap  mt-12">
-        <sidebar className="w-1/4 lg:w-full my-8 mr-8 block">
+        <div className="w-1/4 lg:w-full my-8 mr-8 block">
           <div className="h-full  lg:flex lg:items-center sm:block">
             <div>
               <div>Ime kompanije: {currentUser.displayName}</div>
@@ -57,7 +52,7 @@ export default function Profile() {
               </div>
             </div>
           </div>
-        </sidebar>
+        </div>
         <section className="w-3/4 my-4 lg:w-full">
           <div className="h-full border border-white px-6">
             <ProfileNavbar />
