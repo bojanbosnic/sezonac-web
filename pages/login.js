@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 
 
-export default function LogIn() {
+export default function LogIn({ loggedIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter("");
@@ -21,6 +21,10 @@ export default function LogIn() {
       console.log(error);
     }
   };
+
+  if (loggedIn) {
+    router.push("/");
+  }
 
   return (
     <div className="container">

@@ -7,7 +7,7 @@ import { BiData, BiUserCircle } from "react-icons/bi";
 import { MdOutlineDescription } from "react-icons/md";
 
 
-const Modal = ({ show, onClose, children }) => {
+const Modal = ({ show, onClose, children, jobs }) => {
   const [isBrowser, setIsBrowser] = useState(false);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Modal = ({ show, onClose, children }) => {
       <div className="z-40 w-full absolute top-0 left-0 min-h-full min-w-full p-6">
         <div className="rounded border bg-primary overflow-y-auto h-[90vh]">
           <div className="px-4 py-2 border border-t-0 border-x-0 border-b">
-            ID: 203810482
+            ID: {jobs.id}
           </div>
           <div className="padding-wrapp px-4 my-8">
             <div className="flex justify-between flex-wrap">
@@ -48,7 +48,7 @@ const Modal = ({ show, onClose, children }) => {
                     />
                   </div>
                   <div className="ml-4">
-                    <span className="sm:items-center">Ime_poslodavca</span>
+                    <span className="sm:items-center">{jobs.title}</span>
                   </div>
                   <div className="flex items-center  absolute  top-[-2%] right-[-21%] sm:flex-col sm:right-[-18%]">
                     <BsFillBookmarkFill className="text-xl sm:mb-4" />
@@ -88,7 +88,7 @@ const Modal = ({ show, onClose, children }) => {
                     <span>Lokacija</span>
                   </div>
                   <div className="absolute h-full w-full  text-center py-3 font-medium bg-white text-primary">
-                    <span>Gradiska</span>
+                    <span>{jobs.city}</span>
                   </div>
                 </div>
                 <div className="border mx-8 border-white w-[20%] lg:w-[50%]">
@@ -96,7 +96,7 @@ const Modal = ({ show, onClose, children }) => {
                     <span>Satnica</span>
                   </div>
                   <div className="text-center py-3 font-medium bg-white text-primary">
-                    <span>5 KM</span>
+                    <span>{jobs.money}</span>
                   </div>
                 </div>
               </div>
@@ -114,7 +114,7 @@ const Modal = ({ show, onClose, children }) => {
                     <span className="mx-2">Radno vrijeme</span>
                   </div>
                   <div className="text-center py-1  bg-white text-primary ">
-                    <span className="mx-2 font-medium">Puno radno vrijeme</span>
+                    <span className="mx-2 font-medium">{jobs.time}</span>
                   </div>
                 </div>
                 <div className="flex justify-between border my-4 border-white w-[50%] md:w-full">
@@ -123,7 +123,7 @@ const Modal = ({ show, onClose, children }) => {
                   </div>
                   <div className="text-center py-1 bg-white text-primary">
                     <span className="mx-2 font-medium">
-                      01.06.22 - 20.09.22
+                      {jobs.duration}
                     </span>
                   </div>
                 </div>
@@ -139,10 +139,7 @@ const Modal = ({ show, onClose, children }) => {
               <div className="flex justify-between ml-6 my-8">
                 <div className="w-[80%] border border-white p-6">
                   <p>
-                    Trenutno tražimo konobara sa ili bez radnog iskustva koji bi
-                    radio 8 sati. Za ostale informacije obratite nam se na jedan
-                    od kontakata ispod. Kontaktirajte me na sledeci broj 065 678
-                    654
+                   {jobs.info}
                   </p>
                 </div>
                 <div

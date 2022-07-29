@@ -10,8 +10,7 @@ import Navbar from "../components/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 
-export default function Home() {
-  const [dataA, setDataA] = useState("");
+export default function Home({loggedIn}) {
   const {currentUser} = useContext(AuthContext)
 
   return (
@@ -29,14 +28,33 @@ export default function Home() {
               </p>
             </div>
             <div className="flex items-center sm:flex-col">
-              <Button
-                name="Objavi Posao"
-                textColor="color-white"
-                bgColor="bg-blue-500"
-                hover="hover:bg-sky-700"
-                paddingY="py-5 md:py-4"
-                paddingX="px-8"
-              />
+              {loggedIn ? (
+                <Link href="/postthejob">
+                  <a>
+                    <Button
+                      name="Objavi Posao"
+                      textColor="color-white"
+                      bgColor="bg-blue-500"
+                      hover="hover:bg-sky-700"
+                      paddingY="py-5 md:py-4"
+                      paddingX="px-8"
+                    />
+                  </a>
+                </Link>
+              ) : (
+                <Link href="/login">
+                  <a>
+                    <Button
+                      name="Objavi Posao"
+                      textColor="color-white"
+                      bgColor="bg-blue-500"
+                      hover="hover:bg-sky-700"
+                      paddingY="py-5 md:py-4"
+                      paddingX="px-8"
+                    />
+                  </a>
+                </Link>
+              )}
               <p className="m-4">ili</p>
               <Link href="/jobs">
                 <a>

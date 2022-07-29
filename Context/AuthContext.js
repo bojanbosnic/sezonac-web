@@ -1,5 +1,7 @@
 import { useState, useEffect, useContext, createContext } from "react";
 import { onAuthStateChanged } from "firebase/auth";
+import { getDocs, collection } from "firebase/firestore";
+import { db } from "../firebase";
 import { auth } from "../firebase";
 import LoadingSpinner from "../components/LoadingSpinner";
 
@@ -8,6 +10,7 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
   const value = {
     currentUser,
     setCurrentUser,
@@ -15,6 +18,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
+      console.log(user.uid);
       if (user) {
         localStorage.setItem("Token", user.accessToken);
         setCurrentUser({
@@ -25,7 +29,7 @@ const AuthProvider = ({ children }) => {
           uid: user.uid,
         });
       }
-      setIsLoading(false)
+      setIsLoading(false);
     });
     return unsub;
   }, []);
