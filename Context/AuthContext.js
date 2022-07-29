@@ -15,6 +15,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
+      console.log(user);
       if (user) {
         localStorage.setItem("Token", user.accessToken);
         setCurrentUser({
@@ -23,12 +24,13 @@ const AuthProvider = ({ children }) => {
           email: user.email,
           photoURL: user.photoURL,
           uid: user.uid,
+          lastSignIn: user.metadata.lastSignInTime,
         });
       }
-      setIsLoading(false)
+      setIsLoading(false);
     });
     return unsub;
-  }, []);
+  }, [currentUser.uid]);
 
   if (isLoading) {
     return <LoadingSpinner />;
