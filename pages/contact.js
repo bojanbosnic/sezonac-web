@@ -15,7 +15,7 @@ import { BiMessageRounded } from "react-icons/bi";
 export default function ContactUs() {
   return (
     <div className="container">
-      <Navbar />
+      
       <main className="flex flex-wrap justify-between items-center my-20 md:my-10">
         <section className="w-[calc(50%-40px)] md:w-full">
           <h1>Kontaktiraj Nas</h1>

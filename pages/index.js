@@ -17,7 +17,6 @@ export default function Home() {
   return (
     <>
       <div className="container mx-auto sm:px-8">
-        <Navbar />
         <main className="h-screen flex items-center flex-wrap justify-between lg:justify-center   sm:h-screen">
           <div className="text-left  md:my-8">
             <div>

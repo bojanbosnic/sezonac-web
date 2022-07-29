@@ -2,13 +2,10 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 
 const Interface = () => {
-  const [loadingPage, setLodaingPage] = useState(false);
-  useEffect(() => {
-    setLodaingPage(true);
-  }, []);
+
   return (
     <div className="container lg:px-8 sm:p-4">
-      <Navbar loadingPage={loadingPage} />
+    
       <main className="flex flex-col">
         <h1>Registrujte vaš posao</h1>
         <h2>

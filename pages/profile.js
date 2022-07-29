@@ -11,7 +11,7 @@ export default function Profile() {
 
   return (
     <div className="container lg:px-8 sm:p-4">
-      <Navbar/>
+     
       <main className="flex justify-between lg:flex-wrap  mt-12">
         <div className="w-1/4 lg:w-full my-8 mr-8 block">
           <div className="h-full  lg:flex lg:items-center sm:block">

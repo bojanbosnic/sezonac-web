@@ -7,7 +7,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 export default function Jobs() {
   return (
     <div className="container sm:p-4">
-      <Navbar />
+     
       <main>
         <div className="flex justify-center my-12"> 
           <div className="w-1/2 relative lg:w-full">

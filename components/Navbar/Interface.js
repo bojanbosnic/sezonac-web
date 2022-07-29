@@ -11,18 +11,11 @@ import Button from "../../components/Button";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 
-const Interface = ({ toggleFun, toggleValue }) => {
+const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
   const { currentUser } = useContext(AuthContext);
   const { displayName } = currentUser;
   const router = useRouter();
 
-
-
-if (typeof window !== "undefined") {
-
-  var token = localStorage.getItem("Token");
-}
-  
 
   const handleLogOut = async (e) => {
     try {
@@ -35,80 +28,82 @@ if (typeof window !== "undefined") {
   };
 
   return (
-    <nav className="flex justify-between items-center text-white border-b-2 border-secondary">
-      <Link href="/">
-        <Image src={logo} alt="sezonac-logo" />
-      </Link>
-      <div className={`${styles.siteNavbar} md:w-full md:min-wi-min`}>
-        <ul
+    <div className="container mx-auto sm:px-8">
+      <nav className="flex justify-between items-center text-white border-b-2 border-secondary">
+        <Link href="/">
+          <Image src={logo} alt="sezonac-logo" />
+        </Link>
+        <div className={`${styles.siteNavbar} md:w-full md:min-wi-min`}>
+          <ul
+            className={classNames(
+              `${
+                toggleValue && styles.open
+              } my-5 flex p-0 items-center list-none md:my-0`
+            )}
+          >
+            <li className="text-white mr-4">
+              <Link href="/about">
+                <a>O Nama</a>
+              </Link>
+            </li>
+            <li className="text-white mr-4">
+              <Link href="/contact">
+                <a>Kontakt</a>
+              </Link>
+            </li>
+            <li>
+              <div className="block border-l-2 border-secondary h-8 mx-2 md:border-r-0 md:border-t-1 md:border-secondary md:h-0 md:m-r-0"></div>
+            </li>
+            {loggedIn ? (
+              <>
+                <li style={{ margin: "1rem" }}>
+                  <Link href="/profile">
+                    <a>{displayName}</a>
+                  </Link>
+                </li>
+                <li>
+                  <button onClick={handleLogOut}>Log Out</button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="mx-3">
+                  <Link href="/login">
+                    <a>
+                      <Button
+                        name="Prijavi se"
+                        textColor="color-white"
+                        bgColor="bg-transparent"
+                        hover="hover:bg-sky-700"
+                        paddingY="py-3"
+                        paddingX="px-5"
+                      />
+                    </a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/register">
+                    <a>ili se registruj</a>
+                  </Link>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
+        <button
           className={classNames(
             `${
-              toggleValue && styles.open
-            } my-5 flex p-0 items-center list-none md:my-0`
+              toggleValue && styles.togglerOpen
+            } border-3 border-white m-3 bg-transparent cursor-pointer h-9  z-10 hidden  md:block `
           )}
+          onClick={toggleFun}
         >
-          <li className="text-white mr-4">
-            <Link href="/about">
-              <a>O Nama</a>
-            </Link>
-          </li>
-          <li className="text-white mr-4">
-            <Link href="/contact">
-              <a>Kontakt</a>
-            </Link>
-          </li>
-          <li>
-            <div className="block border-l-2 border-secondary h-8 mx-2 md:border-r-0 md:border-t-1 md:border-secondary md:h-0 md:m-r-0"></div>
-          </li>
-          {token ? (
-            <>
-              <li style={{ margin: "1rem" }}>
-                <Link href="/profile">
-                  <a>{displayName}</a>
-                </Link>
-              </li>
-              <li>
-                <button onClick={handleLogOut}>Log Out</button>
-              </li>
-            </>
-          ) : (
-            <>
-              <li className="mx-3">
-                <Link href="/login">
-                  <a>
-                    <Button
-                      name="Prijavi se"
-                      textColor="color-white"
-                      bgColor="bg-transparent"
-                      hover="hover:bg-sky-700"
-                      paddingY="py-3"
-                      paddingX="px-5"
-                    />
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/register">
-                  <a>ili se registruj</a>
-                </Link>
-              </li>
-            </>
-          )}
-        </ul>
-      </div>
-      <button
-        className={classNames(
-          `${
-            toggleValue && styles.togglerOpen
-          } border-3 border-white m-3 bg-transparent cursor-pointer h-9  z-10 hidden  md:block `
-        )}
-        onClick={toggleFun}
-      >
-        <span
-          className={`${styles.spanAnimation} togglerOpen w-7 h-1 bg-white block ease-in-out duration-300`}
-        ></span>
-      </button>
-    </nav>
+          <span
+            className={`${styles.spanAnimation} togglerOpen w-7 h-1 bg-white block ease-in-out duration-300`}
+          ></span>
+        </button>
+      </nav>
+    </div>
   );
 };
 
