@@ -6,11 +6,13 @@ import { RiDeleteBin2Line } from "react-icons/ri";
 import Modal from "../Modal";
 
 const Interface = () => {
+  const { currentUser } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [fireData, setFireData] = useState([]);
+  const [jobss, setJobss] = useState([]);
 
-console.log(fireData)
-  const { currentUser } = useContext(AuthContext);
+  console.log("This is jobs", jobss);
+
   const getUserData = async () => {
     await getDocs(collection(db, `/${currentUser.uid}`)).then((response) =>
       setFireData(
@@ -20,6 +22,9 @@ console.log(fireData)
       )
     );
   };
+  // const functionModal=(jobs)=>{
+  //   setJobss(jobs);
+  // }
 
   useEffect(() => {
     getUserData();
@@ -36,7 +41,9 @@ console.log(fireData)
           </div>
           <input className="absolute left-[3%]" type="checkbox" />
           <div
-            onClick={() => setShowModal(true)}
+            onClick={() => {
+              setJobss(jobs), setShowModal(true);
+            }}
             className="border w-full flex items-center my-8 px-4 sm:p-0"
           >
             <div className="w-full flex m-8 items-center justify-between sm:flex-wrap sm:m-4 sm:px-4">
@@ -48,12 +55,17 @@ console.log(fireData)
               </span>
             </div>
           </div>
-          <Modal jobs={jobs} show={showModal} onClose={() => setShowModal(false)} />
           <button className="ml-4 sm:hidden">
             <RiDeleteBin2Line fontSize="2rem" />
           </button>
         </div>
       ))}
+      <Modal
+        setJobss={setJobss}
+        jobss={jobss}
+        show={showModal}
+        onClose={() => setShowModal(false)}
+      />
     </div>
   );
 };

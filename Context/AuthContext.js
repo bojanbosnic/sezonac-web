@@ -18,7 +18,6 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
-      console.log(user.uid);
       if (user) {
         localStorage.setItem("Token", user.accessToken);
         setCurrentUser({

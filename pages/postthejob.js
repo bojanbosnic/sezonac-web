@@ -25,7 +25,7 @@ const Interface = () => {
   };
 
   const writeUserData = (e) => {
-     addDoc(collection(db, `/${uid}`), {
+    addDoc(collection(db, `/${uid}`), {
       title: postJob.title,
       city: postJob.city,
       info: postJob.info,
@@ -33,8 +33,19 @@ const Interface = () => {
       money: postJob.money,
       duration: postJob.duration,
     });
-    router.push('/profile')
-    
+    router.push("/profile");
+  };
+
+  const writeGlobalData = (e) => {
+    addDoc(collection(db, `/GlobalJobs`), {
+      title: postJob.title,
+      city: postJob.city,
+      info: postJob.info,
+      time: postJob.time,
+      money: postJob.money,
+      duration: postJob.duration,
+    });
+    router.push("/profile");
   };
 
   return (
@@ -72,7 +83,9 @@ const Interface = () => {
           handleFunction={(e) => handleInput("duration", e.target.value)}
         />
         <button
-          onClick={writeUserData}
+          onClick={() => {
+            writeUserData(), writeGlobalData();
+          }}
           className="w-full border bg-secondary border-secondary rounded-lg py-5 px-6 mb-8"
         >
           Zavrsi Objavu

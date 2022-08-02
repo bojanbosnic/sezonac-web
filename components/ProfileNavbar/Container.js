@@ -6,6 +6,7 @@ import Page3 from "../Inbox";
 
 const Container = () => {
   const [page, setPage] = useState("page1");
+  
   const myPages = () => {
     if (page === "page1") {
       return <Page1/>;
