@@ -94,7 +94,7 @@ const Modal = ({ show, onClose, children, jobss }) => {
                       <span>Lokacija</span>
                     </div>
                     <div className="absolute h-full w-full  text-center py-3 font-medium bg-white text-primary">
-                      <span>gradiska</span>
+                      <span>{job.city}</span>
                     </div>
                   </div>
                   <div className="border mx-8 border-white w-[20%] lg:w-[50%]">
@@ -102,7 +102,7 @@ const Modal = ({ show, onClose, children, jobss }) => {
                       <span>Satnica</span>
                     </div>
                     <div className="text-center py-3 font-medium bg-white text-primary">
-                      <span>5$</span>
+                      <span>{job.money}</span>
                     </div>
                   </div>
                 </div>
@@ -120,7 +120,7 @@ const Modal = ({ show, onClose, children, jobss }) => {
                       <span className="mx-2">Radno vrijeme</span>
                     </div>
                     <div className="text-center py-1  bg-white text-primary ">
-                      <span className="mx-2 font-medium">33</span>
+                      <span className="mx-2 font-medium">{job.time}</span>
                     </div>
                   </div>
                   <div className="flex justify-between border my-4 border-white w-[50%] md:w-full">
@@ -128,7 +128,7 @@ const Modal = ({ show, onClose, children, jobss }) => {
                       <span className="mx-2">Rok trajanja</span>
                     </div>
                     <div className="text-center py-1 bg-white text-primary">
-                      <span className="mx-2 font-medium">22</span>
+                      <span className="mx-2 font-medium">{job.duration}</span>
                     </div>
                   </div>
                 </div>

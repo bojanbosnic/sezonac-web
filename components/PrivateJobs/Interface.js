@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { AuthContext } from "../../Context/AuthContext";
 import { RiDeleteBin2Line } from "react-icons/ri";
@@ -22,9 +22,13 @@ const Interface = () => {
       )
     );
   };
-  // const functionModal=(jobs)=>{
-  //   setJobss(jobs);
-  // }
+
+  const deleteDocument = (id) => {
+    let fieldToDelete = doc(db, `/${currentUser.uid}`, id);
+    deleteDoc(fieldToDelete)
+      .then(() => alert("Data Deleted!"), getUserData())
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
     getUserData();
@@ -55,7 +59,10 @@ const Interface = () => {
               </span>
             </div>
           </div>
-          <button className="ml-4 sm:hidden">
+          <button
+            onClick={() => deleteDocument(jobs.id)}
+            className="ml-4 sm:hidden"
+          >
             <RiDeleteBin2Line fontSize="2rem" />
           </button>
         </div>
