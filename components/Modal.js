@@ -36,7 +36,7 @@ const Modal = ({ show, onClose, children, jobss, getUserData }) => {
       .then(() => {
         setIsUpdate(false);
         getUserData();
-        alert("data updated");
+        onClose();
       })
       .catch((error) => console.log(error));
   };
@@ -108,35 +108,6 @@ const Modal = ({ show, onClose, children, jobss, getUserData }) => {
                         )}
                       </div>
                     </div>
-                    {isUpdate ? (
-                      <>
-                        <button onClick={updateFields} className="mx-2">
-                          update
-                        </button>
-                        <button onClick={() => setIsUpdate(false)}>
-                          Close
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <button
-                          className="mx-2"
-                          onClick={() =>
-                            getDatas(
-                              job.id,
-                              job.title,
-                              job.city,
-                              job.money,
-                              job.time,
-                              job.duration,
-                              job.info
-                            )
-                          }
-                        >
-                          Update item
-                        </button>
-                      </>
-                    )}
                   </div>
                 </div>
                 <div className="slika-hotela">
@@ -285,7 +256,7 @@ const Modal = ({ show, onClose, children, jobss, getUserData }) => {
                   </span>
                   <span>Detaljni opis</span>
                 </div>
-                <div className="flex justify-between ml-6 my-8">
+                <div className="flex justify-between items-center ml-6 my-8">
                   <div className="w-[80%] border border-white p-6">
                     {isUpdate ? (
                       <>
@@ -306,6 +277,33 @@ const Modal = ({ show, onClose, children, jobss, getUserData }) => {
                       <p>{job.info}</p>
                     )}
                   </div>
+                  {isUpdate ? (
+                    <>
+                      <button onClick={updateFields} className="mx-2">
+                        Update
+                      </button>
+                      <button onClick={() => setIsUpdate(false)}>Close</button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className="mx-2"
+                        onClick={() =>
+                          getDatas(
+                            job.id,
+                            job.title,
+                            job.city,
+                            job.money,
+                            job.time,
+                            job.duration,
+                            job.info
+                          )
+                        }
+                      >
+                        Update job
+                      </button>
+                    </>
+                  )}
                   <div
                     className="flex items-end cursor-pointer"
                     onClick={handleClose}
