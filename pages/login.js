@@ -1,8 +1,31 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 import Navbar from "../components/Navbar";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
-export default function LogIn() {
+
+export default function LogIn({ loggedIn }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter("");
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      router.push("/profile");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (loggedIn) {
+    router.push("/");
+  }
+
   return (
     <div className="container">
       <main className="flex justify-center items-center flex-col">
@@ -15,6 +38,8 @@ export default function LogIn() {
             <label htmlFor="email_id">Email</label>
             <div>
               <input
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
                 id="email_id"
                 className="input_field_login"
                 type="email"
@@ -27,6 +52,8 @@ export default function LogIn() {
             <label htmlFor="password_id">Lozinka</label>
             <div>
               <input
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
                 id="password_id"
                 className="input_field_login"
                 type="password"
@@ -50,12 +77,15 @@ export default function LogIn() {
               <a href="#">Zaboravio/la si lozinku?</a>
             </div>
           </div>
-          <button className="w-full py-5 px-6 border-none mt-12 mb-4 bg-secondary text-white pointer rounded-lg">
+          <button
+            onClick={handleLogin}
+            className="w-full py-5 px-6 border-none mt-12 mb-4 bg-secondary text-white pointer rounded-lg"
+          >
             Prijavi se
           </button>
           <div style={{ textAlign: "center" }}>
             Nemaš nalog?{" "}
-            <Link href='/register'>
+            <Link href="/register">
               <a>
                 <span style={{ color: "red" }}> Registruj se besplatno </span>
               </a>

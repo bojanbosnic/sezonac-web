@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, {  useContext } from "react";
 import Navbar from "../components/Navbar";
-import Card from "../components/Card";
 import ProfileNavbar from "../components/ProfileNavbar";
 import Link from "next/link";
-import { AiOutlineSearch } from "react-icons/ai";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function Profile() {
-  const [loadingPage, setLodaingPage] = useState(false);
-  useEffect(() => {
-    setLodaingPage(true);
-  }, []);
+  const { currentUser } = useContext(AuthContext);
+
+
+
   return (
     <div className="container lg:px-8 sm:p-4">
-      <Navbar loadingPage={loadingPage} />
+     
       <main className="flex justify-between lg:flex-wrap  mt-12">
-        <sidebar className="w-1/4 lg:w-full my-8 mr-8 block">
+        <div className="w-1/4 lg:w-full my-8 mr-8 block">
           <div className="h-full  lg:flex lg:items-center sm:block">
             <div>
-              <div>Ime kompanije</div>
+              <div>Ime kompanije: {currentUser.displayName}</div>
+
               <div className="w-60 h-60 overflow-hidden flex realtive items-center border border-white my-8 px-4 py-20 lg:py-14">
                 <div className="text-center overflow-hidden">
                   <input
@@ -52,10 +52,10 @@ export default function Profile() {
               </div>
             </div>
           </div>
-        </sidebar>
+        </div>
         <section className="w-3/4 my-4 lg:w-full">
           <div className="h-full border border-white px-6">
-            <ProfileNavbar/>
+            <ProfileNavbar />
           </div>
         </section>
       </main>

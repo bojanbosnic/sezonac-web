@@ -1,68 +1,93 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
+import { set, ref } from "firebase/database";
+import PostJob from "../components/PostJob";
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import { db } from "../firebase";
+import { useRouter } from "next/router";
+import { addDoc, collection } from "firebase/firestore";
 
 const Interface = () => {
-  const [loadingPage, setLodaingPage] = useState(false);
-  useEffect(() => {
-    setLodaingPage(true);
-  }, []);
+  const { currentUser } = useContext(AuthContext);
+  const { uid } = currentUser;
+  const router = useRouter();
+  const [postJob, setPostJob] = useState({
+    title: "",
+    city: "",
+    info: "",
+    time: "",
+    money: "",
+    duration: "",
+  });
+
+  const handleInput = (type, value) => {
+    setPostJob({ ...postJob, [type]: value });
+  };
+
+  const writeUserData = (e) => {
+    addDoc(collection(db, `/${uid}`), {
+      title: postJob.title,
+      city: postJob.city,
+      info: postJob.info,
+      time: postJob.time,
+      money: postJob.money,
+      duration: postJob.duration,
+    });
+    router.push("/profile");
+  };
+
+  const writeGlobalData = (e) => {
+    addDoc(collection(db, `/GlobalJobs`), {
+      title: postJob.title,
+      city: postJob.city,
+      info: postJob.info,
+      time: postJob.time,
+      money: postJob.money,
+      duration: postJob.duration,
+    });
+    router.push("/profile");
+  };
+
   return (
     <div className="container lg:px-8 sm:p-4">
-      <Navbar loadingPage={loadingPage} />
       <main className="flex flex-col">
         <h1>Registrujte vaš posao</h1>
-        <h2>
-          Upišite naslov Vašeg posla, to je naslov koji će korisnici vidjeti
-          pirlikom pretrage
-        </h2>
-        <input
-          className="input_field_registration"
-          type="text"
-          placeholder="Konobar"
+        <PostJob
+          name="Upišite naslov Vašeg posla"
+          placeHolder="Konobar"
+          handleFunction={(e) => handleInput("title", e.target.value)}
         />
-        <div className="my-8">
-          <h2>Lokacija radnog mjesta</h2>
-          Grad - mjesto{" "}
-          <input
-            className="input_field_registration"
-            type="text"
-            placeholder="Beograd"
-          />
-        </div>
-        <h2>Detaljne informacije</h2>
-        <div className="mb-8">
-          <span>Opis posla</span>
-          <input
-            className="input_field_registration"
-            type="text"
-            placeholder="Opis posla"
-          />
-        </div>
-        <div className="my-8">
-          <span>Radno vrijeme</span>
-          <input
-            className="input_field_registration"
-            type="text"
-            placeholder="Puno radno vrijeme"
-          />
-        </div>
-        <div className="my-8">
-          <span>Satnica</span>
-          <input
-            className="input_field_registration"
-            type="text"
-            placeholder="5 KM"
-          />
-        </div>
-        <div className="my-8">
-          <span>Datum trajanja</span>
-          <input
-            className="input_field_registration"
-            type="text"
-            placeholder="01.01.22-02.02.22"
-          />
-        </div>
-        <button className="w-full border bg-secondary border-secondary rounded-lg py-5 px-6 mb-8">
+        <PostJob
+          name="Lokacija radnog mjesta"
+          placeHolder="Beograd"
+          handleFunction={(e) => handleInput("city", e.target.value)}
+        />
+        <PostJob
+          name="Opis posla"
+          placeHolder="Potreban radnika za..."
+          handleFunction={(e) => handleInput("info", e.target.value)}
+        />
+        <PostJob
+          name="Radno vrijeme"
+          placeHolder=" Puno radno vrijeme"
+          handleFunction={(e) => handleInput("time", e.target.value)}
+        />
+        <PostJob
+          name="Satnica"
+          placeHolder="5 $"
+          handleFunction={(e) => handleInput("money", e.target.value)}
+        />
+        <PostJob
+          name="Datum trajanja"
+          placeHolder=" 01.01.22-02.02.22"
+          handleFunction={(e) => handleInput("duration", e.target.value)}
+        />
+        <button
+          onClick={() => {
+            writeUserData(), writeGlobalData();
+          }}
+          className="w-full border bg-secondary border-secondary rounded-lg py-5 px-6 mb-8"
+        >
           Zavrsi Objavu
         </button>
       </main>

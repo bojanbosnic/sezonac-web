@@ -6,7 +6,6 @@ import about_image2 from "../assets/ilustrations/draw5.svg";
 export default function AboutUs() {
   return (
     <div className="container">
-      <Navbar />
       <main className=" text-white">
         <div>
           <h1>Hajde da se bolje upoznamo</h1>
