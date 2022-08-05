@@ -8,12 +8,14 @@ import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
 
-const Modal = ({ show, onClose, children, jobss }) => {
+const Modal = ({ show, onClose, children, jobss, getUserData }) => {
   const [isBrowser, setIsBrowser] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const { currentUser } = useContext(AuthContext);
+  const [fireData, setFireData] = useState([]);
   const [updateJobs, setUpdateJobs] = useState([]);
   const poslovi = [jobss];
+
   console.log("UPDATED JOBS ID", currentUser.uid);
   const handleClose = (e) => {
     e.preventDefault();
@@ -33,7 +35,7 @@ const Modal = ({ show, onClose, children, jobss }) => {
     })
       .then(() => {
         setIsUpdate(false);
-        // getUserData();
+        getUserData();
         alert("data updated");
       })
       .catch((error) => console.log(error));

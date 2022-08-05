@@ -14,7 +14,7 @@ const Interface = () => {
 
   console.log("This is jobs", jobss);
   console.log("CHECKED", checked);
-  
+
   const getUserData = async () => {
     await getDocs(collection(db, `/${currentUser.uid}`)).then((response) =>
       setFireData(
@@ -85,7 +85,7 @@ const Interface = () => {
         </div>
       ))}
       <Modal
-        setJobss={setJobss}
+        getUserData={getUserData}
         jobss={jobss}
         show={showModal}
         onClose={() => setShowModal(false)}
