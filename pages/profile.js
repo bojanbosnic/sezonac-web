@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import Navbar from "../components/Navbar";
 import ProfileNavbar from "../components/ProfileNavbar";
 import Link from "next/link";
 import { AuthContext } from "../Context/AuthContext";
@@ -14,7 +13,6 @@ export default function Profile() {
           <div className="h-full  lg:flex lg:items-center sm:block">
             <div>
               <div>Ime kompanije: {currentUser.displayName}</div>
-
               <div className="w-60 h-60 overflow-hidden flex realtive items-center border border-white my-8 px-4 py-20 lg:py-14">
                 <div className="text-center overflow-hidden">
                   <input
