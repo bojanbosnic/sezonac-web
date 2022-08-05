@@ -21,42 +21,7 @@ const Modal = ({ show, onClose, children, jobss, getUserData }) => {
     e.preventDefault();
     onClose();
   };
-
-  const updateFields = (e) => {
-    e.preventDefault();
-    let fieldToEdit = doc(db, `/${currentUser.uid}`, updateJobs.ID);
-    updateDoc(fieldToEdit, {
-      title: updateJobs.title,
-      city: updateJobs.city,
-      money: updateJobs.money,
-      time: updateJobs.time,
-      duration: updateJobs.duration,
-      info: updateJobs.info,
-    })
-      .then(() => {
-        setIsUpdate(false);
-        getUserData();
-        alert("data updated");
-      })
-      .catch((error) => console.log(error));
-  };
-
-  const getDatas = (id, title, city, money, time, duration, info) => {
-    setUpdateJobs({
-      ID: id,
-      title: title,
-      city: city,
-      money: money,
-      time: time,
-      duration: duration,
-      info: info,
-    });
-    setIsUpdate(true);
-  };
-
-  useEffect(() => {
-    setIsBrowser(true);
-  }, []);
+  // console.log("Use effect=>", isBrowser);
 
   const modalContent = show ? (
     <div className="z-20 fixed w-full h-full top-0 left-0 bg-dark">
