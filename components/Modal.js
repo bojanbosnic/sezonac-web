@@ -1,29 +1,60 @@
 import React, { useState, useEffect } from "react";
+import { doc, updateDoc } from "firebase/firestore";
 import ReactDOM from "react-dom";
-import { BsFillBookmarkFill } from "react-icons/bs";
-import { HiOutlineMail } from "react-icons/hi";
 import { AiOutlineInfoCircle, AiOutlineCloseSquare } from "react-icons/ai";
 import { BiData, BiUserCircle } from "react-icons/bi";
 import { MdOutlineDescription } from "react-icons/md";
-
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import { db } from "../firebase";
 
 const Modal = ({ show, onClose, children, jobss }) => {
   const [isBrowser, setIsBrowser] = useState(false);
-
-  const poslovi = [jobss]
-
-
-
-
-  console.log("MODAL JOBS", poslovi);
-  useEffect(() => {
-    setIsBrowser(true);
-  }, []);
-
+  const [isUpdate, setIsUpdate] = useState(false);
+  const { currentUser } = useContext(AuthContext);
+  const [updateJobs, setUpdateJobs] = useState([]);
+  const poslovi = [jobss];
+  console.log("UPDATED JOBS ID", currentUser.uid);
   const handleClose = (e) => {
     e.preventDefault();
     onClose();
   };
+
+  const updateFields = (e) => {
+    e.preventDefault();
+    let fieldToEdit = doc(db, `/${currentUser.uid}`, updateJobs.ID);
+    updateDoc(fieldToEdit, {
+      title: updateJobs.title,
+      city: updateJobs.city,
+      money: updateJobs.money,
+      time: updateJobs.time,
+      duration: updateJobs.duration,
+      info: updateJobs.info,
+    })
+      .then(() => {
+        setIsUpdate(false);
+        // getUserData();
+        alert("data updated");
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const getDatas = (id, title, city, money, time, duration, info) => {
+    setUpdateJobs({
+      ID: id,
+      title: title,
+      city: city,
+      money: money,
+      time: time,
+      duration: duration,
+      info: info,
+    });
+    setIsUpdate(true);
+  };
+
+  useEffect(() => {
+    setIsBrowser(true);
+  }, []);
 
   const modalContent = show ? (
     <div className="z-20 fixed w-full h-full top-0 left-0 bg-dark">
@@ -42,24 +73,68 @@ const Modal = ({ show, onClose, children, jobss }) => {
                     </span>
                     <span>Objavio</span>
                   </div>
-                  <div className="w-[70%] relative flex items-center  ml-6 my-8 sm:justify-center md:flex-wrap border border-white p-4 ">
-                    <div className="w-[50%] border border-white p-6 flex flex-col">
-                      <span className="mb-1 text-sm">Choose image</span>
-                      <input
-                        className="text-xs"
-                        type="file"
-                        id="myImage"
-                        name="profile_img"
-                        accept="image/png, image/jpg"
-                      />
+                  <div className="flex">
+                    <div className="w-[70%] relative flex items-center  ml-6 my-8 sm:justify-center md:flex-wrap border border-white p-4 ">
+                      <div className="w-[50%] border border-white p-6 flex flex-col">
+                        <span className="mb-1 text-sm">Choose image</span>
+                        <input
+                          className="text-xs"
+                          type="file"
+                          id="myImage"
+                          name="profile_img"
+                          accept="image/png, image/jpg"
+                        />
+                      </div>
+                      <div className="ml-4">
+                        {isUpdate ? (
+                          <>
+                            <input
+                              onChange={(e) =>
+                                setUpdateJobs({
+                                  ...updateJobs,
+                                  title: e.target.value,
+                                })
+                              }
+                              className="text-black border-2 px-2 border-gray-400"
+                              type={"text"}
+                              placeholder="type text..."
+                              defaultValue={updateJobs.title}
+                            />
+                          </>
+                        ) : (
+                          <span className="sm:items-center">{job.title}</span>
+                        )}
+                      </div>
                     </div>
-                    <div className="ml-4">
-                      <span className="sm:items-center">{job.title}</span>
-                    </div>
-                    <div className="flex items-center  absolute  top-[-2%] right-[-21%] sm:flex-col sm:right-[-18%]">
-                      <BsFillBookmarkFill className="text-xl sm:mb-4" />
-                      <HiOutlineMail className="text-2xl mx-2" />
-                    </div>
+                    {isUpdate ? (
+                      <>
+                        <button onClick={updateFields} className="mx-2">
+                          update
+                        </button>
+                        <button onClick={() => setIsUpdate(false)}>
+                          Close
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          className="mx-2"
+                          onClick={() =>
+                            getDatas(
+                              job.id,
+                              job.title,
+                              job.city,
+                              job.money,
+                              job.time,
+                              job.duration,
+                              job.info
+                            )
+                          }
+                        >
+                          Update item
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className="slika-hotela">
@@ -94,7 +169,24 @@ const Modal = ({ show, onClose, children, jobss }) => {
                       <span>Lokacija</span>
                     </div>
                     <div className="absolute h-full w-full  text-center py-3 font-medium bg-white text-primary">
-                      <span>{job.city}</span>
+                      {isUpdate ? (
+                        <>
+                          <input
+                            onChange={(e) =>
+                              setUpdateJobs({
+                                ...updateJobs,
+                                city: e.target.value,
+                              })
+                            }
+                            className="text-black border-2 px-2 border-gray-400"
+                            type={"text"}
+                            placeholder="type text..."
+                            defaultValue={updateJobs.city}
+                          />
+                        </>
+                      ) : (
+                        <span>{job.city}</span>
+                      )}
                     </div>
                   </div>
                   <div className="border mx-8 border-white w-[20%] lg:w-[50%]">
@@ -102,7 +194,24 @@ const Modal = ({ show, onClose, children, jobss }) => {
                       <span>Satnica</span>
                     </div>
                     <div className="text-center py-3 font-medium bg-white text-primary">
-                      <span>{job.money}</span>
+                      {isUpdate ? (
+                        <>
+                          <input
+                            onChange={(e) =>
+                              setUpdateJobs({
+                                ...updateJobs,
+                                money: e.target.value,
+                              })
+                            }
+                            className="text-black border-2 px-2 border-gray-400"
+                            type={"text"}
+                            placeholder="type text..."
+                            defaultValue={updateJobs.money}
+                          />
+                        </>
+                      ) : (
+                        <span>{job.money}</span>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -120,7 +229,24 @@ const Modal = ({ show, onClose, children, jobss }) => {
                       <span className="mx-2">Radno vrijeme</span>
                     </div>
                     <div className="text-center py-1  bg-white text-primary ">
-                      <span className="mx-2 font-medium">{job.time}</span>
+                      {isUpdate ? (
+                        <>
+                          <input
+                            onChange={(e) =>
+                              setUpdateJobs({
+                                ...updateJobs,
+                                time: e.target.value,
+                              })
+                            }
+                            className="text-black border-2 px-2 border-gray-400"
+                            type={"text"}
+                            placeholder="type text..."
+                            defaultValue={updateJobs.time}
+                          />
+                        </>
+                      ) : (
+                        <span className="mx-2 font-medium">{job.time}</span>
+                      )}
                     </div>
                   </div>
                   <div className="flex justify-between border my-4 border-white w-[50%] md:w-full">
@@ -128,7 +254,24 @@ const Modal = ({ show, onClose, children, jobss }) => {
                       <span className="mx-2">Rok trajanja</span>
                     </div>
                     <div className="text-center py-1 bg-white text-primary">
-                      <span className="mx-2 font-medium">{job.duration}</span>
+                      {isUpdate ? (
+                        <>
+                          <input
+                            onChange={(e) =>
+                              setUpdateJobs({
+                                ...updateJobs,
+                                duration: e.target.value,
+                              })
+                            }
+                            className="text-black border-2 px-2 border-gray-400"
+                            type={"text"}
+                            placeholder="type text..."
+                            defaultValue={updateJobs.duration}
+                          />
+                        </>
+                      ) : (
+                        <span className="mx-2 font-medium">{job.duration}</span>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -142,7 +285,24 @@ const Modal = ({ show, onClose, children, jobss }) => {
                 </div>
                 <div className="flex justify-between ml-6 my-8">
                   <div className="w-[80%] border border-white p-6">
-                    <p>{job.info}</p>
+                    {isUpdate ? (
+                      <>
+                        <input
+                          onChange={(e) =>
+                            setUpdateJobs({
+                              ...updateJobs,
+                              info: e.target.value,
+                            })
+                          }
+                          className="text-black border-2 px-2 border-gray-400"
+                          type={"text"}
+                          placeholder="type text..."
+                          defaultValue={updateJobs.info}
+                        />
+                      </>
+                    ) : (
+                      <p>{job.info}</p>
+                    )}
                   </div>
                   <div
                     className="flex items-end cursor-pointer"

@@ -10,9 +10,11 @@ const Interface = () => {
   const [showModal, setShowModal] = useState(false);
   const [fireData, setFireData] = useState([]);
   const [jobss, setJobss] = useState([]);
+  const [checked, setChecked] = useState(false);
 
   console.log("This is jobs", jobss);
-
+  console.log("CHECKED", checked);
+  
   const getUserData = async () => {
     await getDocs(collection(db, `/${currentUser.uid}`)).then((response) =>
       setFireData(
@@ -30,6 +32,14 @@ const Interface = () => {
       .catch((error) => console.log(error));
   };
 
+  const checkboxDeleteDocument = (id) => {
+    if (checked) {
+      deleteDocument(id);
+    } else {
+      alert("Please first check checkbox and now delete!");
+    }
+  };
+
   useEffect(() => {
     getUserData();
   }, []);
@@ -39,11 +49,19 @@ const Interface = () => {
       {fireData.map((jobs) => (
         <div className="flex items-center relative">
           <div className="mb-32  absolute sm:mb-[8rem]">
-            <button className="hover:underline">Delete</button>
-            <span className="mx-2">/</span>
-            <button className="hover:underline">Delete All</button>
+            <button
+              onClick={() => checkboxDeleteDocument(jobs.id)}
+              className="hover:underline"
+            >
+              Delete
+            </button>
           </div>
-          <input className="absolute left-[3%]" type="checkbox" />
+          <input
+            className="absolute left-[3%]"
+            type="checkbox"
+            defaultChecked={checked}
+            onChange={() => setChecked(!checked)}
+          />
           <div
             onClick={() => {
               setJobss(jobs), setShowModal(true);
@@ -54,8 +72,7 @@ const Interface = () => {
               <span className="mx-4 font-semibold">{jobs.title}</span>
               <span className="mx-4 flex items-center sm:flex-wrap">
                 <span className="bassis-full">Trajanje:</span>
-                <span className="font-semibold mx-2">01.06.2022</span>-
-                <span className="font-semibold mx-2">01.09.2022</span>
+                <span className="font-semibold mx-2">{jobs.duration}</span>
               </span>
             </div>
           </div>
