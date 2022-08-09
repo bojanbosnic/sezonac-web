@@ -12,8 +12,9 @@ const Interface = () => {
   const [jobss, setJobss] = useState([]);
   const [checked, setChecked] = useState(false);
 
-  console.log("This is jobs", jobss);
+  console.log("This is jobs!!", jobss);
   console.log("CHECKED", checked);
+  console.log("FINALY JOBS", fireData)
 
   const getUserData = async () => {
     await getDocs(collection(db, `/${currentUser.uid}`)).then((response) =>
@@ -24,6 +25,13 @@ const Interface = () => {
       )
     );
   };
+
+const writeUserData = (e) => {
+  addDoc(collection(db, `/GlobalJobs`), {
+  
+  });
+  router.push("/profile");
+};
 
   const deleteDocument = (id) => {
     let fieldToDelete = doc(db, `/${currentUser.uid}`, id);
@@ -42,48 +50,55 @@ const Interface = () => {
 
   useEffect(() => {
     getUserData();
+
   }, []);
 
   return (
     <div className="relative mt-16">
-      {fireData.map((jobs) => (
-        <div className="flex items-center relative">
-          <div className="mb-32  absolute sm:mb-[8rem]">
-            <button
-              onClick={() => checkboxDeleteDocument(jobs.id)}
-              className="hover:underline"
-            >
-              Delete
-            </button>
-          </div>
-          <input
-            className="absolute left-[3%]"
-            type="checkbox"
-            defaultChecked={checked}
-            onChange={() => setChecked(!checked)}
-          />
-          <div
-            onClick={() => {
-              setJobss(jobs), setShowModal(true);
-            }}
-            className="border w-full flex items-center my-8 px-4 sm:p-0"
-          >
-            <div className="w-full flex m-8 items-center justify-between sm:flex-wrap sm:m-4 sm:px-4">
-              <span className="mx-4 font-semibold">{jobs.title}</span>
-              <span className="mx-4 flex items-center sm:flex-wrap">
-                <span className="bassis-full">Trajanje:</span>
-                <span className="font-semibold mx-2">{jobs.duration}</span>
-              </span>
+      {fireData.length === 0 ? (
+        <p>Nema poslova za sada...</p>
+      ) : (
+        <>
+          {fireData.map((jobs) => (
+            <div className="flex items-center relative">
+              <div className="mb-32  absolute sm:mb-[8rem]">
+                <button
+                  onClick={() => checkboxDeleteDocument(jobs.id)}
+                  className="hover:underline"
+                >
+                  Delete
+                </button>
+              </div>
+              <input
+                className="absolute left-[3%]"
+                type="checkbox"
+                defaultChecked={checked}
+                onChange={() => setChecked(!checked)}
+              />
+              <div
+                onClick={() => {
+                  setJobss(jobs), setShowModal(true);
+                }}
+                className="border w-full flex items-center my-8 px-4 sm:p-0"
+              >
+                <div className="w-full flex m-8 items-center justify-between sm:flex-wrap sm:m-4 sm:px-4">
+                  <span className="mx-4 font-semibold">{jobs.title}</span>
+                  <span className="mx-4 flex items-center sm:flex-wrap">
+                    <span className="bassis-full">Trajanje:</span>
+                    <span className="font-semibold mx-2">{jobs.duration}</span>
+                  </span>
+                </div>
+              </div>
+              <button
+                onClick={() => deleteDocument(jobs.id)}
+                className="ml-4 sm:hidden"
+              >
+                <RiDeleteBin2Line fontSize="2rem" />
+              </button>
             </div>
-          </div>
-          <button
-            onClick={() => deleteDocument(jobs.id)}
-            className="ml-4 sm:hidden"
-          >
-            <RiDeleteBin2Line fontSize="2rem" />
-          </button>
-        </div>
-      ))}
+          ))}
+        </>
+      )}
       <Modal
         getUserData={getUserData}
         jobss={jobss}

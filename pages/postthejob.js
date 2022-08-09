@@ -37,7 +37,7 @@ const Interface = () => {
   };
 
   const writeGlobalData = (e) => {
-    addDoc(collection(db, `/GlobalJobs`), {
+    addDoc(collection(db, `/GlobalJobs/${}`), {
       title: postJob.title,
       city: postJob.city,
       info: postJob.info,
