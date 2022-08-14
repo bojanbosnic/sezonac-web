@@ -1,9 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  deleteDoc,
+  addDoc,
+  setDoc,
+  doc,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 import { AuthContext } from "../../Context/AuthContext";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import Modal from "../Modal";
+import LoadingSpinner from "../LoadingSpinner";
 
 const Interface = () => {
   const { currentUser } = useContext(AuthContext);
@@ -11,10 +19,11 @@ const Interface = () => {
   const [fireData, setFireData] = useState([]);
   const [jobss, setJobss] = useState([]);
   const [checked, setChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   console.log("This is jobs!!", jobss);
   console.log("CHECKED", checked);
-  console.log("FINALY JOBS", fireData)
+  console.log("FINALY JOBS", fireData);
 
   const getUserData = async () => {
     await getDocs(collection(db, `/${currentUser.uid}`)).then((response) =>
@@ -26,17 +35,10 @@ const Interface = () => {
     );
   };
 
-const writeUserData = (e) => {
-  addDoc(collection(db, `/GlobalJobs`), {
-  
-  });
-  router.push("/profile");
-};
-
   const deleteDocument = (id) => {
     let fieldToDelete = doc(db, `/${currentUser.uid}`, id);
     deleteDoc(fieldToDelete)
-      .then(() => alert("Data Deleted!"), getUserData())
+      .then(() => getUserData())
       .catch((error) => console.log(error));
   };
 
@@ -50,13 +52,15 @@ const writeUserData = (e) => {
 
   useEffect(() => {
     getUserData();
-
   }, []);
 
   return (
     <div className="relative mt-16">
       {fireData.length === 0 ? (
-        <p>Nema poslova za sada...</p>
+        <>
+          {/* {fireData.length === 0 ? setIsLoading(false) : setIsLoading(true)} */}
+          {isLoading ? <p>Nema poslova za sada...</p> : <LoadingSpinner />}
+        </>
       ) : (
         <>
           {fireData.map((jobs) => (

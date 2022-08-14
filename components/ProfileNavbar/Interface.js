@@ -18,20 +18,17 @@ const Interface = ({ setPage, myPages }) => {
           >
             Sačuvani Poslovi
           </li>
-          <li
-            className="text-white mr-8 cursor-pointer"
-            onClick={() => setPage("page3")}
-          >
-            Inbox
+          <li className="mr-8">
+            <Link href="/postthejob">
+              <a>Objavi Posao</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/jobs">
+              <a>Potraži posao</a>
+            </Link>
           </li>
         </ul>
-        <li>
-          <Link href="/postthejob">
-            <a>
-              Objavi Posao
-            </a>
-          </Link>
-        </li>
       </nav>
       <div>{myPages()}</div>
     </div>

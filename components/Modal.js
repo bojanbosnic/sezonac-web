@@ -12,11 +12,10 @@ const Modal = ({ show, onClose, children, jobss, getUserData }) => {
   const [isBrowser, setIsBrowser] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const { currentUser } = useContext(AuthContext);
-  const [fireData, setFireData] = useState([]);
   const [updateJobs, setUpdateJobs] = useState([]);
   const poslovi = [jobss];
 
-  console.log("UPDATED JOBS ID", currentUser.uid);
+  console.log("UPDATED JOBS ID", updateJobs.ID);
   const handleClose = (e) => {
     e.preventDefault();
     onClose();
@@ -33,6 +32,33 @@ const Modal = ({ show, onClose, children, jobss, getUserData }) => {
       duration: updateJobs.duration,
       info: updateJobs.info,
     })
+      .then(() => {
+        let filedglobaledit = doc(db, `/GlobalJobs`, updateJobs.ID);
+        updateDoc(filedglobaledit, {
+          title: updateJobs.title,
+          city: updateJobs.city,
+          money: updateJobs.money,
+          time: updateJobs.time,
+          duration: updateJobs.duration,
+          info: updateJobs.info,
+        });
+      })
+      .then(() => {
+        let filesavejobs = doc(
+          db,
+          `/SavedJobs${currentUser.uid}`,
+          updateJobs.ID
+        );
+        updateDoc(filesavejobs, {
+          title: updateJobs.title,
+          city: updateJobs.city,
+          money: updateJobs.money,
+          time: updateJobs.time,
+          duration: updateJobs.duration,
+          info: updateJobs.info,
+        });
+      })
+
       .then(() => {
         setIsUpdate(false);
         getUserData();

@@ -10,9 +10,10 @@ import Navbar from "../components/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 
-export default function Home({loggedIn}) {
-  const {currentUser} = useContext(AuthContext)
-
+export default function Home({ loggedIn }) {
+  const { currentUser } = useContext(AuthContext);
+  console.log("TRENUTNO!", currentUser);
+  
   return (
     <>
       <div className="container mx-auto sm:px-8">
