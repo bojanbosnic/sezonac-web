@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const Interface = ({ setPage, myPages }) => {
   return (
@@ -25,7 +26,10 @@ const Interface = ({ setPage, myPages }) => {
           </li>
           <li>
             <Link href="/jobs">
-              <a>Potraži posao</a>
+              <a className="flex items-center">
+                <AiOutlineSearch fontSize={'1.5rem'} />
+                <span>global search</span>
+              </a>
             </Link>
           </li>
         </ul>

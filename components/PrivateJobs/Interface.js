@@ -3,8 +3,6 @@ import {
   getDocs,
   collection,
   deleteDoc,
-  addDoc,
-  setDoc,
   doc,
 } from "firebase/firestore";
 import { db } from "../../firebase";
@@ -20,6 +18,7 @@ const Interface = () => {
   const [jobss, setJobss] = useState([]);
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
 
   console.log("This is jobs!!", jobss);
   console.log("CHECKED", checked);
@@ -40,6 +39,10 @@ const Interface = () => {
     deleteDoc(fieldToDelete)
       .then(() => getUserData())
       .catch((error) => console.log(error));
+    let fieldToDeleteGlobal = doc(db, `/GlobalJobs`, id);
+    deleteDoc(fieldToDeleteGlobal)
+      .then(() => getUserData())
+      .catch((error) => console.log(error));
   };
 
   const checkboxDeleteDocument = (id) => {
@@ -52,6 +55,7 @@ const Interface = () => {
 
   useEffect(() => {
     getUserData();
+    setIsUpdating(true);
   }, []);
 
   return (
@@ -107,6 +111,7 @@ const Interface = () => {
         getUserData={getUserData}
         jobss={jobss}
         show={showModal}
+        isUpdating={isUpdating}
         onClose={() => setShowModal(false)}
       />
     </div>

@@ -6,27 +6,37 @@ import { setDoc, doc } from "firebase/firestore";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 
- const Card=(props)=> {
-  const {loggedIn , title, money, duration, time, city, info, id} = props;
+const Card = (props) => {
+  const { title, money, duration, time, city, info, id, loggedIn } = props;
+
   const [isDisabled, setIsDisabled] = useState(false);
   const { currentUser } = useContext(AuthContext);
-  const [globalJobs, setGlobalJobs] = useState([]);
-console.log("LOGED IN =>>", loggedIn)
+
+  console.log("LOGED IN =>>", loggedIn);
+
   const savedJobsFun = async () => {
     if (loggedIn) {
-      await setDoc(doc(db, `/SavedJobs${currentUser.uid}`, `${id}`), {
-        title: title,
-        money: money,
-        duration: duration,
-        time: time,
-        city: city,
-        info: info,
-      });
+      const proba = await setDoc(
+        doc(db, `/SavedJobs${currentUser.uid}`, `${id}`),
+        {
+          title: title,
+          money: money,
+          duration: duration,
+          time: time,
+          city: city,
+          info: info,
+        }
+      );
+      console.log("////proba", proba)
       setIsDisabled(true);
+
     } else {
+          console.log("==PROBA==", proba);
+
       alert("Napravi nalog!!");
     }
   };
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -65,7 +75,6 @@ console.log("LOGED IN =>>", loggedIn)
       </div>
     </>
   );
-}
-
+};
 
 export default Card;

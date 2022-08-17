@@ -8,7 +8,15 @@ import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
 
-const Modal = ({ show, onClose, children, jobss, getUserData }) => {
+const Modal = ({
+  show,
+  onClose,
+  children,
+  jobss,
+  getUserData,
+  set,
+  isUpdating,
+}) => {
   const [isBrowser, setIsBrowser] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const { currentUser } = useContext(AuthContext);
@@ -21,8 +29,12 @@ const Modal = ({ show, onClose, children, jobss, getUserData }) => {
     onClose();
   };
 
+ 
+
   const updateFields = (e) => {
+
     e.preventDefault();
+    
     let fieldToEdit = doc(db, `/${currentUser.uid}`, updateJobs.ID);
     updateDoc(fieldToEdit, {
       title: updateJobs.title,
@@ -44,12 +56,8 @@ const Modal = ({ show, onClose, children, jobss, getUserData }) => {
         });
       })
       .then(() => {
-        let filesavejobs = doc(
-          db,
-          `/SavedJobs${currentUser.uid}`,
-          updateJobs.ID
-        );
-        updateDoc(filesavejobs, {
+        let filedsavedledit = doc(db, `/SavedJobs${currentUser.uid}`, updateJobs.ID);
+        updateDoc(filedsavedledit, {
           title: updateJobs.title,
           city: updateJobs.city,
           money: updateJobs.money,
@@ -78,6 +86,32 @@ const Modal = ({ show, onClose, children, jobss, getUserData }) => {
       info: info,
     });
     setIsUpdate(true);
+  };
+
+  const privateUpdate = (id, title, city, money, time, duration, info) => {
+    if (isUpdate) {
+      return (
+        <>
+          <button onClick={updateFields} className="mx-2">
+            Update
+          </button>
+          <button onClick={() => setIsUpdate(false)}>Close</button>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <button
+            className="mx-2"
+            onClick={() =>
+              getDatas(id, title, city, money, time, duration, info)
+            }
+          >
+            Update job
+          </button>
+        </>
+      );
+    }
   };
 
   useEffect(() => {
@@ -303,33 +337,16 @@ const Modal = ({ show, onClose, children, jobss, getUserData }) => {
                       <p>{job.info}</p>
                     )}
                   </div>
-                  {isUpdate ? (
-                    <>
-                      <button onClick={updateFields} className="mx-2">
-                        Update
-                      </button>
-                      <button onClick={() => setIsUpdate(false)}>Close</button>
-                    </>
-                  ) : (
-                    <>
-                      <button
-                        className="mx-2"
-                        onClick={() =>
-                          getDatas(
-                            job.id,
-                            job.title,
-                            job.city,
-                            job.money,
-                            job.time,
-                            job.duration,
-                            job.info
-                          )
-                        }
-                      >
-                        Update job
-                      </button>
-                    </>
-                  )}
+                  {isUpdating &&
+                    privateUpdate(
+                      job.id,
+                      job.title,
+                      job.city,
+                      job.money,
+                      job.time,
+                      job.duration,
+                      job.info
+                    )}
                   <div
                     className="flex items-end cursor-pointer"
                     onClick={handleClose}

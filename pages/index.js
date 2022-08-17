@@ -4,7 +4,7 @@ import { ref, set } from "firebase/database";
 import { uuidv4 } from "@firebase/util";
 import { useState } from "react";
 import { db } from "../firebase";
-import homepage_pic from "../assets/ilustrations/search_job1.svg";
+import homepage_pic from "../assets/ilustrations/0f5b8b79722289.5ccbece3c3379.gif";
 import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 import { useContext } from "react";
