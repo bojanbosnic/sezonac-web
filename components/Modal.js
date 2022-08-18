@@ -29,12 +29,9 @@ const Modal = ({
     onClose();
   };
 
- 
-
   const updateFields = (e) => {
-
     e.preventDefault();
-    
+
     let fieldToEdit = doc(db, `/${currentUser.uid}`, updateJobs.ID);
     updateDoc(fieldToEdit, {
       title: updateJobs.title,
@@ -56,7 +53,11 @@ const Modal = ({
         });
       })
       .then(() => {
-        let filedsavedledit = doc(db, `/SavedJobs${currentUser.uid}`, updateJobs.ID);
+        let filedsavedledit = doc(
+          db,
+          `/SavedJobs${currentUser.uid}`,
+          updateJobs.ID
+        );
         updateDoc(filedsavedledit, {
           title: updateJobs.title,
           city: updateJobs.city,

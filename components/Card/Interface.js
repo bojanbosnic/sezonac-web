@@ -7,36 +7,41 @@ import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 
 const Card = (props) => {
-  const { title, money, duration, time, city, info, id, loggedIn } = props;
+  const {
+    title,
+    money,
+    duration,
+    time,
+    city,
+    info,
+    id,
+    isSaved,
+    setIsSaved,
+    loggedIn,
+  } = props;
 
   const [isDisabled, setIsDisabled] = useState(false);
   const { currentUser } = useContext(AuthContext);
 
-  console.log("LOGED IN =>>", loggedIn);
-
   const savedJobsFun = async () => {
     if (loggedIn) {
-      const proba = await setDoc(
-        doc(db, `/SavedJobs${currentUser.uid}`, `${id}`),
-        {
-          title: title,
-          money: money,
-          duration: duration,
-          time: time,
-          city: city,
-          info: info,
-        }
-      );
-      console.log("////proba", proba)
+      setIsSaved(true);
+      await setDoc(doc(db, `/SavedJobs${currentUser.uid}`, `${id}`), {
+        title: title,
+        money: money,
+        duration: duration,
+        time: time,
+        city: city,
+        info: info,
+        isSaved: isSaved,
+      });
+
       setIsDisabled(true);
-
     } else {
-          console.log("==PROBA==", proba);
-
       alert("Napravi nalog!!");
     }
   };
-  useEffect(() => {}, []);
+  console.log("CARD INTERFACE --->", isSaved);
 
   return (
     <>

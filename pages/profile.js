@@ -10,7 +10,7 @@ export default function Profile({ loggedIn }) {
   const { currentUser } = useContext(AuthContext);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true)
-  
+  console.log("USER--->>>", currentUser)
 
   useEffect(() => {
     if (!loggedIn) {

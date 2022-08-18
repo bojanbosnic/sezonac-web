@@ -10,6 +10,7 @@ const Jobs = ({ loggedIn }) => {
   const [searchData, setSearchData] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [globalDatas, setGlobalDatas] = useState([]);
+  const [isSaved, setIsSaved] = useState(false)
 
   const getUserData = async () => {
     await getDocs(collection(db, `/GlobalJobs`)).then((response) =>
@@ -21,7 +22,7 @@ const Jobs = ({ loggedIn }) => {
     );
   };
 
-  console.log("SearchData", searchData);
+  console.log("SearchData", globalJobs);
 
   useEffect(() => {
     getUserData();
@@ -40,44 +41,48 @@ const Jobs = ({ loggedIn }) => {
             <AiOutlineSearch className="absolute text-xl z-10 top-[30px] left-3" />
           </div>
         </div>
-
-        {globalJobs
-          .filter((datas) => {
-            if (searchData == "") {
-              return datas;
-            } else if (
-              datas.title.toLowerCase().includes(searchData.toLocaleLowerCase())
-            ) {
-              return datas;
-            }
-          })
-          .map((datas) => (
-            <div
-              onClick={() => {
-                setGlobalDatas(datas), setShowModal(true);
-              }}
-              className="flex flex-wrap justify-between w-full"
-            >
-              <Card
-                id={datas.id}
-                title={datas.title}
-                money={datas.money}
-                time={datas.time}
-                duration={datas.duration}
-                city={datas.city}
-                info={datas.info}
-                loggedIn={loggedIn}
-                setGlobalDatas={setGlobalDatas}
-                setShowModal={setShowModal}
-              />
-            </div>
-          ))}
-        <Modal
-          getUserData={getUserData}
-          jobss={globalDatas}
-          show={showModal}
-          onClose={() => setShowModal(false)}
-        />
+        <div className="flex flex-wrap justify-between w-full">
+          {globalJobs
+            .filter((datas) => {
+              if (searchData == "") {
+                return datas;
+              } else if (
+                datas.title
+                  .toLowerCase()
+                  .includes(searchData.toLocaleLowerCase())
+              ) {
+                return datas;
+              }
+            })
+            .map((datas) => (
+              <div
+                onClick={() => {
+                  setGlobalDatas(datas), setShowModal(true);
+                }}
+              >
+                <Card
+                  id={datas.id}
+                  title={datas.title}
+                  money={datas.money}
+                  time={datas.time}
+                  duration={datas.duration}
+                  city={datas.city}
+                  info={datas.info}
+                  isSaved={isSaved}
+                  setIsSaved={setIsSaved}
+                  loggedIn={loggedIn}
+                  setGlobalDatas={setGlobalDatas}
+                  setShowModal={setShowModal}
+                />
+              </div>
+            ))}
+          <Modal
+            getUserData={getUserData}
+            jobss={globalDatas}
+            show={showModal}
+            onClose={() => setShowModal(false)}
+          />
+        </div>
       </main>
     </div>
   );

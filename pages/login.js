@@ -67,20 +67,8 @@ export default function LogIn({ loggedIn }) {
                 />
               </div>
             </div>
-            <div className="flex justify-between">
-              <div className="flex items-center mr-12 mb-4">
-                <input
-                  id="checkbox_id"
-                  type={`checkbox`}
-                  name="InputCheckBoxFiled"
-                />
-                <label htmlFor="checkbox_id" style={{ marginLeft: "0.5rem" }}>
-                  Zapamti za 30 dana
-                </label>
-              </div>
-              <div>
-                <a href="#">Zaboravio/la si lozinku?</a>
-              </div>
+            <div>
+              <a href="#">Zaboravio/la si lozinku?</a>
             </div>
             <button
               onClick={handleLogin}
