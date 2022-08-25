@@ -25,13 +25,14 @@ const Interface = () => {
   console.log("FINALY JOBS", fireData);
 
   const getUserData = async () => {
-    await getDocs(collection(db, `/${currentUser.uid}`)).then((response) =>
+   await getDocs(collection(db, `/${currentUser.uid}`)).then((response) =>
       setFireData(
         response.docs.map((datas) => {
           return { ...datas.data(), id: datas.id };
         })
       )
-    );
+      );
+     
   };
 
   const deleteDocument = (id) => {

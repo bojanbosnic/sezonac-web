@@ -3,6 +3,7 @@ import Card from "../components/Card/Interface";
 import { AiOutlineSearch } from "react-icons/ai";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebase";
+
 import Modal from "../components/Modal";
 
 const Jobs = ({ loggedIn }) => {
@@ -10,7 +11,6 @@ const Jobs = ({ loggedIn }) => {
   const [searchData, setSearchData] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [globalDatas, setGlobalDatas] = useState([]);
-  const [isSaved, setIsSaved] = useState(false)
 
   const getUserData = async () => {
     await getDocs(collection(db, `/GlobalJobs`)).then((response) =>
@@ -21,8 +21,6 @@ const Jobs = ({ loggedIn }) => {
       )
     );
   };
-
-  console.log("SearchData", globalJobs);
 
   useEffect(() => {
     getUserData();
@@ -55,26 +53,27 @@ const Jobs = ({ loggedIn }) => {
               }
             })
             .map((datas) => (
-              <div
-                onClick={() => {
-                  setGlobalDatas(datas), setShowModal(true);
-                }}
-              >
-                <Card
-                  id={datas.id}
-                  title={datas.title}
-                  money={datas.money}
-                  time={datas.time}
-                  duration={datas.duration}
-                  city={datas.city}
-                  info={datas.info}
-                  isSaved={isSaved}
-                  setIsSaved={setIsSaved}
-                  loggedIn={loggedIn}
-                  setGlobalDatas={setGlobalDatas}
-                  setShowModal={setShowModal}
-                />
-              </div>
+              <>
+                <div
+                  className="card my-12"
+                  onClick={() => {
+                    setGlobalDatas(datas);
+                    setShowModal(true);
+                  }}
+                >
+                  <Card
+                    id={datas.id}
+                    title={datas.title}
+                    duration={datas.duration}
+                    city={datas.city}
+                    time={datas.time}
+                    money={datas.money}
+                    info={datas.info}
+                    profileID={datas.profileID}
+                    loggedIn={loggedIn}
+                  />
+                </div>
+              </>
             ))}
           <Modal
             getUserData={getUserData}

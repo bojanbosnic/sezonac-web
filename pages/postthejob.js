@@ -27,7 +27,7 @@ const Interface = () => {
   
 
   const writeUserData = async (e) => {
-    const refi = await addDoc(collection(db, `/${uid}`), {
+    const ref = await addDoc(collection(db, `/${uid}`), {
       title: postJob.title,
       city: postJob.city,
       info: postJob.info,
@@ -36,13 +36,14 @@ const Interface = () => {
       duration: postJob.duration,
     });
 
-    await setDoc(doc(db, `/GlobalJobs`, `${refi.id}`), {
+    await setDoc(doc(db, `/GlobalJobs`, `${ref.id}`), {
       title: postJob.title,
       city: postJob.city,
       info: postJob.info,
       time: postJob.time,
       money: postJob.money,
       duration: postJob.duration,
+      profileID: `${currentUser.uid}`,
     });
 
     router.push("/profile");
