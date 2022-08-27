@@ -7,6 +7,7 @@ import { MdOutlineDescription } from "react-icons/md";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
+import UploadForm from "./UploadForm";
 
 const Modal = ({
   show,
@@ -173,14 +174,7 @@ const Modal = ({
                 </div>
                 <div className="slika-hotela">
                   <div className="w-[14rem] h-[12rem] my-2 border border-white p-6 flex flex-col lg:ml-6">
-                    <span className="mb-1 text-sm">Choose image</span>
-                    <input
-                      className="text-xs"
-                      type="file"
-                      id="myImage"
-                      name="profile_img"
-                      accept="image/png, image/jpg"
-                    />
+               <UploadForm/>
                   </div>
                 </div>
               </div>
