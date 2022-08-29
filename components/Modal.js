@@ -7,21 +7,118 @@ import { MdOutlineDescription } from "react-icons/md";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
+import UploadForm from "./UploadForm";
 
-const Modal = ({ show, onClose, children, jobss, getUserData }) => {
+const Modal = ({
+  show,
+  onClose,
+  children,
+  jobss,
+  getUserData,
+  set,
+  isUpdating,
+}) => {
   const [isBrowser, setIsBrowser] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const { currentUser } = useContext(AuthContext);
-  const [fireData, setFireData] = useState([]);
   const [updateJobs, setUpdateJobs] = useState([]);
   const poslovi = [jobss];
 
-  console.log("UPDATED JOBS ID", currentUser.uid);
+  console.log("UPDATED JOBS ID", updateJobs.ID);
   const handleClose = (e) => {
     e.preventDefault();
     onClose();
   };
-  // console.log("Use effect=>", isBrowser);
+
+  const updateFields = (e) => {
+    e.preventDefault();
+
+    let fieldToEdit = doc(db, `/${currentUser.uid}`, updateJobs.ID);
+    updateDoc(fieldToEdit, {
+      title: updateJobs.title,
+      city: updateJobs.city,
+      money: updateJobs.money,
+      time: updateJobs.time,
+      duration: updateJobs.duration,
+      info: updateJobs.info,
+    })
+      .then(() => {
+        let filedglobaledit = doc(db, `/GlobalJobs`, updateJobs.ID);
+        updateDoc(filedglobaledit, {
+          title: updateJobs.title,
+          city: updateJobs.city,
+          money: updateJobs.money,
+          time: updateJobs.time,
+          duration: updateJobs.duration,
+          info: updateJobs.info,
+        });
+      })
+      .then(() => {
+        let filedsavedledit = doc(
+          db,
+          `/SavedJobs${currentUser.uid}`,
+          updateJobs.ID
+        );
+        updateDoc(filedsavedledit, {
+          title: updateJobs.title,
+          city: updateJobs.city,
+          money: updateJobs.money,
+          time: updateJobs.time,
+          duration: updateJobs.duration,
+          info: updateJobs.info,
+        });
+      })
+
+      .then(() => {
+        setIsUpdate(false);
+        getUserData();
+        onClose();
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const getDatas = (id, title, city, money, time, duration, info) => {
+    setUpdateJobs({
+      ID: id,
+      title: title,
+      city: city,
+      money: money,
+      time: time,
+      duration: duration,
+      info: info,
+    });
+    setIsUpdate(true);
+  };
+
+  const privateUpdate = (id, title, city, money, time, duration, info) => {
+    if (isUpdate) {
+      return (
+        <>
+          <button onClick={updateFields} className="mx-2">
+            Update
+          </button>
+          <button onClick={() => setIsUpdate(false)}>Close</button>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <button
+            className="mx-2"
+            onClick={() =>
+              getDatas(id, title, city, money, time, duration, info)
+            }
+          >
+            Update job
+          </button>
+        </>
+      );
+    }
+  };
+
+  useEffect(() => {
+    setIsBrowser(true);
+  }, []);
 
   const modalContent = show ? (
     <div className="z-20 fixed w-full h-full top-0 left-0 bg-dark">
@@ -73,47 +170,11 @@ const Modal = ({ show, onClose, children, jobss, getUserData }) => {
                         )}
                       </div>
                     </div>
-                    {isUpdate ? (
-                      <>
-                        <button onClick={updateFields} className="mx-2">
-                          update
-                        </button>
-                        <button onClick={() => setIsUpdate(false)}>
-                          Close
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <button
-                          className="mx-2"
-                          onClick={() =>
-                            getDatas(
-                              job.id,
-                              job.title,
-                              job.city,
-                              job.money,
-                              job.time,
-                              job.duration,
-                              job.info
-                            )
-                          }
-                        >
-                          Update item
-                        </button>
-                      </>
-                    )}
                   </div>
                 </div>
                 <div className="slika-hotela">
                   <div className="w-[14rem] h-[12rem] my-2 border border-white p-6 flex flex-col lg:ml-6">
-                    <span className="mb-1 text-sm">Choose image</span>
-                    <input
-                      className="text-xs"
-                      type="file"
-                      id="myImage"
-                      name="profile_img"
-                      accept="image/png, image/jpg"
-                    />
+               <UploadForm/>
                   </div>
                 </div>
               </div>
@@ -250,7 +311,7 @@ const Modal = ({ show, onClose, children, jobss, getUserData }) => {
                   </span>
                   <span>Detaljni opis</span>
                 </div>
-                <div className="flex justify-between ml-6 my-8">
+                <div className="flex justify-between items-center ml-6 my-8">
                   <div className="w-[80%] border border-white p-6">
                     {isUpdate ? (
                       <>
@@ -271,6 +332,16 @@ const Modal = ({ show, onClose, children, jobss, getUserData }) => {
                       <p>{job.info}</p>
                     )}
                   </div>
+                  {isUpdating &&
+                    privateUpdate(
+                      job.id,
+                      job.title,
+                      job.city,
+                      job.money,
+                      job.time,
+                      job.duration,
+                      job.info
+                    )}
                   <div
                     className="flex items-end cursor-pointer"
                     onClick={handleClose}

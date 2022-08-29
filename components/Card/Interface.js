@@ -1,56 +1,107 @@
-import React from "react";
-import { AiOutlineMail } from "react-icons/ai";
-import { BsFillBookmarkFill } from "react-icons/bs";
+import React, { useState, useContext } from "react";
 import { MdLocationOn } from "react-icons/md";
+import { db } from "../../firebase";
+import { AuthContext } from "../../Context/AuthContext";
+import { setDoc, doc } from "firebase/firestore";
+import { BsBookmark, BsBookmarkFill, BsJournalBookmark } from "react-icons/bs";
 
-export default function Card(props) {
-    const {job} = props;
+const Card = (props) => {
+  const { id, title, duration, city, time, money, info, profileID, loggedIn } =
+    props;
+  const [isDisabled, setIsDisabled] = useState(false);
+  const { currentUser } = useContext(AuthContext);
+
+  const savedJobsFun = async () => {
+    if (loggedIn) {
+      await setDoc(doc(db, `/SavedJobs${currentUser.uid}`, `${id}`), {
+        title: title,
+        money: money,
+        duration: duration,
+        time: time,
+        city: city,
+        info: info,
+      });
+      setIsDisabled(true);
+    } else {
+      alert("Napravi nalog!!");
+    }
+  };
+
+  const btnsFunciton = () => {
+    console.log("first thing!!");
+    if (!loggedIn) {
+      return (
+        <>
+          <button
+            onClick={(e) => e.stopPropagation()}
+            disabled={isDisabled}
+            className="ml-2"
+          >
+            <BsBookmark className="text-lg" style={{ color: "red" }} />
+          </button>
+        </>
+      );
+      return null;
+    } else if (currentUser.uid === profileID) {
+    return(
+        <button
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+        disabled={isDisabled}
+        className="ml-2"
+      >
+        Own Job
+        {/* <BsBookmark className="text-lg" /> */}
+      </button>
+    )
+    return null;
+
+    } else {
+     return(
+       <button
+        onClick={(e) => {
+          e.stopPropagation(); savedJobsFun();
+        }}
+        disabled={isDisabled}
+        className="ml-2"
+      >
+        {isDisabled ? (
+          <>
+            <BsBookmarkFill disabled={isDisabled} className="text-xl" />
+          </>
+        ) : (
+          <BsBookmark className="text-lg" />
+        )}
+      </button>
+     )
+    }
+  }; ///kraj funckcije
+
   return (
     <>
-      <div className="card my-12">
-        <div className="flex items-center absolute right-[3%] top-[5%]">
-          <button className="card_save and msg">
-            <AiOutlineMail className="text-2xl" />
-          </button>
-          <button className="ml-2">
-            <BsFillBookmarkFill className="text-xl" />
-          </button>
+      <div className="flex justify-between items-center">
+        <div className="absolute top-[60%] z-10">{btnsFunciton()}</div>
+        <div>
+          <img src="" alt="Profile picture" />
+          <div className="subtitle">ime_poslodavca</div>
         </div>
-        <div className="card-title">
-          <h2>{job}</h2>
-        </div>
-        <div className="subtitle">ime_poslodavca</div>
-        <div className="flex  my-4 items-center">
-          <div>datum trajanja</div>
-          <div className="ml-8">01.06.2022-01.09.2022</div>
-        </div>
-        <div className="flex items-center my-4">
-          <div>
+        <div>
+          <div className="card-title">
+            <h2>{title}</h2>
+          </div>
+          <div className="flex  my-4 items-center">
             <MdLocationOn />
+            <div className="ml-2">{city}</div>
           </div>
-          <div className="ml-2">
-            Gradiška, Republika Srpska, Bosna i hercegovina
-          </div>
-        </div>
-        <div className="border-2 border-red-700 rounded-lg p-4 my-4">
-          <p>
-            Trenutno tražimo konobara sa ili bez radnog iskustva koji bi radio 8
-            sati. Za ostale informacije obratite nam se na jedan od kontakata
-            ispod.
-          </p>
-        </div>
-        <div className="flex justify-between flex-wrap items-center">
-          <div className="border-2 border-red-700 rounded-lg p-2 my-4 lg:w-full lg:text-center">
-            telefon: 065567987
-          </div>
-          <div className="border-2 border-red-700 rounded-lg p-2 my-4  lg:w-full lg:text-center ">
-            satnica: 5km
-          </div>
-          <div className="border-2 border-red-700 rounded-lg p-2 my-4   lg:w-full lg:text-center">
-            email: imekorisnika@gmail.com
+          <div className="flex my-4">
+            <div>datum trajanja</div>
+            <div className="ml-8">{duration}</div>
           </div>
         </div>
       </div>
     </>
   );
-}
+};
+
+export default Card;
