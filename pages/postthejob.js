@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { set, ref } from "firebase/database";
 import PostJob from "../components/PostJob";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
@@ -24,8 +23,6 @@ const Interface = () => {
     setPostJob({ ...postJob, [type]: value });
   };
 
-  
-
   const writeUserData = async (e) => {
     const ref = await addDoc(collection(db, `/${uid}`), {
       title: postJob.title,
@@ -34,6 +31,9 @@ const Interface = () => {
       time: postJob.time,
       money: postJob.money,
       duration: postJob.duration,
+      email: currentUser.email,
+      photo: currentUser.photoURL,
+      company: currentUser.displayName
     });
 
     await setDoc(doc(db, `/GlobalJobs`, `${ref.id}`), {
@@ -44,12 +44,14 @@ const Interface = () => {
       money: postJob.money,
       duration: postJob.duration,
       profileID: `${currentUser.uid}`,
+      email: currentUser.email,
+      photo: currentUser.photoURL,
+      company: currentUser.displayName,
     });
 
     router.push("/profile");
   };
 
-  console.log("THIS IS FOR GLOBAL DATA", postJob);
 
   return (
     <div className="container lg:px-8 sm:p-4">

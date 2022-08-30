@@ -1,7 +1,5 @@
 import { useState, useEffect, useContext, createContext } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { getDocs, collection } from "firebase/firestore";
-import { db } from "../firebase";
 import { auth } from "../firebase";
 import LoadingSpinner from "../components/LoadingSpinner";
 
@@ -33,7 +31,7 @@ const AuthProvider = ({ children }) => {
       setIsLoading(false);
     });
     return unsub;
-  }, [currentUser.uid]);
+  }, [currentUser.accessToken]);
 
   if (isLoading) {
     return <LoadingSpinner />;

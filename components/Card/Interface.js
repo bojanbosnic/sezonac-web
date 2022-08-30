@@ -6,7 +6,7 @@ import { setDoc, doc } from "firebase/firestore";
 import { BsBookmark, BsBookmarkFill, BsJournalBookmark } from "react-icons/bs";
 
 const Card = (props) => {
-  const { id, title, duration, city, time, money, info, profileID, loggedIn } =
+  const { id, title, duration, city, time, money, info, profileID, loggedIn, photo } =
     props;
   const [isDisabled, setIsDisabled] = useState(false);
   const { currentUser } = useContext(AuthContext);
@@ -20,6 +20,9 @@ const Card = (props) => {
         time: time,
         city: city,
         info: info,
+        email: currentUser.email,
+        photo: currentUser.photoURL,
+        company: currentUser.displayName,
       });
       setIsDisabled(true);
     } else {
@@ -83,7 +86,7 @@ const Card = (props) => {
       <div className="flex justify-between items-center">
         <div className="absolute top-[60%] z-10">{btnsFunciton()}</div>
         <div>
-          <img src="" alt="Profile picture" />
+          <img className="w-28" src={photo} alt="Profile picture" />
           <div className="subtitle">ime_poslodavca</div>
         </div>
         <div>

@@ -3,10 +3,12 @@ import Card from "../components/Card/Interface";
 import { AiOutlineSearch } from "react-icons/ai";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebase";
-
+import { AuthContext } from "../Context/AuthContext";
+import { useContext } from "react";
 import Modal from "../components/Modal";
 
 const Jobs = ({ loggedIn }) => {
+  const { currentUser } = useContext(AuthContext);
   const [globalJobs, setGlobalJobs] = useState([]);
   const [searchData, setSearchData] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -71,6 +73,7 @@ const Jobs = ({ loggedIn }) => {
                     info={datas.info}
                     profileID={datas.profileID}
                     loggedIn={loggedIn}
+                    photo={currentUser.photoURL}
                   />
                 </div>
               </>

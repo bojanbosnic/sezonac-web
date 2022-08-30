@@ -8,7 +8,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 export default function LogIn({ loggedIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter("");
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,15 +22,15 @@ export default function LogIn({ loggedIn }) {
 
   useEffect(() => {
     if (loggedIn) {
-      router.push("/");
+      router.push("/profile");
     } else {
-      setIsLoading(true);
+      setIsLoading(false);
     }
   }, []);
 
   return (
     <div className="container">
-      {!isLoading ? (
+      {isLoading ? (
         <LoadingSpinner />
       ) : (
         <main className="flex justify-center items-center flex-col">

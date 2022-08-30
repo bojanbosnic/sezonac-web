@@ -7,17 +7,8 @@ import { MdOutlineDescription } from "react-icons/md";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
-import UploadForm from "./UploadForm";
 
-const Modal = ({
-  show,
-  onClose,
-  children,
-  jobss,
-  getUserData,
-  set,
-  isUpdating,
-}) => {
+const Modal = ({ show, onClose, jobss, getUserData, isUpdating }) => {
   const [isBrowser, setIsBrowser] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const { currentUser } = useContext(AuthContext);
@@ -66,6 +57,9 @@ const Modal = ({
           time: updateJobs.time,
           duration: updateJobs.duration,
           info: updateJobs.info,
+          email: currentUser.email,
+          photo: currentUser.photoURL,
+          company: currentUser.displayName,
         });
       })
 
@@ -136,18 +130,13 @@ const Modal = ({
                       <BiUserCircle />
                     </span>
                     <span>Objavio</span>
+                    <p>{job.company}</p>
                   </div>
                   <div className="flex">
                     <div className="w-[70%] relative flex items-center  ml-6 my-8 sm:justify-center md:flex-wrap border border-white p-4 ">
                       <div className="w-[50%] border border-white p-6 flex flex-col">
                         <span className="mb-1 text-sm">Choose image</span>
-                        <input
-                          className="text-xs"
-                          type="file"
-                          id="myImage"
-                          name="profile_img"
-                          accept="image/png, image/jpg"
-                        />
+                    <img src={job.photo}/>
                       </div>
                       <div className="ml-4">
                         {isUpdate ? (
@@ -170,11 +159,6 @@ const Modal = ({
                         )}
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div className="slika-hotela">
-                  <div className="w-[14rem] h-[12rem] my-2 border border-white p-6 flex flex-col lg:ml-6">
-               <UploadForm/>
                   </div>
                 </div>
               </div>
