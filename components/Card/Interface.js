@@ -6,8 +6,19 @@ import { setDoc, doc } from "firebase/firestore";
 import { BsBookmark, BsBookmarkFill, BsJournalBookmark } from "react-icons/bs";
 
 const Card = (props) => {
-  const { id, title, duration, city, time, money, info, profileID, loggedIn, photo } =
-    props;
+  const {
+    id,
+    title,
+    duration,
+    city,
+    time,
+    money,
+    info,
+    profileID,
+    loggedIn,
+    photo,
+    company,
+  } = props;
   const [isDisabled, setIsDisabled] = useState(false);
   const { currentUser } = useContext(AuthContext);
 
@@ -20,16 +31,16 @@ const Card = (props) => {
         time: time,
         city: city,
         info: info,
-        email: currentUser.email,
-        photo: currentUser.photoURL,
-        company: currentUser.displayName,
+        // email: currentUser.email,
+        photo: photo,
+        company: company,
       });
       setIsDisabled(true);
     } else {
       alert("Napravi nalog!!");
     }
   };
-
+  console.log("GLOBAL PHOTO ===>>///", photo);
   const btnsFunciton = () => {
     console.log("first thing!!");
     if (!loggedIn) {
@@ -46,38 +57,38 @@ const Card = (props) => {
       );
       return null;
     } else if (currentUser.uid === profileID) {
-    return(
+      return (
         <button
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-        disabled={isDisabled}
-        className="ml-2"
-      >
-        Own Job
-        {/* <BsBookmark className="text-lg" /> */}
-      </button>
-    )
-    return null;
-
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          disabled={isDisabled}
+          className="ml-2"
+        >
+          Own Job
+          {/* <BsBookmark className="text-lg" /> */}
+        </button>
+      );
+      return null;
     } else {
-     return(
-       <button
-        onClick={(e) => {
-          e.stopPropagation(); savedJobsFun();
-        }}
-        disabled={isDisabled}
-        className="ml-2"
-      >
-        {isDisabled ? (
-          <>
-            <BsBookmarkFill disabled={isDisabled} className="text-xl" />
-          </>
-        ) : (
-          <BsBookmark className="text-lg" />
-        )}
-      </button>
-     )
+      return (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            savedJobsFun();
+          }}
+          disabled={isDisabled}
+          className="ml-2"
+        >
+          {isDisabled ? (
+            <>
+              <BsBookmarkFill disabled={isDisabled} className="text-xl" />
+            </>
+          ) : (
+            <BsBookmark className="text-lg" />
+          )}
+        </button>
+      );
     }
   }; ///kraj funckcije
 

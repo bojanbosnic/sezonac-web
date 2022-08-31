@@ -53,7 +53,9 @@ const Interface = () => {
           >
             <div className="mx-8 w-full flex items-center justify-between sm:my-2">
               <div className="flex flex-col items-center">
-                <div className="border w-24 h-24 mx-8 sm:mx-8 sm:w-12 sm:h-12"></div>
+                <div className="border w-24 h-24 mx-8 sm:mx-8 sm:w-12 sm:h-12">
+                  <img src={datas.photo}/>
+                </div>
               </div>
               <div className="flex items-center sm:flex-wrap">
                 <span className="mx-4 font-semibold">{datas.title}</span>

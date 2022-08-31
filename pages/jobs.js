@@ -73,7 +73,8 @@ const Jobs = ({ loggedIn }) => {
                     info={datas.info}
                     profileID={datas.profileID}
                     loggedIn={loggedIn}
-                    photo={currentUser.photoURL}
+                    photo={datas.photo}
+                    company={datas.company}
                   />
                 </div>
               </>
