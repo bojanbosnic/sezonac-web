@@ -1,0 +1,19 @@
+.wrapper {
+  position: relative;
+  z-index: -1;
+  height: 100vh;
+  background-color: rgb(0, 0, 0);
+}
+
+.wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-image: url("../assets/ilustrations/pic5.jpg");
+  background-size: cover;
+  background-position: top center;
+  opacity: 0.3;
+}
