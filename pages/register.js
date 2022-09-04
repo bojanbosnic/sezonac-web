@@ -7,6 +7,7 @@ import { auth } from "../firebase";
 import Link from "next/link";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useRouter } from "next/router";
+import createUsers from "../utils/createUsers";
 
 const Register = ({ loggedIn }) => {
   const [confirmed, setConfirmed] = useState(true);
@@ -22,6 +23,8 @@ const Register = ({ loggedIn }) => {
 
   const router = useRouter();
 
+  const { displayName, email } = form;
+
   const handleRegister = async (e) => {
     e.preventDefault();
     if (form.password !== form.confirmPassword) {
@@ -36,6 +39,7 @@ const Register = ({ loggedIn }) => {
       await updateProfile(auth.currentUser, { displayName: form.displayName });
       console.log("User after update profile", auth.currentUser.displayName);
       setCurrentUser({ ...currentUser, displayName: form.displayName });
+      await createUsers({ id: auth.currentUser.uid, displayName, email });
 
       router.push("/profile");
     } catch (error) {

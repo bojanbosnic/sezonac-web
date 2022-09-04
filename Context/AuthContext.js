@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
       setIsLoading(false);
     });
     return unsub;
-  }, [currentUser.uid]);
+  }, [currentUser.accessToken]);
 
   if (isLoading) {
     return <LoadingSpinner />;

@@ -24,26 +24,47 @@ const Interface = () => {
     setPostJob({ ...postJob, [type]: value });
   };
 
-  
-
   const writeUserData = async (e) => {
-    const ref = await addDoc(collection(db, `/${uid}`), {
-      title: postJob.title,
-      city: postJob.city,
-      info: postJob.info,
-      time: postJob.time,
-      money: postJob.money,
-      duration: postJob.duration,
+    // const ref = await addDoc(collection(db, `/${uid}`), {
+    //   title: postJob.title,
+    //   city: postJob.city,
+    //   info: postJob.info,
+    //   time: postJob.time,
+    //   money: postJob.money,
+    //   duration: postJob.duration,
+    // });
+
+    // await setDoc(doc(db, `/global-jobs`, `${ref.id}`), {
+    //   title: postJob.title,
+    //   city: postJob.city,
+    //   info: postJob.info,
+    //   time: postJob.time,
+    //   money: postJob.money,
+    //   duration: postJob.duration,
+    //   profileID: `${currentUser.uid}`,
+    // });
+
+    await setDoc(doc(db, `/users`, `${uid}`), {
+      jobs: [
+        {
+          title: postJob.title,
+          city: postJob.city,
+          info: postJob.info,
+          time: postJob.time,
+          money: postJob.money,
+          duration: postJob.duration,
+        },
+      ],
     });
 
-    await setDoc(doc(db, `/GlobalJobs`, `${ref.id}`), {
+    await setDoc(doc(db, `/global-jobs`, `${uid}`), {
       title: postJob.title,
       city: postJob.city,
       info: postJob.info,
       time: postJob.time,
       money: postJob.money,
       duration: postJob.duration,
-      profileID: `${currentUser.uid}`,
+      // profileID: `${currentUser.uid}`,
     });
 
     router.push("/profile");
