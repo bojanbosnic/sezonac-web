@@ -38,15 +38,15 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
             className={classNames(
               `${
                 toggleValue && styles.open
-              } my-5 flex p-0 items-center list-none md:my-0`
+              } my-5 flex p-0 items-center list-none text-black md:my-0`
             )}
           >
-            <li className="text-white mr-4">
+            <li className=" mr-4">
               <Link href="/about">
                 <a>O Nama</a>
               </Link>
             </li>
-            <li className="text-white mr-4">
+            <li className=" mr-4">
               <Link href="/contact">
                 <a>Kontakt</a>
               </Link>

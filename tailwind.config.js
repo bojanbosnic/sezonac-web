@@ -1,10 +1,11 @@
-
 module.exports = {
   content: ["./pages/**/*.{html,js}", "./components/**/*.{html,js}"],
   theme: {
     container: {
       padding: "4rem",
-   
+    },
+    fontFamily: {
+      my_font: ['Montserrat', 'sans-serif'],
     },
     screens: {
       xl: { max: "1200px" },
@@ -25,7 +26,7 @@ module.exports = {
         primary: "#00214A",
         secondary: "#707070",
         white: "#fff",
-        dark:  'rgb(0 0 0 / 93%)',
+        dark: "rgb(0 0 0 / 93%)",
       },
     },
   },

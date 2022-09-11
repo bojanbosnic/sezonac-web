@@ -41,9 +41,9 @@ export default function Home({ loggedIn }) {
                       <Button
                         name="Objavi Posao"
                         textColor="color-white"
-                        bgColor="bg-blue-500"
+                        bgColor="bg-black"
                         hover="hover:bg-sky-700"
-                        paddingY="py-5 md:py-4"
+                        paddingY="py-4 md:py-4"
                         paddingX="px-8"
                       />
                     </a>
@@ -55,9 +55,9 @@ export default function Home({ loggedIn }) {
                     <Button
                       name="Potraži posao"
                       textColor="color-white"
-                      bgColor="bg-transparent"
+                      bgColor="bg-black"
                       hover="hover:bg-sky-700"
-                      paddingY="py-5"
+                      paddingY="py-4"
                       paddingX="px-8"
                     />
                   </a>
