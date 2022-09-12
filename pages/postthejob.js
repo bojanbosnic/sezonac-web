@@ -5,7 +5,15 @@ import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
 import { useRouter } from "next/router";
-import { addDoc, collection, setDoc, doc } from "firebase/firestore";
+import { v4 as uuidv4 } from "uuid";
+import {
+  addDoc,
+  collection,
+  setDoc,
+  doc,
+  arrayUnion,
+  updateDoc,
+} from "firebase/firestore";
 
 const Interface = () => {
   const { currentUser } = useContext(AuthContext);
@@ -19,53 +27,40 @@ const Interface = () => {
     money: "",
     duration: "",
   });
-
+  const jobsid = uuidv4();
   const handleInput = (type, value) => {
     setPostJob({ ...postJob, [type]: value });
   };
 
   const writeUserData = async (e) => {
-    // const ref = await addDoc(collection(db, `/${uid}`), {
-    //   title: postJob.title,
-    //   city: postJob.city,
-    //   info: postJob.info,
-    //   time: postJob.time,
-    //   money: postJob.money,
-    //   duration: postJob.duration,
-    // });
-
-    // await setDoc(doc(db, `/global-jobs`, `${ref.id}`), {
-    //   title: postJob.title,
-    //   city: postJob.city,
-    //   info: postJob.info,
-    //   time: postJob.time,
-    //   money: postJob.money,
-    //   duration: postJob.duration,
-    //   profileID: `${currentUser.uid}`,
-    // });
-
-    await setDoc(doc(db, `/users`, `${uid}`), {
-      jobs: [
-        {
-          title: postJob.title,
-          city: postJob.city,
-          info: postJob.info,
-          time: postJob.time,
-          money: postJob.money,
-          duration: postJob.duration,
-        },
-      ],
+    const jobsRef = doc(db, `/users`, `${uid}`);
+    await updateDoc(jobsRef, {
+      jobs: arrayUnion({
+        title: postJob.title,
+        city: postJob.city,
+        info: postJob.info,
+        time: postJob.time,
+        money: postJob.money,
+        duration: postJob.duration,
+        jobsID: jobsid,
+      }),
     });
+    console.log("---0--->", jobsRef.id);
 
-    await setDoc(doc(db, `/global-jobs`, `${uid}`), {
-      title: postJob.title,
-      city: postJob.city,
-      info: postJob.info,
-      time: postJob.time,
-      money: postJob.money,
-      duration: postJob.duration,
-      // profileID: `${currentUser.uid}`,
-    });
+    await setDoc(
+      collection(db, `/global-jobs`, jobsRef.id),
+      {
+        title: postJob.title,
+        city: postJob.city,
+        info: postJob.info,
+        time: postJob.time,
+        money: postJob.money,
+        duration: postJob.duration,
+        jobsID: jobsid,
+      },
+      { merge: true },
+      { capital: true }
+    );
 
     router.push("/profile");
   };

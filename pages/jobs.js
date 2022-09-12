@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "../components/Card/Interface";
 import { AiOutlineSearch } from "react-icons/ai";
-import { getDocs, collection } from "firebase/firestore";
+import { doc, collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 
 import Modal from "../components/Modal";
@@ -13,7 +13,7 @@ const Jobs = ({ loggedIn }) => {
   const [globalDatas, setGlobalDatas] = useState([]);
 
   const getUserData = async () => {
-    await getDocs(collection(db, `/GlobalJobs`)).then((response) =>
+    await getDocs(collection(db, `/global-jobs`)).then((response) =>
       setGlobalJobs(
         response.docs.map((datas) => {
           return { ...datas.data(), id: datas.id };
@@ -21,6 +21,8 @@ const Jobs = ({ loggedIn }) => {
       )
     );
   };
+
+  console.log("GLOBAL JOBS -->", globalJobs)
 
   useEffect(() => {
     getUserData();

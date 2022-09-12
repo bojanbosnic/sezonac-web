@@ -4,6 +4,11 @@ import {
   collection,
   deleteDoc,
   doc,
+  updateDoc,
+  collectionGroup,
+  onSnapshot,
+  arrayUnion,
+  getDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import { AuthContext } from "../../Context/AuthContext";
@@ -22,18 +27,23 @@ const Interface = () => {
 
   console.log("This is jobs!!", jobss);
   console.log("CHECKED", checked);
-  console.log("FINALY JOBS", fireData);
+
+
+  const jobsRef = doc(db, `/users`, `${currentUser.uid}`);
 
   const getUserData = async () => {
-   await getDocs(collection(db, `/${currentUser.uid}`)).then((response) =>
+    const docSnap = await getDoc(jobsRef);
+
+    console.log("Document data:====>", docSnap.data().jobs);
+    if (docSnap.exists()) {
       setFireData(
-        response.docs.map((datas) => {
-          return { ...datas.data(), id: datas.id };
+        docSnap.data().jobs.map((datas) => {
+          return { ...datas, id: datas.id };
         })
-      )
       );
-     
+    }
   };
+  console.log("FINALY JOBS==>", fireData);
 
   const deleteDocument = (id) => {
     let fieldToDelete = doc(db, `/${currentUser.uid}`, id);
@@ -63,8 +73,8 @@ const Interface = () => {
     <div className="relative mt-16">
       {fireData.length === 0 ? (
         <>
-          {/* {fireData.length === 0 ? setIsLoading(false) : setIsLoading(true)} */}
-          {isLoading ? <p>Nema poslova za sada...</p> : <LoadingSpinner />}
+        
+          <p>Nema poslova za sada...</p>
         </>
       ) : (
         <>
