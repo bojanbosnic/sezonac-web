@@ -22,7 +22,7 @@ const Jobs = ({ loggedIn }) => {
     );
   };
 
-  console.log("GLOBAL JOBS -->", globalJobs)
+  console.log("GLOBAL JOBS -->", globalJobs);
 
   useEffect(() => {
     getUserData();
@@ -64,7 +64,7 @@ const Jobs = ({ loggedIn }) => {
                   }}
                 >
                   <Card
-                    id={datas.id}
+                    id={datas.jobsID}
                     title={datas.title}
                     duration={datas.duration}
                     city={datas.city}

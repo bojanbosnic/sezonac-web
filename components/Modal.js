@@ -43,7 +43,7 @@ const Modal = ({
       info: updateJobs.info,
     })
       .then(() => {
-        let filedglobaledit = doc(db, `/GlobalJobs`, updateJobs.ID);
+        let filedglobaledit = doc(db, `/global-jobs`, updateJobs.ID);
         updateDoc(filedglobaledit, {
           title: updateJobs.title,
           city: updateJobs.city,

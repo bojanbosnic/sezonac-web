@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { MdLocationOn } from "react-icons/md";
 import { db } from "../../firebase";
 import { AuthContext } from "../../Context/AuthContext";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { BsBookmark, BsBookmarkFill, BsJournalBookmark } from "react-icons/bs";
 
 const Card = (props) => {
@@ -10,16 +10,16 @@ const Card = (props) => {
     props;
   const [isDisabled, setIsDisabled] = useState(false);
   const { currentUser } = useContext(AuthContext);
+  const { uid } = currentUser;
 
   const savedJobsFun = async () => {
     if (loggedIn) {
-      await setDoc(doc(db, `/SavedJobs${currentUser.uid}`, `${id}`), {
-        title: title,
-        money: money,
-        duration: duration,
-        time: time,
-        city: city,
-        info: info,
+      const jobsRef = doc(db, `/users`, `${uid}`);
+      await updateDoc(jobsRef, {
+        saved_jobs: arrayUnion({
+          jobsID: id,
+          profileID: uid,
+        }),
       });
       setIsDisabled(true);
     } else {
@@ -43,38 +43,38 @@ const Card = (props) => {
       );
       return null;
     } else if (currentUser.uid === profileID) {
-    return(
+      return (
         <button
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-        disabled={isDisabled}
-        className="ml-2"
-      >
-        Own Job
-        {/* <BsBookmark className="text-lg" /> */}
-      </button>
-    )
-    return null;
-
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          disabled={isDisabled}
+          className="ml-2"
+        >
+          Own Job
+          {/* <BsBookmark className="text-lg" /> */}
+        </button>
+      );
+      return null;
     } else {
-     return(
-       <button
-        onClick={(e) => {
-          e.stopPropagation(); savedJobsFun();
-        }}
-        disabled={isDisabled}
-        className="ml-2"
-      >
-        {isDisabled ? (
-          <>
-            <BsBookmarkFill disabled={isDisabled} className="text-xl" />
-          </>
-        ) : (
-          <BsBookmark className="text-lg" />
-        )}
-      </button>
-     )
+      return (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            savedJobsFun();
+          }}
+          disabled={isDisabled}
+          className="ml-2"
+        >
+          {isDisabled ? (
+            <>
+              <BsBookmarkFill disabled={isDisabled} className="text-xl" />
+            </>
+          ) : (
+            <BsBookmark className="text-lg" />
+          )}
+        </button>
+      );
     }
   }; ///kraj funckcije
 

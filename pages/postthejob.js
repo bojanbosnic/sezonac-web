@@ -45,10 +45,10 @@ const Interface = () => {
         jobsID: jobsid,
       }),
     });
-    console.log("---0--->", jobsRef.id);
+    console.log("---0--->", jobsRef);
 
-    await setDoc(
-      collection(db, `/global-jobs`, jobsRef.id),
+    await addDoc(
+      collection(db, `/global-jobs`),
       {
         title: postJob.title,
         city: postJob.city,
@@ -57,6 +57,7 @@ const Interface = () => {
         money: postJob.money,
         duration: postJob.duration,
         jobsID: jobsid,
+        profileID: uid,
       },
       { merge: true },
       { capital: true }
