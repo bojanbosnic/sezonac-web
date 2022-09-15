@@ -1,11 +1,11 @@
 @tailwind base;
 @layer base {
   body {
-    @apply  font-my_font text-black;
+    @apply font-my_font font-semibold text-black bg-bgColor;
   }
 
   h1 {
-    @apply text-5xl font-semibold my-8;
+    @apply text-5xl font-normal my-8;
   }
   h2 {
     @apply text-xl my-8;
@@ -18,7 +18,7 @@
   }
 
   .heading3 {
-    @apply text-lg ;
+    @apply text-lg;
   }
 
   .input_field_contact {
@@ -26,7 +26,7 @@
   }
 
   .input_field_login {
-    @apply w-full outline-none bg-transparent text-white border border-secondary rounded-lg py-5 px-6 my-2;
+    @apply w-full outline-none bg-white text-black border border-secondary rounded-lg py-5 px-6 my-2;
   }
 
   .input_field_registration {
@@ -39,8 +39,8 @@
   .card {
     @apply bg-primary border relative p-6 w-[calc(50%-40px)] text-white rounded-2xl lg:w-full;
   }
-
- 
 }
 
 @tailwind utilities;
+
+

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "../components/Card/Interface";
+import Navbar from "../components/Navbar";
 import { AiOutlineSearch } from "react-icons/ai";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebase";
@@ -29,16 +30,25 @@ const Jobs = ({ loggedIn }) => {
   }, []);
   return (
     <div className="container sm:p-4">
+      <Navbar />
       <main>
-        <div className="flex justify-center my-12">
-          <div className="w-1/2 relative lg:w-full">
-            <input
-              onChange={(e) => setSearchData(e.target.value)}
-              className="input_field_login border-white z-20 relative pl-12 "
-              type="text"
-              placeholder="Potraži posao"
-            />
-            <AiOutlineSearch className="absolute text-xl z-10 top-[30px] left-3" />
+        <div className="flex justify-center my-12 ">
+          <div className="flex p-8 border-rounded bg-primary justify-center justify-evenly border-rounded w-4/5">
+            <div className="w-1/2 lg:w-full">
+              <input
+                onChange={(e) => setSearchData(e.target.value)}
+                className="input_field_login border-white z-20"
+                type="text"
+                placeholder="Pretraži posao..."
+                id="search-input"
+              />
+            </div>
+            <label
+              htmlFor="search-input"
+              className="input_field_login w-1/5 text-white bg-secondary text-center"
+            >
+              Text here
+            </label>
           </div>
         </div>
         <div className="flex flex-wrap justify-between w-full">

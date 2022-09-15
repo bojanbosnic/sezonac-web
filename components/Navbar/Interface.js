@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/logos/logo.png";
+// import logo from "../../assets/logos/logo.png";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import Link from "next/link";
@@ -16,7 +16,6 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
   const { displayName } = currentUser;
   const router = useRouter();
 
-
   const handleLogOut = async (e) => {
     try {
       localStorage.removeItem("Token");
@@ -29,9 +28,10 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
 
   return (
     <div className="container mx-auto sm:px-8">
-      <nav className="flex justify-between items-center text-white border-b-2 border-secondary">
+      <nav className="flex justify-between items-center">
         <Link href="/">
-          <Image src={logo} alt="sezonac-logo" />
+          sezonac.ba
+          {/* <Image src={logo} alt="sezonac-logo" /> */}
         </Link>
         <div className={`${styles.siteNavbar} md:w-full md:min-wi-min`}>
           <ul
@@ -51,9 +51,7 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
                 <a>Kontakt</a>
               </Link>
             </li>
-            <li>
-              <div className="block border-l-2 border-secondary h-8 mx-2 md:border-r-0 md:border-t-1 md:border-secondary md:h-0 md:m-r-0"></div>
-            </li>
+
             {loggedIn ? (
               <>
                 <li style={{ margin: "1rem" }}>
@@ -73,7 +71,7 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
                       <Button
                         name="Prijavi se"
                         textColor="color-white"
-                        bgColor="bg-transparent"
+                        bgColor="bg-primary"
                         hover="hover:bg-sky-700"
                         paddingY="py-3"
                         paddingX="px-5"

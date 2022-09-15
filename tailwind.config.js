@@ -5,7 +5,7 @@ module.exports = {
       padding: "4rem",
     },
     fontFamily: {
-      my_font: ['Montserrat', 'sans-serif'],
+      my_font: ["Montserrat", "sans-serif"],
     },
     screens: {
       xl: { max: "1200px" },
@@ -23,10 +23,11 @@ module.exports = {
 
     extend: {
       colors: {
-        primary: "#00214A",
-        secondary: "#707070",
+        primary: "#2BC968",
+        secondary: "#292929",
         white: "#fff",
         dark: "rgb(0 0 0 / 93%)",
+        bgColor: " rgb(239, 230, 221)",
       },
     },
   },

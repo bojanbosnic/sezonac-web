@@ -1,7 +1,8 @@
-/* .wrapper {
+.wrapper {
   position: relative;
   height: 100vh;
-  background-color: rgb(0, 0, 0);
+  z-index: 2;
+  background-color: #ffe6dd;
 }
 
 .wrapper::before {
@@ -12,8 +13,8 @@
   right: 0px;
   bottom: 0px;
   left: 0px;
-  background-image: url("../assets/ilustrations/pic5.jpg");
+  background-image: url("../assets/ilustrations/draw2.svg");
   background-size: cover;
   background-position: top center;
   opacity: 0.3;
-} */
+}
