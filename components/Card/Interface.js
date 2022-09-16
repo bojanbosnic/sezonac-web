@@ -55,7 +55,6 @@ const Card = (props) => {
           </button>
         </>
       );
-      return null;
     } else if (currentUser.uid === profileID) {
       return (
         <button
@@ -63,13 +62,11 @@ const Card = (props) => {
             e.stopPropagation();
           }}
           disabled={isDisabled}
-          className="ml-2"
         >
           Own Job
           {/* <BsBookmark className="text-lg" /> */}
         </button>
       );
-      return null;
     } else {
       return (
         <button
@@ -78,7 +75,6 @@ const Card = (props) => {
             savedJobsFun();
           }}
           disabled={isDisabled}
-          className="ml-2"
         >
           {isDisabled ? (
             <>
@@ -95,22 +91,34 @@ const Card = (props) => {
   return (
     <>
       <div className="flex justify-between items-center">
-        <div className="absolute top-[60%] z-10">{btnsFunciton()}</div>
         <div>
-          <img className="w-28" src={photo} alt="Profile picture" />
-          <div className="subtitle">ime_poslodavca</div>
-        </div>
-        <div>
+          <div className="absolute top-[10%] z-10">{btnsFunciton()}</div>
           <div className="card-title">
             <h2>{title}</h2>
           </div>
-          <div className="flex  my-4 items-center">
-            <MdLocationOn />
-            <div className="ml-2">{city}</div>
-          </div>
+
           <div className="flex my-4">
-            <div>datum trajanja</div>
+            <div>Datum Trajanja</div>
             <div className="ml-8">{duration}</div>
+          </div>
+          <div className="flex items-center">
+            <div
+              style={{
+                backgroundImage: `url(${photo})`,
+                width: "100px",
+                height: "100px",
+                borderRadius: "50%",
+                backgroundSize: "cover",
+                marginRight: "1rem",
+              }}
+            ></div>
+            <div className="flex flex-col">
+              <div className="subtitle">ime_poslodavca</div>
+              <div className="flex my-2 items-center">
+                <MdLocationOn />
+                <div className="ml-2">{city}</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

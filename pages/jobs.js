@@ -6,6 +6,7 @@ import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../Context/AuthContext";
 import { useContext } from "react";
+import { FaSearch } from "react-icons/fa";
 import Modal from "../components/Modal";
 
 const Jobs = ({ loggedIn }) => {
@@ -30,25 +31,24 @@ const Jobs = ({ loggedIn }) => {
   }, []);
   return (
     <div className="container sm:p-4">
-      <Navbar />
       <main>
         <div className="flex justify-center my-12 ">
-          <div className="flex p-8 border-rounded bg-primary justify-center justify-evenly border-rounded w-4/5">
-            <div className="w-1/2 lg:w-full">
-              <input
-                onChange={(e) => setSearchData(e.target.value)}
-                className="input_field_login border-white z-20"
-                type="text"
-                placeholder="Pretraži posao..."
-                id="search-input"
-              />
+          <div className=" p-8 rounded-2xl bg-primary  border-rounded w-4/5">
+            <h1 className="text-center text-white">Pretraži poslove koji te zanimaju</h1>
+            <div className="flex justify-center items-center">
+              <div className="w-1/2 mr-4 lg:w-full">
+                <input
+                  onChange={(e) => setSearchData(e.target.value)}
+                  className="input_field_login text-primary placeholder-color  border-white z-20"
+                  type="text"
+                  placeholder="Konobar..."
+                  id="search-input"
+                />
+              </div>
+              <label className="" htmlFor="search-input">
+                <FaSearch color="white" fontSize="2rem" />
+              </label>
             </div>
-            <label
-              htmlFor="search-input"
-              className="input_field_login w-1/5 text-white bg-secondary text-center"
-            >
-              Text here
-            </label>
           </div>
         </div>
         <div className="flex flex-wrap justify-between w-full">
@@ -67,7 +67,7 @@ const Jobs = ({ loggedIn }) => {
             .map((datas) => (
               <>
                 <div
-                  className="card my-12"
+                  className="card my-12 border-2 border-primary transition ease-in-out hover:bg-primary hover:text-white "
                   onClick={() => {
                     setGlobalDatas(datas);
                     setShowModal(true);

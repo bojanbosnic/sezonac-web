@@ -1,7 +1,7 @@
 @tailwind base;
 @layer base {
   body {
-    @apply font-my_font font-semibold text-black bg-bgColor;
+    @apply font-my_font font-semibold text-black;
   }
 
   h1 {
@@ -13,8 +13,13 @@
   h3 {
     @apply text-lg my-8;
   }
-  a:hover {
-    @apply underline;
+
+  p {
+    @apply font-normal;
+  }
+
+  li {
+    @apply font-normal;
   }
 
   .heading3 {
@@ -26,21 +31,24 @@
   }
 
   .input_field_login {
-    @apply w-full outline-none bg-white text-black border border-secondary rounded-lg py-5 px-6 my-2;
+    @apply w-full outline-none bg-white text-black border border-secondary rounded-lg py-4 px-6 my-2;
   }
 
-  .input_field_registration {
+  /* .input_field_registration {
     @apply w-full outline-none bg-transparent text-white border border-secondary rounded-lg py-5 px-6 my-2;
-  }
+  } isto samo stavim bg-transparent*/
 }
 @tailwind components;
 
 @layer components {
   .card {
-    @apply bg-primary border relative p-6 w-[calc(50%-40px)] text-white rounded-2xl lg:w-full;
+    @apply relative p-6 w-[calc(30%-40px)] text-secondary rounded-xl cursor-pointer lg:w-full;
   }
 }
 
 @tailwind utilities;
 
-
+.placeholder-color::placeholder {
+  color: primary;
+  font-weight: normal;
+}

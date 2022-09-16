@@ -1,6 +1,5 @@
 import React from "react";
 import classnames from "classnames";
-import styles from "./button.module.css";
 
 function Button({
   name,
@@ -10,13 +9,15 @@ function Button({
   paddingY,
   paddingX,
   marginRight,
+  icon,
 }) {
   return (
     <button
       className={classnames(
-        `${bgColor} ${textColor}  ${paddingY} ${paddingX} ${marginRight} font-semibold border-2 rounded-lg text-sm sm:w-full`
+        `${bgColor} ${textColor} ${paddingY} ${paddingX} ${marginRight} flex items-center font-medium border-2 rounded-lg text-sm sm:w-full`
       )}
     >
+      {icon}
       {name}
     </button>
   );

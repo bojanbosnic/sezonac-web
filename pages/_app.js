@@ -13,7 +13,7 @@ console.log("token", token )
         <Head>
           <title>Sezonac</title>
         </Head>
-        {/* <Navbar loggedIn={!!token} /> */}
+        <Navbar loggedIn={!!token} />
         <Component loggedIn={!!token} {...pageProps} />
       </AuthProvider>
     </>

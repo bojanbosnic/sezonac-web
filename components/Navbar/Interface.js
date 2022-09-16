@@ -70,18 +70,13 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
                     <a>
                       <Button
                         name="Prijavi se"
-                        textColor="color-white"
+                        textColor="text-white"
                         bgColor="bg-primary"
                         hover="hover:bg-sky-700"
                         paddingY="py-3"
                         paddingX="px-5"
                       />
                     </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/register">
-                    <a>ili se registruj</a>
                   </Link>
                 </li>
               </>
