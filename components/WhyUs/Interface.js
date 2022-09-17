@@ -4,40 +4,40 @@ import { MdOutlineLocalOffer } from "react-icons/md";
 
 const Interface = () => {
   return (
-    <div>
-      <h2 className="text-center mb-4 mt-12">Zašto birate nas?</h2>
-      <div className="flex justify-between my-8 md:flex-wrap">
-        <div className="flex flex-col items-center text-center m-4 border-2 border-primary p-4 rounded-3xl md:w-full">
-          <span className="text-3xl">
-            <AiOutlineSafety className="text-primary" />
-          </span>
-          <h3>Sigurni poslovi</h3>
+    <div className="flex justify-between flex-wrap my-8 md:flex-wrap">
+      <div className="flex">
+        <div className="card shadow-sm shadow-[#7cb5ea] flex flex-col items-center text-center m-4 bg-[#7cb5ea]  p-4 rounded-3xl md:w-full">
+          <span className="text-3xl text-[#3898e2]">01</span>
+          <h4>Sigurni poslovi</h4>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-            condimentum gravida euismod. Vestibulum malesuada ante in nisl
-            aliquet rutrum.
+            condimentum gravida euismod.
           </p>
         </div>
-        <div className="flex flex-col items-center text-center m-4 border-2 border-primary p-4 rounded-3xl md:w-full">
-          <span className="text-3xl">
-            <HiSearch className="text-primary" />
-          </span>
+        <div className="card flex flex-col items-center text-center m-4 bg-[#eac87c]  p-4 rounded-3xl md:w-full">
+          <span className="text-3xl text-[#e2b438]">02</span>
           <h3>Brza pretraga</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-            condimentum gravida euismod. Vestibulum malesuada ante in nisl
-            aliquet rutrum.
+            condimentum gravida euismod.
           </p>
         </div>
-        <div className="flex flex-col items-center text-center m-4 border-2 border-primary p-4 rounded-3xl md:w-full">
-          <span className="text-3xl">
-            <MdOutlineLocalOffer className="text-primary" />
-          </span>
+      </div>
+      <div className="flex">
+        <div className=" card flex flex-col items-center text-center m-4 bg-[#cea7d9]  p-4 rounded-3xl md:w-full">
+          <span className="text-3xl text-[#bc84ca]">03</span>
           <h2>Najbolje ponude</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-            condimentum gravida euismod. Vestibulum malesuada ante in nisl
-            aliquet rutrum.
+            condimentum gravida euismod.
+          </p>
+        </div>
+        <div className=" card flex flex-col items-center text-center m-4 bg-[#8be3c6] p-4 rounded-3xl md:w-full">
+          <span className="text-3xl text-[#56d8b1]">04</span>
+          <h2>Najbolje ponude</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
+            condimentum gravida euismod.
           </p>
         </div>
       </div>

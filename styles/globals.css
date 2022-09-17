@@ -13,6 +13,9 @@
   h3 {
     @apply text-lg my-8;
   }
+  h4 {
+    @apply font-medium;
+  }
 
   p {
     @apply font-normal;
@@ -52,3 +55,6 @@
   color: primary;
   font-weight: normal;
 }
+
+
+/* 1px 5px 26px 5px rgb(124 181 234) */

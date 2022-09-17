@@ -28,6 +28,10 @@ module.exports = {
         white: "#fff",
         dark: "rgb(0 0 0 / 93%)",
       },
+
+      boxShadow: {
+        sm: "1px 5px 26px 5px",
+      },
     },
   },
   variants: {
