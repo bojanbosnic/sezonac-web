@@ -66,12 +66,12 @@ const Register = ({ loggedIn }) => {
         <main className="flex justify-center items-center flex-col my-9">
           <section className="text-center">
             <h1>Registruj se</h1>
-            <h2>Molimo vas da u formi ispod upišete svoje podatke</h2>
+            <h2 className="font-normal">Molimo vas da u formi ispod upišete svoje podatke</h2>
           </section>
 
           <SignUp
             name="Firma"
-            placeHolder="Upisi naziv firme"
+            placeHolder="Naziv firme"
             funkcija={(e) => handleForm("displayName", e.target.value)}
             vrednost={form.displayName}
             type="text"
@@ -79,7 +79,7 @@ const Register = ({ loggedIn }) => {
 
           <SignUp
             name="Email"
-            placeHolder="Email"
+            placeHolder="ime.prezime@example.com"
             funkcija={(e) => handleForm("email", e.target.value)}
             vrednost={form.email}
             type="email"
@@ -87,7 +87,7 @@ const Register = ({ loggedIn }) => {
 
           <SignUp
             name="Lozinka"
-            placeHolder="Upisi Lozinku"
+            placeHolder="● ● ● ● ● ● "
             funkcija={(e) => handleForm("password", e.target.value)}
             vrednost={form.password}
             type="password"
@@ -95,7 +95,7 @@ const Register = ({ loggedIn }) => {
 
           <SignUp
             name="Potvrdi Lozinku"
-            placeHolder="Ponovi lozinku"
+            placeHolder="● ● ● ● ● ● "
             funkcija={(e) => handleForm("confirmPassword", e.target.value)}
             vrednost={form.confirmPassword}
             type="password"
@@ -105,11 +105,11 @@ const Register = ({ loggedIn }) => {
 
           <button
             onClick={handleRegister}
-            className="w-full py-5 px-6 border-none mb-4 bg-secondary text-white pointer rounded-lg"
+            className="w-2/4  py-5 px-6 border-none mb-4 bg-primary text-white font-medium pointer rounded-lg md:w-full"
           >
             Registruj se
           </button>
-          <div className="text-center">
+          <div className="text-center font-medium">
             Već imaš nalog?
             <Link href="/login">
               <a>

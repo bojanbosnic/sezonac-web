@@ -26,11 +26,12 @@ module.exports = {
         primary: "#1967d2",
         secondary: "#292929",
         white: "#fff",
-        dark: "rgb(0 0 0 / 93%)",
+        black: "#3c3c3c",
       },
 
       boxShadow: {
         sm: "1px 5px 26px 5px",
+        xs: "0px 0px 25px",
       },
     },
   },

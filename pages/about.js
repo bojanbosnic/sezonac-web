@@ -7,12 +7,12 @@ import { BsCheckCircleFill } from "react-icons/bs";
 export default function AboutUs() {
   return (
     <div className="container">
-      <main className="flex">
-        <div>
+      <main className="flex items-center md:flex-wrap">
+        <div className="w-3/6">
           <div>
             <h1>Naši benefiti</h1>
           </div>
-          <ul>
+          <ul className="text-3xl">
             <li className="flex items-center">
               <BsCheckCircleFill className="mr-2 text-primary" /> Povjerenje &
               Kvalitetan Posao
@@ -34,7 +34,9 @@ export default function AboutUs() {
           <div className="flex flex-col w-1/4  lg:w-full"></div>
           <div className="flex flex-col w-1/4 lg:w-full  lg:order-1"></div>
         </div> */}
-        <WhyUs />
+        <div className="w-3/6">
+          <WhyUs />
+        </div>
       </main>
     </div>
   );

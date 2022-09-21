@@ -51,7 +51,10 @@ const Card = (props) => {
             disabled={isDisabled}
             className="ml-2"
           >
-            <BsBookmark className="text-lg" style={{ color: "red" }} />
+            <BsBookmark
+              className="text-3xl"
+              style={{ color: "red", marginTop: "-3.4rem" }}
+            />
           </button>
         </>
       );
@@ -64,7 +67,6 @@ const Card = (props) => {
           disabled={isDisabled}
         >
           Own Job
-          {/* <BsBookmark className="text-lg" /> */}
         </button>
       );
     } else {
@@ -78,48 +80,53 @@ const Card = (props) => {
         >
           {isDisabled ? (
             <>
-              <BsBookmarkFill disabled={isDisabled} className="text-xl" />
+              <BsBookmarkFill
+                disabled={isDisabled}
+                className="text-3xl"
+                style={{ marginTop: "-3.4rem" }}
+              />
             </>
           ) : (
-            <BsBookmark className="text-lg" />
+            <BsBookmark className="text-3xl" style={{ marginTop: "-3.4rem" }} />
           )}
         </button>
       );
     }
   }; ///kraj funckcije
 
+  // absolute top-[10%]
+
   return (
     <>
-      <div className="flex justify-between items-center">
-        <div>
-          <div className="absolute top-[10%] z-10">{btnsFunciton()}</div>
+      <div className="flex justify-between">
+        <div
+          style={{
+            backgroundImage: `url(${photo})`,
+            width: "150px",
+            height: "150px",
+            borderRadius: "10%",
+            backgroundSize: "cover",
+            marginRight: "1rem",
+            marginTop: "-4rem",
+          }}
+        ></div>
+        <div className=" z-10">{btnsFunciton()}</div>
+      </div>
+      <div className="">
+        <div className="flex flex-col">
           <div className="card-title">
-            <h2>{title}</h2>
+            <h3>{title}</h3>
           </div>
-
-          <div className="flex my-4">
-            <div>Datum Trajanja</div>
-            <div className="ml-8">{duration}</div>
-          </div>
-          <div className="flex items-center">
-            <div
-              style={{
-                backgroundImage: `url(${photo})`,
-                width: "100px",
-                height: "100px",
-                borderRadius: "50%",
-                backgroundSize: "cover",
-                marginRight: "1rem",
-              }}
-            ></div>
-            <div className="flex flex-col">
-              <div className="subtitle">ime_poslodavca</div>
-              <div className="flex my-2 items-center">
-                <MdLocationOn />
-                <div className="ml-2">{city}</div>
-              </div>
+          <div className="flex my-2 items-center">
+            <MdLocationOn />
+            <div className="ml-2">
+              <p className="text-[#3c3c3c]">{city}</p>
             </div>
           </div>
+        </div>
+        <div className="flex items-center justify-between">
+          <h4 className="font-medium">Datum Potražnje</h4>
+          <p className="text-[#3c3c3c]">{duration}</p>
         </div>
       </div>
     </>

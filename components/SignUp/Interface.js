@@ -5,13 +5,13 @@ const Interface = ({ vrednost, placeHolder, name, funkcija, type }) => {
  
   return (
     <form className="w-2/4 text-white md:w-full">
-      <div className="my-12">
-        <label htmlFor="name_id">{name}</label>
+      <div className="my-4">
+        <label htmlFor="name_id" className="font-medium text-black">{name}</label>
         <div>
           <input
             onChange={funkcija}
             value={vrednost}
-            className="input_field_registration"
+            className="input_field_login"
             type={type}
             placeholder={placeHolder}
           />

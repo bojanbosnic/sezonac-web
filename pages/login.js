@@ -36,11 +36,11 @@ export default function LogIn({ loggedIn }) {
         <main className="flex justify-center items-center flex-col">
           <section className="text-center">
             <h1>Prijavite se</h1>
-            <h2>Molimo vas da u formi ispod upišete svoje podatke</h2>
+            <h2 className="font-normal">Molimo vas da u formi ispod upišete svoje podatke</h2>
           </section>
           <form className="w-1/2 text-white md:w-full">
             <div className="my-12">
-              <label htmlFor="email_id">Email</label>
+              <label htmlFor="email_id" className="font-medium text-black">Email</label>
               <div>
                 <input
                   onChange={(e) => setEmail(e.target.value)}
@@ -48,13 +48,13 @@ export default function LogIn({ loggedIn }) {
                   id="email_id"
                   className="input_field_login"
                   type="email"
-                  placeholder="Unesi svoj email"
+                  placeholder="ime.prezime@example.com"
                   name="inputField"
                 />
               </div>
             </div>
             <div className="my-12" style={{ margin: "1.5rem 0" }}>
-              <label htmlFor="password_id">Lozinka</label>
+              <label htmlFor="password_id" className="font-medium text-black">Lozinka</label>
               <div>
                 <input
                   onChange={(e) => setPassword(e.target.value)}
@@ -67,20 +67,20 @@ export default function LogIn({ loggedIn }) {
                 />
               </div>
             </div>
-            <div>
+            <div className="text-black font-medium my-4">
               <a href="#">Zaboravio/la si lozinku?</a>
             </div>
             <button
               onClick={handleLogin}
-              className="w-full py-5 px-6 border-none mt-12 mb-4 bg-secondary text-white pointer rounded-lg"
+              className="w-full py-5 px-6 border-none mb-4 bg-primary text-white font-medium pointer rounded-lg"
             >
               Prijavi se
             </button>
-            <div style={{ textAlign: "center" }}>
+            <div className="text-black font-medium text-center mt-4 mb-8">
               Nemaš nalog?{" "}
               <Link href="/register">
                 <a>
-                  <span style={{ color: "red" }}> Registruj se besplatno </span>
+                  <span style={{ color: "red" }}> Registruj se  </span>
                 </a>
               </Link>
             </div>

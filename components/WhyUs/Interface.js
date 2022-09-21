@@ -14,7 +14,7 @@ const Interface = () => {
             condimentum gravida euismod.
           </p>
         </div>
-        <div className="card flex flex-col items-center text-center m-4 bg-[#eac87c]  p-4 rounded-3xl md:w-full">
+        <div className="card shadow-sm shadow-[#eac87c] flex flex-col items-center text-center m-4 bg-[#eac87c]  p-4 rounded-3xl md:w-full">
           <span className="text-3xl text-[#e2b438]">02</span>
           <h3>Brza pretraga</h3>
           <p>
@@ -24,7 +24,7 @@ const Interface = () => {
         </div>
       </div>
       <div className="flex">
-        <div className=" card flex flex-col items-center text-center m-4 bg-[#cea7d9]  p-4 rounded-3xl md:w-full">
+        <div className="card shadow-sm shadow-[#cea7d9] flex flex-col items-center text-center m-4 bg-[#cea7d9]  p-4 rounded-3xl md:w-full">
           <span className="text-3xl text-[#bc84ca]">03</span>
           <h2>Najbolje ponude</h2>
           <p>
@@ -32,7 +32,7 @@ const Interface = () => {
             condimentum gravida euismod.
           </p>
         </div>
-        <div className=" card flex flex-col items-center text-center m-4 bg-[#8be3c6] p-4 rounded-3xl md:w-full">
+        <div className="card shadow-sm shadow-[#8be3c6] flex flex-col items-center text-center m-4 bg-[#8be3c6] p-4 rounded-3xl md:w-full">
           <span className="text-3xl text-[#56d8b1]">04</span>
           <h2>Najbolje ponude</h2>
           <p>

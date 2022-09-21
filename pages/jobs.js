@@ -34,7 +34,9 @@ const Jobs = ({ loggedIn }) => {
       <main>
         <div className="flex justify-center my-12 ">
           <div className=" p-8 rounded-2xl bg-primary  border-rounded w-4/5">
-            <h1 className="text-center text-white">Pretraži poslove koji te zanimaju</h1>
+            <h1 className="text-center text-white">
+              Pretraži poslove koji te zanimaju
+            </h1>
             <div className="flex justify-center items-center">
               <div className="w-1/2 mr-4 lg:w-full">
                 <input
@@ -66,8 +68,9 @@ const Jobs = ({ loggedIn }) => {
             })
             .map((datas) => (
               <>
+                {/* transform: translateY(-10px) */}
                 <div
-                  className="card my-12 border-2 border-primary transition ease-in-out hover:bg-primary hover:text-white "
+                  className="card my-12 shadow-xs shadow-[#3898e28d] transition ease-in-out hover:translate-x-0.5"
                   onClick={() => {
                     setGlobalDatas(datas);
                     setShowModal(true);

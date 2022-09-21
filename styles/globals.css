@@ -11,10 +11,10 @@
     @apply text-xl my-8;
   }
   h3 {
-    @apply text-lg my-8;
+    @apply text-lg my-8 text-[#17171d] font-medium;
   }
   h4 {
-    @apply font-medium;
+    @apply font-medium my-8;
   }
 
   p {
@@ -34,7 +34,7 @@
   }
 
   .input_field_login {
-    @apply w-full outline-none bg-white text-black border border-secondary rounded-lg py-4 px-6 my-2;
+    @apply w-full outline-none bg-[#dbe6f7] font-normal text-black rounded-lg py-4 px-6 my-2;
   }
 
   /* .input_field_registration {
@@ -45,7 +45,7 @@
 
 @layer components {
   .card {
-    @apply relative p-6 w-[calc(30%-40px)] text-secondary rounded-xl cursor-pointer lg:w-full;
+    @apply relative p-6 w-[calc(50%-40px)] text-secondary rounded-xl lg:w-full;
   }
 }
 
@@ -55,6 +55,5 @@
   color: primary;
   font-weight: normal;
 }
-
 
 /* 1px 5px 26px 5px rgb(124 181 234) */
