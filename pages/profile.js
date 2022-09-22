@@ -1,18 +1,35 @@
 import React, { useContext, useEffect, useState } from "react";
-import ProfileNavbar from "../components/ProfileNavbar";
+
 import Link from "next/link";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { signOut } from "firebase/auth";
+
 import { updateProfile } from "firebase/auth";
 import { AuthContext } from "../Context/AuthContext";
 import { auth, storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useRouter } from "next/router";
+import { AiFillFileMarkdown, AiOutlineGlobal } from "react-icons/ai";
+import { FaSave, FaUserAlt } from "react-icons/fa";
+import { RiFileUploadFill } from "react-icons/ri";
+import { HiOutlineLogout } from "react-icons/hi";
+import Page1 from "../components/PrivateJobs";
+import Page2 from "../components/SavedJobs";
 
 export default function Profile({ loggedIn }) {
   const { currentUser } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true);
   const [image, setImage] = useState(currentUser.photoURL);
   const router = useRouter();
+  const [page, setPage] = useState("page1");
+
+  const myPages = () => {
+    if (page === "page1") {
+      return <Page1 />;
+    } else if (page === "page2") {
+      return <Page2 />;
+    }
+  };
 
   const uploadPhoto = async (photo) => {
     try {
@@ -38,12 +55,21 @@ export default function Profile({ loggedIn }) {
       console.log("slika: ", e.target.files);
     }
   };
+  const handleLogOut = async (e) => {
+    try {
+      localStorage.removeItem("Token");
+      await signOut(auth);
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (!loggedIn) {
-      router.push("/login")
-    }else{
-      setIsLoading(false)
+      router.push("/login");
+    } else {
+      setIsLoading(false);
     }
   }, []);
 
@@ -53,10 +79,9 @@ export default function Profile({ loggedIn }) {
         <LoadingSpinner />
       ) : (
         <main className="flex justify-between lg:flex-wrap  mt-12">
-          <div className="w-1/4 lg:w-full my-8 mr-8 block">
-            <div className="h-full  lg:flex lg:items-center sm:block">
+          <div className="w-1/4 bg-secondary lg:w-full my-8 mr-8 block">
+            <div className="flex items-center justify-center flex-col h-full  lg:flex lg:items-center sm:block">
               <div>
-                <div>Ime kompanije: {currentUser.displayName}</div>
                 <div className="w-60 h-60 flex realtive items-center border border-white my-8 px-4 py-20 lg:py-14">
                   <div className="text-center overflow-hidden">
                     <img
@@ -76,32 +101,53 @@ export default function Profile({ loggedIn }) {
                     />
                   </div>
                 </div>
-                <div className="flex items-end order-2">
-                  <Link href={"/settings"}>
-                    <a>
-                      <p className="">Podešavanje</p>
-                    </a>
-                  </Link>
-                </div>
               </div>
-              <div className="w-full lg:mx-4 sm:mx-0">
-                <div className="flex flex-col">
-                  <p className="my-2">Email: {currentUser.email}</p>
-                </div>
-
-                <div className="flex flex-col">
-                  <p className="my-2">
-                    Datum registracije: {currentUser.lastSignIn}
-                  </p>
-                  <p className="my-2">ID korisnika: {currentUser.uid}</p>
-                </div>
+              <div>
+                <ul>
+                  <li className="flex items-center">
+                    <FaUserAlt className="text-primary mr-2" />
+                    <h3>{currentUser.displayName}</h3>
+                  </li>
+                  <li
+                    className="flex items-center"
+                    onClick={() => setPage("page1")}
+                  >
+                    <AiFillFileMarkdown className="text-primary mr-2" />
+                    Moji Poslovi
+                  </li>
+                  <li
+                    className="flex items-center"
+                    onClick={() => setPage("page2")}
+                  >
+                    <FaSave className="text-primary mr-2" />
+                    Sačuvani Poslovi
+                  </li>
+                  <li
+                    className="flex items-center"
+                    onClick={() => setPage("page3")}
+                  >
+                    <AiOutlineGlobal className="text-primary mr-2" />
+                    Globalni Poslovi
+                  </li>
+                  <li className="flex items-center">
+                    <RiFileUploadFill className="text-primary mr-2" />
+                    Objavi Posao
+                  </li>
+                  <li>
+                    <button
+                      className="flex items-center"
+                      onClick={handleLogOut}
+                    >
+                      <HiOutlineLogout className="text-primary mr-2" />
+                      Odjavi Se
+                    </button>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
           <section className="w-3/4 my-4 lg:w-full">
-            <div className="h-full border border-white px-6">
-              <ProfileNavbar />
-            </div>
+            <div className="h-full border border-white px-6">{myPages()}</div>
           </section>
         </main>
       )}

@@ -1,6 +1,5 @@
 import React from "react";
 // import logo from "../../assets/logos/logo.png";
-import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,16 +14,6 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
   const { currentUser } = useContext(AuthContext);
   const { displayName } = currentUser;
   const router = useRouter();
-
-  const handleLogOut = async (e) => {
-    try {
-      localStorage.removeItem("Token");
-      await signOut(auth);
-      router.push("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <div className="container mx-auto sm:px-8">
@@ -58,9 +47,6 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
                   <Link href="/profile">
                     <a>{displayName}</a>
                   </Link>
-                </li>
-                <li>
-                  <button onClick={handleLogOut}>Log Out</button>
                 </li>
               </>
             ) : (

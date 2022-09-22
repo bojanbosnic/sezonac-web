@@ -61,7 +61,7 @@ export default function Home({ loggedIn }) {
                         name="Registruj se"
                         icon=<FiLogIn />
                         textColor="text-white"
-                        bgColor="bg-secondary"
+                        bgColor="bg-black"
                         hover="hover:bg-sky-700"
                         paddingY="py-4"
                         paddingX="px-8"

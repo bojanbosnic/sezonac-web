@@ -5,7 +5,7 @@
   }
 
   h1 {
-    @apply text-5xl font-normal my-8;
+    @apply text-5xl font-medium my-8;
   }
   h2 {
     @apply text-xl my-8;
@@ -15,6 +15,10 @@
   }
   h4 {
     @apply font-medium my-8;
+  }
+
+  a{
+    @apply font-medium
   }
 
   p {
@@ -34,12 +38,12 @@
   }
 
   .input_field_login {
-    @apply w-full outline-none bg-[#dbe6f7] font-normal text-black rounded-lg py-4 px-6 my-2;
+    @apply w-full outline-none bg-secondary font-normal text-black rounded-lg py-4 px-6 my-2;
   }
 
-  /* .input_field_registration {
-    @apply w-full outline-none bg-transparent text-white border border-secondary rounded-lg py-5 px-6 my-2;
-  } isto samo stavim bg-transparent*/
+  .submit_btn_form {
+    @apply py-5 px-6 border-none mb-4 bg-primary text-white font-medium  rounded-lg;
+  }
 }
 @tailwind components;
 
