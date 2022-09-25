@@ -40,9 +40,7 @@ const Card = (props) => {
       alert("Napravi nalog!!");
     }
   };
-  console.log("GLOBAL PHOTO ===>>///", photo);
   const btnsFunciton = () => {
-    console.log("first thing!!");
     if (!loggedIn) {
       return (
         <>
@@ -92,9 +90,8 @@ const Card = (props) => {
         </button>
       );
     }
-  }; ///kraj funckcije
+  }; 
 
-  // absolute top-[10%]
 
   return (
     <>
@@ -118,7 +115,7 @@ const Card = (props) => {
             <h3>{title}</h3>
           </div>
           <div className="flex my-2 items-center">
-            <MdLocationOn />
+            <MdLocationOn className="text-primary" />
             <div className="ml-2">
               <p className="text-[#3c3c3c]">{city}</p>
             </div>

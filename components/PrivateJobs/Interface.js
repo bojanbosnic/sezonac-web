@@ -1,10 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  getDocs,
-  collection,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
+import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { AuthContext } from "../../Context/AuthContext";
 import { RiDeleteBin2Line } from "react-icons/ri";
@@ -18,21 +13,15 @@ const Interface = () => {
   const [jobss, setJobss] = useState([]);
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isUpdating, setIsUpdating] = useState(false);
-
-  console.log("This is jobs!!", jobss);
-  console.log("CHECKED", checked);
-  console.log("FINALY JOBS", fireData);
 
   const getUserData = async () => {
-   await getDocs(collection(db, `/${currentUser.uid}`)).then((response) =>
+    await getDocs(collection(db, `/${currentUser.uid}`)).then((response) =>
       setFireData(
         response.docs.map((datas) => {
           return { ...datas.data(), id: datas.id };
         })
       )
-      );
-     
+    );
   };
 
   const deleteDocument = (id) => {
@@ -56,7 +45,7 @@ const Interface = () => {
 
   useEffect(() => {
     getUserData();
-    setIsUpdating(true);
+    // setIsUpdating(true);
   }, []);
 
   return (
@@ -68,6 +57,8 @@ const Interface = () => {
         </>
       ) : (
         <>
+          <h1 className="text-xl font-medium">Objavljeni Poslovi</h1>
+          <div className="block border-l-2 border-black h-8 md:border-r-0 md:border-t-1 md:border-secondary md:h-0 md:m-r-0"></div>
           {fireData.map((jobs) => (
             <div className="flex items-center relative">
               <div className="mb-32  absolute sm:mb-[8rem]">
@@ -108,13 +99,14 @@ const Interface = () => {
           ))}
         </>
       )}
-      <Modal
+
+      {/* <Modal
         getUserData={getUserData}
         jobss={jobss}
         show={showModal}
         isUpdating={isUpdating}
         onClose={() => setShowModal(false)}
-      />
+      /> */}
     </div>
   );
 };

@@ -15,6 +15,7 @@ import { RiFileUploadFill } from "react-icons/ri";
 import { HiOutlineLogout } from "react-icons/hi";
 import Page1 from "../components/PrivateJobs";
 import Page2 from "../components/SavedJobs";
+import Page4 from "../components/PostTheJob";
 
 export default function Profile({ loggedIn }) {
   const { currentUser } = useContext(AuthContext);
@@ -28,6 +29,8 @@ export default function Profile({ loggedIn }) {
       return <Page1 />;
     } else if (page === "page2") {
       return <Page2 />;
+    } else if (page === "page4") {
+      return <Page4 />;
     }
   };
 
@@ -78,11 +81,11 @@ export default function Profile({ loggedIn }) {
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <main className="flex justify-between lg:flex-wrap  mt-12">
-          <div className="w-1/4 bg-secondary lg:w-full my-8 mr-8 block">
-            <div className="flex items-center justify-center flex-col h-full  lg:flex lg:items-center sm:block">
+        <main className="flex justify-between lg:flex-wrap mt-2">
+          <div className="w-1/5 bg-secondary lg:w-full my-8 mr-8 block rounded-xl">
+            <div className=" h-full p-[30px]  lg:flex lg:items-center sm:block">
               <div>
-                <div className="w-60 h-60 flex realtive items-center border border-white my-8 px-4 py-20 lg:py-14">
+                <div className="h-60 flex realtive items-center border border-white my-8 px-4 py-20 lg:py-14">
                   <div className="text-center overflow-hidden">
                     <img
                       src={image}
@@ -104,50 +107,53 @@ export default function Profile({ loggedIn }) {
               </div>
               <div>
                 <ul>
-                  <li className="flex items-center">
+                  <li className="flex items-center py-4">
                     <FaUserAlt className="text-primary mr-2" />
-                    <h3>{currentUser.displayName}</h3>
+                    <h3 className="m-0">{currentUser.displayName}</h3>
                   </li>
                   <li
-                    className="flex items-center"
+                    className="flex items-center  py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
                     onClick={() => setPage("page1")}
                   >
                     <AiFillFileMarkdown className="text-primary mr-2" />
                     Moji Poslovi
                   </li>
                   <li
-                    className="flex items-center"
+                    className="flex items-center  py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
                     onClick={() => setPage("page2")}
                   >
                     <FaSave className="text-primary mr-2" />
                     Sačuvani Poslovi
                   </li>
                   <li
-                    className="flex items-center"
+                    className="flex items-center  py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
                     onClick={() => setPage("page3")}
                   >
                     <AiOutlineGlobal className="text-primary mr-2" />
                     Globalni Poslovi
                   </li>
-                  <li className="flex items-center">
+                  <li
+                    className="flex items-center px-4  py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
+                    onClick={() => setPage("page4")}
+                  >
                     <RiFileUploadFill className="text-primary mr-2" />
                     Objavi Posao
                   </li>
-                  <li>
-                    <button
-                      className="flex items-center"
-                      onClick={handleLogOut}
-                    >
-                      <HiOutlineLogout className="text-primary mr-2" />
-                      Odjavi Se
-                    </button>
+                  <li
+                    className="flex items-center py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
+                    onClick={handleLogOut}
+                  >
+                    <HiOutlineLogout className="text-primary mr-2" />
+                    Odjavi Se
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-          <section className="w-3/4 my-4 lg:w-full">
-            <div className="h-full border border-white px-6">{myPages()}</div>
+          <section className="w-3/4 p-8 bg-secondary rounded-xl my-4 lg:w-full">
+            <div className="h-full bg-white rounded-xl border border-white px-6">
+              {myPages()}
+            </div>
           </section>
         </main>
       )}

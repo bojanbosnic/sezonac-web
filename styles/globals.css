@@ -14,7 +14,7 @@
     @apply text-lg my-8 text-[#17171d] font-medium;
   }
   h4 {
-    @apply font-medium my-8;
+    @apply font-medium text-black my-8;
   }
 
   a{
@@ -27,6 +27,9 @@
 
   li {
     @apply font-normal;
+  }
+  p{
+    @apply text-black;
   }
 
   .heading3 {

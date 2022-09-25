@@ -17,7 +17,7 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
 
   return (
     <div className="container mx-auto sm:px-8">
-      <nav className="flex justify-between items-center">
+      <nav className="flex justify-between items-center mx-4">
         <Link href="/">
           sezonac.ba
           {/* <Image src={logo} alt="sezonac-logo" /> */}
@@ -43,7 +43,7 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
 
             {loggedIn ? (
               <>
-                <li style={{ margin: "1rem" }}>
+                <li>
                   <Link href="/profile">
                     <a>{displayName}</a>
                   </Link>
@@ -82,7 +82,7 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
           ></span>
         </button>
       </nav>
-    </div>
+</div>
   );
 };
 

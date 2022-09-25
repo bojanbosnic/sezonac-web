@@ -1,30 +1,29 @@
 import React from "react";
 import Image from "next/image";
-import about_image2 from "../assets/ilustrations/pic2.png";
 import WhyUs from "../components/WhyUs";
 import { BsCheckCircleFill } from "react-icons/bs";
 
 export default function AboutUs() {
   return (
     <div className="container">
-      <main className="flex items-center md:flex-wrap">
-        <div className="w-3/6">
+      <main className="flex items-center justify-between lg:flex-wrap">
+        <div className="w-1/3 grow-0 shrink-0	basis-auto	lg:w-full">
           <div>
-            <h1>Naši benefiti</h1>
+            <h1 className="text-[2.5rem]">Naši benefiti</h1>
           </div>
-          <ul className="text-3xl">
-            <li className="flex items-center">
+          <ul className="text-2xl">
+            <li className="flex items-center my-4">
               <BsCheckCircleFill className="mr-2 text-primary" /> Povjerenje &
               Kvalitetan Posao
             </li>
-            <li className="flex items-center">
+            <li className="flex items-center my-4">
               <BsCheckCircleFill className="mr-2 text-primary" />
               Internacionalni Posao
             </li>
-            <li className="flex items-center">
+            <li className="flex items-center my-4">
               <BsCheckCircleFill className="mr-2 text-primary" /> Top Kompanije
             </li>
-            <li className="flex items-center">
+            <li className="flex items-center my-4">
               <BsCheckCircleFill className="mr-2 text-primary" /> Bez Dodatne
               Naknade
             </li>
@@ -34,7 +33,7 @@ export default function AboutUs() {
           <div className="flex flex-col w-1/4  lg:w-full"></div>
           <div className="flex flex-col w-1/4 lg:w-full  lg:order-1"></div>
         </div> */}
-        <div className="w-3/6">
+        <div className="w-2/3 grow-0 shrink-0	basis-auto lg:w-full">
           <WhyUs />
         </div>
       </main>

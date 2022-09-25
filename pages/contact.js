@@ -12,8 +12,8 @@ import { HiLocationMarker, HiMail } from "react-icons/hi";
 export default function ContactUs() {
   return (
     <div className="container">
-      <main className="flex flex-wrap justify-between items-center my-20 md:my-10">
-        <section className="w-[calc(50%-40px)] md:w-full">
+      <main className="flex flex-wrap justify-between items-center  my-20 md:my-10">
+        <section className="w-[calc(60%-40px)] md:w-full">
           <h1>Pošaljite Nam Poruku</h1>
           <h2 className="font-normal">
             Slobodno nas kontaktirajte i mi ćemo Vam se javiti čim budemo mogli.
@@ -56,39 +56,34 @@ export default function ContactUs() {
             <button className="pointer submit_btn_form">Pošalji poruku</button>
           </form>
         </section>
-        <section className="w-[calc(50%-40px)] h-screen bg-secondary p-4  md:w-full">
+        <section className="w-[calc(40%-40px)] h-screen p-4 md:w-full">
           <address>
-            <div className="bg-white">
-              <div className="border rounded p-16">
-                <div className="flex items-center mr-4 my-6">
-                  <div className="bg-secondary mr-8 my-6 w-[76px] h-[76px] flex items-center justify-center rounded-xl">
-                    <MdPhoneAndroid className="text-primary" fontSize="2rem" />
-                  </div>
-                  <div>
-                    <h3 className="my-2">Kontaktiraj Nas</h3>
-                    <p>+387 555 333</p>
-                  </div>
+            <div className="flex flex-col justify-center items-center border rounded p-16 md:p-4">
+              <div className="flex items-center mr-4 my-6">
+                <div className="bg-secondary mr-8 my-6 w-[76px] h-[76px] flex items-center justify-center rounded-xl">
+                  <MdPhoneAndroid className="text-primary" fontSize="2rem" />
                 </div>
-                <div className="flex items-center mr-4 my-6">
-                  <div className="bg-secondary mr-8 my-6 w-[76px] h-[76px] flex items-center justify-center rounded-xl">
-                    <HiMail className="text-primary" fontSize="2rem" />
-                  </div>
-                  <div>
-                    <h3 className="my-2">Podrška</h3>
-                    <a href="mailto:hello@gmail.com">hello@gmail.com</a>
-                  </div>
+                <div>
+                  <h3 className="my-2">Kontaktiraj Nas</h3>
+                  <p>+387 555 333</p>
                 </div>
-                <div className="flex items-center mr-4 my-6">
-                  <div className="bg-secondary mr-8 my-6 w-[76px] h-[76px] flex items-center justify-center rounded-xl">
-                    <HiLocationMarker
-                      className="text-primary"
-                      fontSize="2rem"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="my-2">Posjeti nas</h3>
-                    <p>Ulica Ive Andrića BB</p>
-                  </div>
+              </div>
+              <div className="flex items-center mr-4 my-6">
+                <div className="bg-secondary mr-8 my-6 w-[76px] h-[76px] flex items-center justify-center rounded-xl">
+                  <HiMail className="text-primary" fontSize="2rem" />
+                </div>
+                <div>
+                  <h3 className="my-2">Podrška</h3>
+                  <a href="mailto:hello@gmail.com">hello@gmail.com</a>
+                </div>
+              </div>
+              <div className="flex items-center mr-4 my-6">
+                <div className="bg-secondary mr-8 my-6 w-[76px] h-[76px] flex items-center justify-center rounded-xl">
+                  <HiLocationMarker className="text-primary" fontSize="2rem" />
+                </div>
+                <div>
+                  <h3 className="my-2">Posjeti nas</h3>
+                  <p>Ulica Ive Andrića BB</p>
                 </div>
               </div>
             </div>
