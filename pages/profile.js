@@ -82,7 +82,7 @@ export default function Profile({ loggedIn }) {
         <LoadingSpinner />
       ) : (
         <main className="flex justify-between lg:flex-wrap mt-2">
-          <div className="w-1/5 bg-secondary lg:w-full my-8 mr-8 block rounded-xl">
+          <div className="w-1/5 bg-secondary lg:w-full my-8 mr-8 block rounded-3xl">
             <div className=" h-full p-[30px]  lg:flex lg:items-center sm:block">
               <div>
                 <div className="h-60 flex realtive items-center border border-white my-8 px-4 py-20 lg:py-14">

@@ -50,6 +50,8 @@ const Interface = () => {
 
   return (
     <div className="relative mt-16">
+      <h1 className="text-xl font-medium">Objavljeni Poslovi</h1>
+      <div className=" border-b border-black w-full md:border-r-0 md:border-t-1 md:border-secondary md:h-0 md:m-r-0"></div>
       {fireData.length === 0 ? (
         <>
           {/* {fireData.length === 0 ? setIsLoading(false) : setIsLoading(true)} */}
@@ -57,8 +59,6 @@ const Interface = () => {
         </>
       ) : (
         <>
-          <h1 className="text-xl font-medium">Objavljeni Poslovi</h1>
-          <div className="block border-l-2 border-black h-8 md:border-r-0 md:border-t-1 md:border-secondary md:h-0 md:m-r-0"></div>
           {fireData.map((jobs) => (
             <div className="flex items-center relative">
               <div className="mb-32  absolute sm:mb-[8rem]">
@@ -79,13 +79,13 @@ const Interface = () => {
                 onClick={() => {
                   setJobss(jobs), setShowModal(true);
                 }}
-                className="border w-full flex items-center my-8 px-4 sm:p-0"
+                className="border rounded-3xl bg-secondary text-black w-full flex items-center my-8 px-4 sm:p-0"
               >
                 <div className="w-full flex m-8 items-center justify-between sm:flex-wrap sm:m-4 sm:px-4">
-                  <span className="mx-4 font-semibold">{jobs.title}</span>
+                  <span className="mx-4 font-medium">{jobs.title}</span>
                   <span className="mx-4 flex items-center sm:flex-wrap">
-                    <span className="bassis-full">Trajanje:</span>
-                    <span className="font-semibold mx-2">{jobs.duration}</span>
+                    <span className="bassis-full font-medium">Trajanje:</span>
+                    <span className="font-medium mx-2">{jobs.duration}</span>
                   </span>
                 </div>
               </div>
@@ -99,6 +99,7 @@ const Interface = () => {
           ))}
         </>
       )}
+      
 
       {/* <Modal
         getUserData={getUserData}
