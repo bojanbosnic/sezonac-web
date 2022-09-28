@@ -13,7 +13,7 @@ export default function ContactUs() {
   return (
     <div className="container">
       <main className="flex flex-wrap justify-between items-center  my-20 md:my-10">
-        <section className="w-[calc(60%-40px)] md:w-full">
+        <section className="w-[calc(60%-40px)] lg:w-full">
           <h1>Pošaljite Nam Poruku</h1>
           <h2 className="font-normal">
             Slobodno nas kontaktirajte i mi ćemo Vam se javiti čim budemo mogli.
@@ -56,9 +56,9 @@ export default function ContactUs() {
             <button className="pointer submit_btn_form">Pošalji poruku</button>
           </form>
         </section>
-        <section className="w-[calc(40%-40px)] h-screen p-4 md:w-full">
+        <section className="w-[calc(40%-40px)] h-screen p-4 lg:w-full">
           <address>
-            <div className="flex flex-col justify-center items-center border rounded p-16 md:p-4">
+            <div className="flex flex-col shadow-xs shadow-[#3898e28d]  justify-center items-center rounded-3xl p-16 md:p-4">
               <div className="flex items-center mr-4 my-6">
                 <div className="bg-secondary mr-8 my-6 w-[76px] h-[76px] flex items-center justify-center rounded-xl">
                   <MdPhoneAndroid className="text-primary" fontSize="2rem" />

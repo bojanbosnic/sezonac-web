@@ -49,7 +49,7 @@ const Interface = () => {
             onClick={() => {
               setSavedDatas(datas), setShowModal(true);
             }}
-            className="border w-full flex items-center my-8 p-4 sm:p-0"
+            className="border rounded-3xl bg-secondary text-black w-full flex items-center my-8 px-4 sm:p-0"
           >
             <div className="mx-8 w-full flex items-center justify-between sm:my-2">
               <div className="flex flex-col items-center">

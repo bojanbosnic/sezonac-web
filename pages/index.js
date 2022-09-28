@@ -4,8 +4,10 @@ import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 import styles from "../styles/home.module.css";
 import { FiLogIn } from "react-icons/fi";
+import { useState } from "react";
 
 export default function Home({ loggedIn }) {
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -41,7 +43,7 @@ export default function Home({ loggedIn }) {
                   </a>
                 </Link>
                 {loggedIn ? (
-                  <Link href="/postthejob">
+                  <Link href="/profile">
                     <a>
                       <Button
                         name="Objavi Posao"

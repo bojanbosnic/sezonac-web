@@ -7,7 +7,7 @@ const Interface = () => {
   return (
     <div className="flex justify-between flex-wrap my-8 md:flex-wrap">
       <div className="flex justify-between md:flex-wrap">
-        <div className="card shadow-sm shadow-[#7cb5ea] flex flex-col ml-20 items-center text-center m-4 bg-[#7cb5ea]  p-4 rounded-3xl md:w-full">
+        <div className="card shadow-sm shadow-[#7cb5ea] flex flex-col  items-center text-center m-4 bg-[#7cb5ea]  p-4 rounded-3xl md:w-full">
           <div className="absolute left-[-50px] top-[33px] w-[90px] h-[95px] bg-white flex items-center justify-center rounded-lg shadow-sm shadow-[#7cb5ea]">
             <Image src={icon1} alt="icon1" />
           </div>
@@ -18,7 +18,7 @@ const Interface = () => {
             condimentum gravida euismod.
           </p>
         </div>
-        <div className="card shadow-sm shadow-[#eac87c] flex flex-col ml-20 items-center text-center m-4 bg-[#eac87c]  p-4 rounded-3xl md:w-full">
+        <div className="card shadow-sm shadow-[#eac87c] flex flex-col ml-20 md:ml-0 items-center text-center m-4 bg-[#eac87c]  p-4 rounded-3xl md:w-full">
           <div className="absolute left-[-50px] top-[33px] w-[90px] h-[95px] bg-white flex items-center justify-center rounded-lg shadow-sm shadow-[#7cb5ea]">
             <Image src={icon2} alt="icon2" />
           </div>
@@ -31,7 +31,7 @@ const Interface = () => {
         </div>
       </div>
       <div className="flex justify-between md:flex-wrap">
-        <div className="card shadow-sm shadow-[#cea7d9] flex flex-col ml-20 items-center text-center m-4 bg-[#cea7d9]  p-4 rounded-3xl md:w-full">
+        <div className="card shadow-sm shadow-[#cea7d9] flex flex-col items-center text-center m-4 bg-[#cea7d9]  p-4 rounded-3xl md:w-full">
           <div className="absolute left-[-50px] top-[33px] w-[90px] h-[95px] bg-white flex items-center justify-center rounded-lg shadow-sm shadow-[#7cb5ea]">
             <Image src={icon3} alt="icon3" />
           </div>
@@ -42,7 +42,7 @@ const Interface = () => {
             condimentum gravida euismod.
           </p>
         </div>
-        <div className="card shadow-sm shadow-[#8be3c6] flex flex-col ml-20 items-center text-center m-4 bg-[#8be3c6] p-4 rounded-3xl md:w-full">
+        <div className="card shadow-sm shadow-[#8be3c6] flex flex-col ml-20 md:ml-0 items-center text-center m-4 bg-[#8be3c6] p-4 rounded-3xl md:w-full">
           <div className="absolute left-[-50px] top-[33px] w-[90px] h-[95px] bg-white flex items-center justify-center rounded-lg shadow-sm shadow-[#7cb5ea]">
             <Image src={icon3} alt="icon3" />
           </div>

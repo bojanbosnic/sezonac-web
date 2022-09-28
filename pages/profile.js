@@ -112,26 +112,25 @@ export default function Profile({ loggedIn }) {
                     <h3 className="m-0">{currentUser.displayName}</h3>
                   </li>
                   <li
-                    className="flex items-center  py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
+                    className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
                     onClick={() => setPage("page1")}
                   >
                     <AiFillFileMarkdown className="text-primary mr-2" />
                     Moji Poslovi
                   </li>
                   <li
-                    className="flex items-center  py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
+                    className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
                     onClick={() => setPage("page2")}
                   >
                     <FaSave className="text-primary mr-2" />
                     Sačuvani Poslovi
                   </li>
-                  <li
-                    className="flex items-center  py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
-                    onClick={() => setPage("page3")}
-                  >
-                    <AiOutlineGlobal className="text-primary mr-2" />
-                    Globalni Poslovi
-                  </li>
+                  <Link href="/jobs">
+                    <li className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out">
+                      <AiOutlineGlobal className="text-primary mr-2" />
+                      Globalni Poslovi
+                    </li>
+                  </Link>
                   <li
                     className="flex items-center px-4  py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
                     onClick={() => setPage("page4")}
@@ -140,7 +139,7 @@ export default function Profile({ loggedIn }) {
                     Objavi Posao
                   </li>
                   <li
-                    className="flex items-center py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
+                    className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
                     onClick={handleLogOut}
                   >
                     <HiOutlineLogout className="text-primary mr-2" />

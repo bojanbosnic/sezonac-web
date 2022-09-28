@@ -49,10 +49,7 @@ const Card = (props) => {
             disabled={isDisabled}
             className="ml-2"
           >
-            <BsBookmark
-              className="text-3xl"
-              style={{ color: "red", marginTop: "-3.4rem" }}
-            />
+            <BsBookmark className="text-3xl" style={{ color: "red" }} />
           </button>
         </>
       );
@@ -63,6 +60,7 @@ const Card = (props) => {
             e.stopPropagation();
           }}
           disabled={isDisabled}
+          style={{ color: "black" }}
         >
           Own Job
         </button>
@@ -81,17 +79,16 @@ const Card = (props) => {
               <BsBookmarkFill
                 disabled={isDisabled}
                 className="text-3xl"
-                style={{ marginTop: "-3.4rem" }}
+                style={{ color: "#1967d2" }}
               />
             </>
           ) : (
-            <BsBookmark className="text-3xl" style={{ marginTop: "-3.4rem" }} />
+            <BsBookmark className="text-3xl" style={{ color: "#1967d2" }} />
           )}
         </button>
       );
     }
-  }; 
-
+  };
 
   return (
     <>
