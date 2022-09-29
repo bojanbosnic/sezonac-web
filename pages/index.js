@@ -7,7 +7,6 @@ import { FiLogIn } from "react-icons/fi";
 import { useState } from "react";
 
 export default function Home({ loggedIn }) {
-
   return (
     <>
       <div className={styles.wrapper}>
@@ -61,7 +60,7 @@ export default function Home({ loggedIn }) {
                     <a>
                       <Button
                         name="Registruj se"
-                        icon=<FiLogIn />
+                        icon={<FiLogIn />}
                         textColor="text-white"
                         bgColor="bg-black"
                         hover="hover:bg-sky-700"

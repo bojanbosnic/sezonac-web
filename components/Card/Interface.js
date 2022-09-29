@@ -2,32 +2,23 @@ import React, { useState, useContext } from "react";
 import { MdLocationOn } from "react-icons/md";
 import { db } from "../../firebase";
 import { AuthContext } from "../../Context/AuthContext";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { BsBookmark, BsBookmarkFill, BsJournalBookmark } from "react-icons/bs";
 
 const Card = (props) => {
-  const {
-    id,
-    title,
-    duration,
-    city,
-    time,
-    money,
-    info,
-    profileID,
-    loggedIn,
-    photo,
-    company,
-  } = props;
+  const { id, title, duration, city, profileID, loggedIn, photo } = props;
   const [isDisabled, setIsDisabled] = useState(false);
   const { currentUser } = useContext(AuthContext);
 
+  console.log("vece======>>", id);
+
   const saveJob = async () => {
     if (loggedIn) {
-      const jobsRef = doc(db, `/jobs`);
+      const jobsRef = doc(db, `users`, `${id}`);
       await updateDoc(jobsRef, {
         savedJobs: arrayUnion({
-          
+          jobsID: id,
+          profileid: profileID,
         }),
       });
       setIsDisabled(true);
@@ -65,7 +56,7 @@ const Card = (props) => {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            savedJobsFun();
+            saveJob();
           }}
           disabled={isDisabled}
         >

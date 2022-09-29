@@ -77,17 +77,18 @@ const Jobs = ({ loggedIn }) => {
                   }}
                 >
                   <Card
-                    id={datas.id}
+                    id={datas.jobID}
                     title={datas.title}
                     duration={datas.duration}
                     city={datas.city}
                     time={datas.time}
                     money={datas.money}
-                    info={datas.info}
+                    
                     profileID={datas.creatorID}
                     loggedIn={loggedIn}
                     photo={datas.photo}
                     company={datas.company}
+                    
                   />
                 </div>
               </>
