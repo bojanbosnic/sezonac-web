@@ -17,7 +17,7 @@ const Jobs = ({ loggedIn }) => {
   const [globalDatas, setGlobalDatas] = useState([]);
 
   const getUserData = async () => {
-    await getDocs(collection(db, `/GlobalJobs`)).then((response) =>
+    await getDocs(collection(db, `/jobs`)).then((response) =>
       setGlobalJobs(
         response.docs.map((datas) => {
           return { ...datas.data(), id: datas.id };
@@ -84,7 +84,7 @@ const Jobs = ({ loggedIn }) => {
                     time={datas.time}
                     money={datas.money}
                     info={datas.info}
-                    profileID={datas.profileID}
+                    profileID={datas.creatorID}
                     loggedIn={loggedIn}
                     photo={datas.photo}
                     company={datas.company}

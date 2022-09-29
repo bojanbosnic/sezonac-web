@@ -10,7 +10,7 @@ const Interface = ({ poslovi }) => {
   const router = useRouter();
   const data = router.query;
 
-  console.log("Uccitani poslovi -->", data);
+  // console.log("Uccitani poslovi -->", data);
   const updateFields = (e) => {
     e.preventDefault();
 

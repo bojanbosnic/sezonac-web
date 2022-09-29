@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { addDoc, collection, setDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import PostJobInput from "../PostJobInput";
+import { ref } from "firebase/storage";
 const Interface = () => {
   const { currentUser } = useContext(AuthContext);
   const { uid, photoURL, displayName } = currentUser;
@@ -25,7 +26,8 @@ const Interface = () => {
   };
 
   const writeUserData = async (e) => {
-    const ref = await addDoc(collection(db, `/jobs`), {
+    const jobRef = collection(db, `/jobs`);
+    await addDoc(jobRef, {
       title: postJob.title,
       location: postJob.location,
       money: postJob.money,
@@ -35,6 +37,7 @@ const Interface = () => {
       photo: photoURL,
       company: displayName,
       creatorID: uid,
+      jobID: jobRef.id,
     });
 
     window.location.reload(false);

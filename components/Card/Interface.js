@@ -22,18 +22,13 @@ const Card = (props) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const { currentUser } = useContext(AuthContext);
 
-  const savedJobsFun = async () => {
+  const saveJob = async () => {
     if (loggedIn) {
-      await setDoc(doc(db, `/SavedJobs${currentUser.uid}`, `${id}`), {
-        title: title,
-        money: money,
-        duration: duration,
-        time: time,
-        city: city,
-        info: info,
-        // email: currentUser.email,
-        photo: photo,
-        company: company,
+      const jobsRef = doc(db, `/jobs`);
+      await updateDoc(jobsRef, {
+        savedJobs: arrayUnion({
+          
+        }),
       });
       setIsDisabled(true);
     } else {
