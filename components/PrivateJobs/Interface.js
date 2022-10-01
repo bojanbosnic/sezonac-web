@@ -38,8 +38,6 @@ const Interface = () => {
   //   console.log("Current cities in CA: ", cities.join(", "));
   // });  ovo bi trebalo isprobati
 
-  
-
   const getUserData = async () => {
     const jobsRef = collection(db, "jobs");
 
@@ -50,8 +48,6 @@ const Interface = () => {
     querySnapshot.forEach((doc) => {
       console.log("TOJETO", [{ ...doc.data() }]);
       setFireData([{ ...doc.data() }]);
-      // return { ...datas, id: datas }
-      // console.log(doc.id, " => ", doc.data());
     });
   };
 

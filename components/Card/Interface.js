@@ -9,12 +9,13 @@ const Card = (props) => {
   const { id, title, duration, city, profileID, loggedIn, photo } = props;
   const [isDisabled, setIsDisabled] = useState(false);
   const { currentUser } = useContext(AuthContext);
+  const { uid } = currentUser;
 
   console.log("vece======>>", id);
 
   const saveJob = async () => {
     if (loggedIn) {
-      const jobsRef = doc(db, `users`, `${id}`);
+      const jobsRef = doc(db, `users`, `${uid}`);
       await updateDoc(jobsRef, {
         savedJobs: arrayUnion({
           jobsID: id,

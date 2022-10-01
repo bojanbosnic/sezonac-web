@@ -6,7 +6,6 @@ import Head from "next/head";
 function MyApp({ Component, pageProps }) {
   const token =
     typeof window !== "undefined" ? localStorage.getItem("Token") : null;
-console.log("token", token )
   return (
     <>
       <AuthProvider>

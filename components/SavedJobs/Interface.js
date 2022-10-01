@@ -1,45 +1,61 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import Image from "next/image";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { MdLocationOn } from "react-icons/md";
 import { AuthContext } from "../../Context/AuthContext";
 import { useContext } from "react";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  deleteDoc,
+  doc,
+  query,
+  where,
+  getDoc,
+  collectionGroup,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 import Modal from "../Modal";
 
 const Interface = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [savedJobs, setSavedJobs] = useState([]);
-  const [savedDatas, setSavedDatas] = useState([]);
+  // const [showModal, setShowModal] = useState(false);
+  const [savedJobID, setSavedJobsID] = useState([]);
   const { currentUser } = useContext(AuthContext);
+  const { uid } = currentUser;
+  const [sacuvaniPoslovi, setSacuvaniPoslovi] = useState([]);
 
   const getUserData = async () => {
-    await getDocs(collection(db, `/SavedJobs${currentUser.uid}`)).then(
-      (response) =>
-        setSavedJobs(
-          response.docs.map((datas) => {
-            return { ...datas.data(), id: datas.id };
-          })
-        )
-    );
-  };
-  // console.log("SAVED DATAS =>>", savedJobs);
+    const usersRef = collection(db, "/users");
+    const q = query(usersRef, where("userID", "==", uid));
+    const querySnapshot = await getDocs(q);
 
-  const removeDocument = (id) => {
-    let fieldToDelete = doc(db, `/SavedJobs${currentUser.uid}`, id);
-    deleteDoc(fieldToDelete)
-      .then(() => getUserData())
-      .catch((error) => console.log(error));
-    console.log("REMOVE FUNCTION");
+    querySnapshot.forEach((doc) => {
+      console.log("TOJETO", doc.data().savedJobs);
+      setSavedJobsID([...doc.data().savedJobs]);
+    });
+
+    const jobsRef = collection(db, "/jobs");
+    savedJobID.forEach(async (savedJob) => {
+      const b = query(jobsRef, where("jobID", "==", savedJob.jobsID));
+      const queryJobs = await getDocs(b);
+
+      queryJobs.forEach((queriedJob) => {
+        setSacuvaniPoslovi([{ ...queriedJob.data() }]);
+      });
+    });
   };
+
+  console.log("sacuvaniPoslovi---- - -- - - >", sacuvaniPoslovi);
 
   useEffect(() => {
     getUserData();
-  }, []);
+  }, [savedJobID]);
+
   return (
     <div className="relative mt-16">
-      {savedJobs.map((datas) => (
+      <h3>Sacuvani Poslovi</h3>
+
+      {sacuvaniPoslovi.map((datas) => (
         <div className="flex items-center relative ">
           <div className="mb-44 absolute sm:mb-[5.5rem]">
             <button className="hover:underline">Remove</button>
@@ -54,11 +70,11 @@ const Interface = () => {
             <div className="mx-8 w-full flex items-center justify-between sm:my-2">
               <div className="flex flex-col items-center">
                 <div className="border w-24 h-24 mx-8 sm:mx-8 sm:w-12 sm:h-12">
-                  <img src={datas.photo}/>
+                  <img src={datas.photo} />
                 </div>
               </div>
               <div className="flex items-center sm:flex-wrap">
-                <span className="mx-4 font-semibold">{datas.title}</span>
+                <span className="mx-4 font-semibold">{datas.company}</span>
                 <div className="flex items-center justify-center">
                   <span className="mx-4 flex items-center sm:flex-wrap">
                     <MdLocationOn />
@@ -76,14 +92,22 @@ const Interface = () => {
           </button>
         </div>
       ))}
-      <Modal
+      {/* <Modal
         getUserData={getUserData}
         jobss={savedDatas}
         show={showModal}
         onClose={() => setShowModal(false)}
-      />
+      /> */}
     </div>
   );
 };
 
 export default Interface;
+
+// const removeDocument = (id) => {
+//   let fieldToDelete = doc(db, `/SavedJobs${currentUser.uid}`, id);
+//   deleteDoc(fieldToDelete)
+//     .then(() => getUserData())
+//     .catch((error) => console.log(error));
+//   console.log("REMOVE FUNCTION");
+// };
