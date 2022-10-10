@@ -9,6 +9,9 @@ import { useContext } from "react";
 import { FaSearch } from "react-icons/fa";
 import Modal from "../components/Modal";
 
+const token =
+  typeof window !== "undefined" ? localStorage.getItem("Token") : null;
+
 const Jobs = ({ loggedIn }) => {
   const { currentUser } = useContext(AuthContext);
   const [globalJobs, setGlobalJobs] = useState([]);
@@ -31,6 +34,7 @@ const Jobs = ({ loggedIn }) => {
   }, []);
   return (
     <div className="container sm:p-4">
+      <Navbar loggedIn={!!token} />
       <main>
         <div className="flex justify-center my-12 ">
           <div className=" p-8 rounded-2xl bg-primary  border-rounded w-4/5">
@@ -83,12 +87,10 @@ const Jobs = ({ loggedIn }) => {
                     city={datas.city}
                     time={datas.time}
                     money={datas.money}
-                    
                     profileID={datas.creatorID}
                     loggedIn={loggedIn}
                     photo={datas.photo}
                     company={datas.company}
-                    
                   />
                 </div>
               </>

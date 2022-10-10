@@ -8,12 +8,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAujl1Rrzsm1vVaWXHQoPjbI4T6vtO7wrU",
-  authDomain: "sezonac-41ea3.firebaseapp.com",
-  projectId: "sezonac-41ea3",
-  storageBucket: "sezonac-41ea3.appspot.com",
-  messagingSenderId: "422523568568",
-  appId: "1:422523568568:web:4cde6f24fb3069e9cc8f4d",
+  apiKey: "AIzaSyA7uQAqsaEm-sykSCIYcTykkq81DupW2xM",
+  authDomain: "project-sezonac.firebaseapp.com",
+  projectId: "project-sezonac",
+  storageBucket: "project-sezonac.appspot.com",
+  messagingSenderId: "495150965627",
+  appId: "1:495150965627:web:661df0ba5e2edf1b0453de"
 };
 
 // Initialize Firebase

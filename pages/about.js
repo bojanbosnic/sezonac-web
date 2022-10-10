@@ -2,10 +2,14 @@ import React from "react";
 import Image from "next/image";
 import WhyUs from "../components/WhyUs";
 import { BsCheckCircleFill } from "react-icons/bs";
+import Navbar from "../components/Navbar";
+const token =
+  typeof window !== "undefined" ? localStorage.getItem("Token") : null;
 
 export default function AboutUs() {
   return (
     <div className="container">
+      <Navbar loggedIn={!!token} />
       <main className="flex items-center justify-between lg:flex-wrap">
         <div className="w-1/2 grow-0 shrink-0	basis-auto	lg:w-full">
           <div>
@@ -29,10 +33,6 @@ export default function AboutUs() {
             </li>
           </ul>
         </div>
-        {/* <div className="flex  justify-around flex-row items-center">
-          <div className="flex flex-col w-1/4  lg:w-full"></div>
-          <div className="flex flex-col w-1/4 lg:w-full  lg:order-1"></div>
-        </div> */}
         <div className="w-1/2 grow-0 shrink-0	basis-auto lg:w-full">
           <WhyUs />
         </div>

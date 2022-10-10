@@ -16,73 +16,71 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
   const router = useRouter();
 
   return (
-    <div className="container mx-auto sm:px-8">
-      <nav className="flex justify-between items-center mx-4">
-        <Link href="/">
-          sezonac.ba
-          {/* <Image src={logo} alt="sezonac-logo" /> */}
-        </Link>
-        <div className={`${styles.siteNavbar} md:w-full md:min-wi-min`}>
-          <ul
-            className={classNames(
-              `${
-                toggleValue && styles.open
-              } my-5 flex p-0 items-center list-none text-black md:my-0`
-            )}
-          >
-            <li className=" mr-4">
-              <Link href="/about">
-                <a>O Nama</a>
-              </Link>
-            </li>
-            <li className=" mr-4">
-              <Link href="/contact">
-                <a>Kontakt</a>
-              </Link>
-            </li>
-
-            {loggedIn ? (
-              <>
-                <li>
-                  <Link href="/profile">
-                    <a>{displayName}</a>
-                  </Link>
-                </li>
-              </>
-            ) : (
-              <>
-                <li className="mx-3">
-                  <Link href="/login">
-                    <a>
-                      <Button
-                        name="Prijavi se"
-                        textColor="text-white"
-                        bgColor="bg-primary"
-                        hover="hover:bg-sky-700"
-                        paddingY="py-3"
-                        paddingX="px-5"
-                      />
-                    </a>
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
-        </div>
-        <button
+    <nav className="flex bg-transparent justify-between items-center">
+      <Link href="/">
+        sezonac.ba
+        {/* <Image src={logo} alt="sezonac-logo" /> */}
+      </Link>
+      <div className={`${styles.siteNavbar} md:w-full md:min-wi-min`}>
+        <ul
           className={classNames(
             `${
-              toggleValue && styles.togglerOpen
-            } border-3 border-white m-3 bg-transparent cursor-pointer h-9  z-10 hidden  md:block `
+              toggleValue && styles.open
+            } my-5 flex p-0 items-center list-none text-black md:my-0`
           )}
-          onClick={toggleFun}
         >
-          <span
-            className={`${styles.spanAnimation} togglerOpen w-7 h-1 bg-white block ease-in-out duration-300`}
-          ></span>
-        </button>
-      </nav>
-</div>
+          <li className=" mr-4">
+            <Link href="/about">
+              <a>O Nama</a>
+            </Link>
+          </li>
+          <li className=" mr-4">
+            <Link href="/contact">
+              <a>Kontakt</a>
+            </Link>
+          </li>
+
+          {loggedIn ? (
+            <>
+              <li>
+                <Link href="/profile">
+                  <a>{displayName}</a>
+                </Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="mx-3">
+                <Link href="/login">
+                  <a>
+                    <Button
+                      name="Prijavi se"
+                      textColor="text-white"
+                      bgColor="bg-primary"
+                      hover="hover:bg-sky-700"
+                      paddingY="py-3"
+                      paddingX="px-5"
+                    />
+                  </a>
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
+      </div>
+      <button
+        className={classNames(
+          `${
+            toggleValue && styles.togglerOpen
+          } border-3 border-white m-3 bg-transparent cursor-pointer h-9  z-10 hidden  md:block `
+        )}
+        onClick={toggleFun}
+      >
+        <span
+          className={`${styles.spanAnimation} togglerOpen w-7 h-1 bg-white block ease-in-out duration-300`}
+        ></span>
+      </button>
+    </nav>
   );
 };
 

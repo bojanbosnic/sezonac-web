@@ -4,15 +4,18 @@ import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 import styles from "../styles/home.module.css";
 import { FiLogIn } from "react-icons/fi";
-import { useState } from "react";
+import barmen_picture from "../assets/ilustrations/commercial_photo_barmen.webp";
+const token =
+  typeof window !== "undefined" ? localStorage.getItem("Token") : null;
 
 export default function Home({ loggedIn }) {
   return (
     <>
       <div className={styles.wrapper}>
         <div className="container mx-auto sm:px-8">
-          <main className="h-screen flex items-center z-20 flex-wrap justify-between lg:justify-center   sm:h-screen">
-            <div className="text-left  md:my-8">
+          <Navbar loggedIn={!!token} />
+          <main className="flex items-center z-20 grid grid-cols-2 gap-4  justify-between lg:justify-center   sm:h-screen">
+            <div className="text-left md:my-8">
               <div>
                 <h1 className="leading-normal sm:text-4xl">
                   Tražiš{" "}
@@ -72,12 +75,8 @@ export default function Home({ loggedIn }) {
                 )}
               </div>
             </div>
-            <div className="block w-96  md:my-8 sm:hidden">
-              {/* <Image
-                src={homepage_pic}
-                alt="find-job-image"
-                className="items-center"
-              /> */}
+            <div className="">
+              <Image src={barmen_picture} />
             </div>
           </main>
         </div>
