@@ -75,8 +75,10 @@ export default function Home({ loggedIn }) {
                 )}
               </div>
             </div>
-            <div className="">
-              <Image src={barmen_picture} />
+            <div>
+              <div className="flex justify-between">
+                <Image src={barmen_picture} className="relative"/>
+              </div>
             </div>
           </main>
         </div>

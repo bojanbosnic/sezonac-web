@@ -17,8 +17,8 @@
     @apply font-medium text-black my-8;
   }
 
-  a{
-    @apply font-medium
+  a {
+    @apply font-medium;
   }
 
   p {
@@ -28,7 +28,7 @@
   li {
     @apply font-normal;
   }
-  p{
+  p {
     @apply text-black;
   }
 
@@ -62,4 +62,5 @@
   color: primary;
   font-weight: normal;
 }
+
 

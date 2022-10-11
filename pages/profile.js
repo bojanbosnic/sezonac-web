@@ -16,21 +16,37 @@ import Page2 from "../components/SavedJobs";
 import Page4 from "../components/PostTheJob";
 import Navbar from "../components/Navbar";
 
+import {
+  getDocs,
+  collection,
+  deleteDoc,
+  doc,
+  query,
+  where,
+  getDoc,
+  collectionGroup,
+} from "firebase/firestore";
+import { db } from "../firebase";
+
 // const token =
 //   typeof window !== "undefined" ? localStorage.getItem("Token") : null;
 
 export default function Profile({ loggedIn }) {
   const { currentUser } = useContext(AuthContext);
+
+  const { uid } = currentUser;
   const [isLoading, setIsLoading] = useState(true);
   const [image, setImage] = useState(currentUser.photoURL);
   const router = useRouter();
   const [page, setPage] = useState("page1");
 
+  const [savedJobID, setSavedJobsID] = useState([]);
+
   const myPages = () => {
     if (page === "page1") {
       return <Page1 />;
     } else if (page === "page2") {
-      return <Page2 />;
+      return <Page2 savedJobID={savedJobID} />;
     } else if (page === "page4") {
       return <Page4 />;
     }
@@ -49,6 +65,7 @@ export default function Profile({ loggedIn }) {
   };
 
   const handleImage = (e) => {
+    f;
     if (e.target.files[0]) {
       uploadPhoto(e.target.files[0]);
       console.log(
@@ -69,6 +86,27 @@ export default function Profile({ loggedIn }) {
       console.log(error);
     }
   };
+
+  console.log("UUIIIDDD- >", uid);
+
+  const getUserData = async () => {
+    const userSavedJobs = [];
+    const usersRef = collection(db, "/users");
+    const q = query(usersRef, where("userID", "==", uid));
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+      userSavedJobs.push(...doc.data().savedJobs);
+    });
+
+    setSavedJobsID(userSavedJobs);
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  // sve tefun
 
   useEffect(() => {
     if (!loggedIn) {

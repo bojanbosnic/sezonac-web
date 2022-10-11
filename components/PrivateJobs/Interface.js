@@ -55,7 +55,6 @@ const Interface = () => {
     const querySnapshot = await getDocs(api);
 
     querySnapshot.forEach((doc, index) => {
-      console.log("Objekti", doc.data());
       jobovi.push({ ...doc.data() });
     });
 
@@ -68,6 +67,7 @@ const Interface = () => {
       .then(() => getUserData())
       .catch((error) => console.log(error));
   };
+  console.log("Komponenta--> Private Jobs")
 
   useEffect(() => {
     getUserData();

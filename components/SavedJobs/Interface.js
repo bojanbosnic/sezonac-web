@@ -17,45 +17,47 @@ import {
 import { db } from "../../firebase";
 import Modal from "../Modal";
 
-const Interface = () => {
+const Interface = ({ savedJobID }) => {
   // const [showModal, setShowModal] = useState(false);
-  const [savedJobID, setSavedJobsID] = useState([]);
   const { currentUser } = useContext(AuthContext);
   const { uid } = currentUser;
   const [sacuvaniPoslovi, setSacuvaniPoslovi] = useState([]);
 
   const getUserData = async () => {
+    const userSavedJobs = [];
     const usersRef = collection(db, "/users");
     const q = query(usersRef, where("userID", "==", uid));
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
-      console.log("TOJETO", doc.data().savedJobs);
-      setSavedJobsID([...doc.data().savedJobs]);
+      userSavedJobs.push(...doc.data().savedJobs);
     });
+
+    setSavedJobsID(userSavedJobs);
   };
 
   const getSavedJobs = () => {
+    const finallySavedjobs = [];
     const jobsRef = collection(db, "/jobs");
-    savedJobID.forEach(async (savedJob) => {
-      const b = query(jobsRef, where("jobID", "==", savedJob.jobsID));
+    savedJobID.map(async (data) => {
+      console.log("Saved Datas!", data);
+      const b = query(jobsRef, where("jobID", "==", data.jobsID));
+      console.log("Filtirirani saved jobs", b);
       const queryJobs = await getDocs(b);
 
       queryJobs.forEach((queriedJob) => {
-        setSacuvaniPoslovi((prevData) => [
-          ...prevData,
-          { ...queriedJob.data() },
-        ]);
+        finallySavedjobs.push({ ...queriedJob.data() });
       });
+      setSacuvaniPoslovi(finallySavedjobs);
     });
   };
 
-  console.log("sacuvaniPoslovi---- - -- - - >", sacuvaniPoslovi);
-
   useEffect(() => {
-    getUserData();
     getSavedJobs();
   }, []);
+
+  console.log("Savedjobs id: ", savedJobID);
+  console.log("Sacuvani poslovi: ", sacuvaniPoslovi);
 
   return (
     <div className="relative">
