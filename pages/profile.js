@@ -190,7 +190,7 @@ export default function Profile({ loggedIn }) {
                 </div>
               </div>
             </div>
-            <section className="w-3/4 p-8 bg-secondary rounded-xl my-4 lg:w-full">
+            <section className="w-3/4 p-8 bg-[#f5f7f9] rounded-xl my-4 lg:w-full">
               <div className="h-full bg-white rounded-xl border border-white">
                 {myPages()}
               </div>

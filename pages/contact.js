@@ -10,8 +10,8 @@ export default function ContactUs() {
   return (
     <div className="container">
       <Navbar loggedIn={!!token} />
-      <main className="flex flex-wrap justify-between items-center  my-20 md:my-10">
-        <section className="w-[calc(60%-40px)] lg:w-full">
+      <main className="grid grid-cols-2 gap-4 my-20 md:my-10">
+        <section className=" lg:w-full">
           <h1>Pošaljite Nam Poruku</h1>
           <h2 className="font-normal">
             Slobodno nas kontaktirajte i mi ćemo Vam se javiti čim budemo mogli.
@@ -54,22 +54,22 @@ export default function ContactUs() {
             <button className="pointer submit_btn_form">Pošalji poruku</button>
           </form>
         </section>
-        <section className="w-[calc(40%-40px)] p-4 lg:w-full">
+        <section className="lg:w-full">
           <address>
-            <div className="flex flex-col lg:flex-row flex-wrap shadow-xs shadow-[#3898e28d]  justify-center items-center rounded-3xl p-16 md:p-4">
+            {/* <div className="flex flex-col lg:flex-row flex-wrap shadow-xs shadow-[#3898e28d]  justify-center items-center rounded-3xl p-16 md:p-4"> */}
               <div className="flex items-center my-6 flex-wrap justify-center">
                 <div className="bg-secondary my-6 p-6 flex items-center justify-center rounded-xl">
-                  <MdPhoneAndroid className="text-primary" fontSize="2.1rem" />
-                </div>
+                  <MdPhoneAndroid className="text-primary"  />
+                
                 <div className="md:text-center">
                   <h3 className="my-2">Kontaktiraj Nas</h3>
                   <p>+387 555 333</p>
                 </div>
+                </div>
               </div>
               <div className="flex items-center my-6 flex-wrap justify-center">
-                <div className="bg-secondary my-6 p-6  flex items-center justify-center rounded-xl">
-                  <HiMail className="text-primary" fontSize="2rem" />
-                </div>
+                  <HiMail className="text-primary"/>
+                
                 <div className="md:text-center">
                   <h3 className="my-2">Tehnička Podrška</h3>
                   <a href="mailto:hello@gmail.com">hello@gmail.com</a>
@@ -77,14 +77,13 @@ export default function ContactUs() {
               </div>
               <div className="flex items-center my-6 flex-wrap justify-center">
                 <div className="bg-secondary my-6 p-6 flex items-center justify-center rounded-xl">
-                  <HiLocationMarker className="text-primary" fontSize="2rem" />
+                  <HiLocationMarker className="text-primary"  />
                 </div>
                 <div className="md:text-center">
                   <h3 className="my-2">Posjeti nas</h3>
                   <p>Ulica Ive Andrića BB</p>
                 </div>
               </div>
-            </div>
           </address>
         </section>
       </main>

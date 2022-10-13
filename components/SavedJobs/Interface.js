@@ -22,7 +22,7 @@ const Interface = ({ savedJobID }) => {
   const { currentUser } = useContext(AuthContext);
   const { uid } = currentUser;
   const [sacuvaniPoslovi, setSacuvaniPoslovi] = useState([]);
-
+  
   const getUserData = async () => {
     const userSavedJobs = [];
     const usersRef = collection(db, "/users");

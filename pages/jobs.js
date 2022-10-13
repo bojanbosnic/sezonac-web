@@ -6,7 +6,7 @@ import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../Context/AuthContext";
 import { useContext } from "react";
-import { FaSearch } from "react-icons/fa";
+import { FiSearch } from "react-icons/fi";
 import Modal from "../components/Modal";
 
 const token =
@@ -38,22 +38,17 @@ const Jobs = ({ loggedIn }) => {
       <main>
         <div className="flex justify-center my-12 ">
           <div className=" p-8 rounded-2xl bg-primary  border-rounded w-4/5">
-            <h1 className="text-center text-white">
-              Pretraži poslove koji te zanimaju
-            </h1>
             <div className="flex justify-center items-center">
-              <div className="w-1/2 mr-4 lg:w-full">
+              <div className="w-1/2 relative z-20 pl-12 mr-4 lg:w-full">
                 <input
                   onChange={(e) => setSearchData(e.target.value)}
-                  className="input_field_login text-primary placeholder-color  border-white z-20"
+                  className="input_field_login relative text-primary placeholder-color  border-white z-20"
                   type="text"
-                  placeholder="Konobar..."
+                  placeholder="Naslov Posla / Konobar..."
                   id="search-input"
                 />
+                <FiSearch className="absolute z-10 top-[25px] left-3" />
               </div>
-              <label className="" htmlFor="search-input">
-                <FaSearch color="white" fontSize="2rem" />
-              </label>
             </div>
           </div>
         </div>
