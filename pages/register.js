@@ -8,6 +8,9 @@ import Link from "next/link";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useRouter } from "next/router";
 import createUser from "../utils/createUser";
+import { FaBuilding } from "react-icons/fa";
+import { MdAlternateEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
 
 const Register = ({ loggedIn }) => {
   const [confirmed, setConfirmed] = useState(true);
@@ -78,34 +81,50 @@ const Register = ({ loggedIn }) => {
 
           <SignUp
             name="Firma"
+            id="title_id"
             placeHolder="Naziv firme"
             funkcija={(e) => handleForm("displayName", e.target.value)}
             vrednost={form.displayName}
             type="text"
+            icon={
+              <FaBuilding className="absolute z-20 top-[28px] text-primary left-[12px]" />
+            }
           />
 
           <SignUp
             name="Email"
+            id="email_id"
             placeHolder="ime.prezime@example.com"
             funkcija={(e) => handleForm("email", e.target.value)}
             vrednost={form.email}
             type="email"
+            icon={
+              <MdAlternateEmail className="absolute z-20 top-[28px] text-primary left-[12px]" />
+            }
           />
 
           <SignUp
             name="Lozinka"
+            id="password_id"
             placeHolder="● ● ● ● ● ● "
             funkcija={(e) => handleForm("password", e.target.value)}
             vrednost={form.password}
             type="password"
+            icon={
+              <RiLockPasswordFill className="absolute z-20 top-[28px] text-primary left-[12px]" />
+            }
           />
 
           <SignUp
             name="Potvrdi Lozinku"
+            id="cpassword_id"
             placeHolder="● ● ● ● ● ● "
             funkcija={(e) => handleForm("confirmPassword", e.target.value)}
             vrednost={form.confirmPassword}
             type="password"
+            icon={
+              <RiLockPasswordFill className="absolute z-20 top-[28px] text-primary left-[12px]" />
+            }
           />
 
           {!confirmed && <h1>Lozinke se ne poklapaju!!</h1>}

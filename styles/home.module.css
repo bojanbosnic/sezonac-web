@@ -17,3 +17,11 @@
   background-position: top center;
 }
 
+.card_hover {
+  transition: transform 0.5s;
+}
+
+.card_hover:hover {
+  box-shadow: #00000029 0 10px 36px, #0000000f 0 0 0 1px;
+  transform: translateY(-10px);
+}

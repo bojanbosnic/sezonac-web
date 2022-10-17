@@ -65,7 +65,6 @@ export default function Profile({ loggedIn }) {
   };
 
   const handleImage = (e) => {
-    f;
     if (e.target.files[0]) {
       uploadPhoto(e.target.files[0]);
       console.log(
@@ -149,38 +148,39 @@ export default function Profile({ loggedIn }) {
                 </div>
                 <div>
                   <ul>
-                    <li className="flex items-center py-4">
+                    <li className="flex items-center px-4 py-2">
+                      <FaUserAlt className="text-primary mr-2" />
                       <h3 className="m-0">{currentUser.displayName}</h3>
                     </li>
                     <li
-                      className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
+                      className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300"
                       onClick={() => setPage("page1")}
                     >
                       <AiFillFileMarkdown className="text-primary mr-2" />
                       Moji Poslovi
                     </li>
                     <li
-                      className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
+                      className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300"
                       onClick={() => setPage("page2")}
                     >
                       <FaSave className="text-primary mr-2" />
                       Sačuvani Poslovi
                     </li>
-                    <Link href="/jobs">
-                      <li className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out">
+                    <a href="/jobs" target="_blank" rel="noopener noreferrer">
+                      <li className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300">
                         <AiOutlineGlobal className="text-primary mr-2" />
                         Globalni Poslovi
                       </li>
-                    </Link>
+                    </a>
                     <li
-                      className="flex items-center px-4  py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
+                      className="flex items-center px-4  py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300"
                       onClick={() => setPage("page4")}
                     >
                       <RiFileUploadFill className="text-primary mr-2" />
                       Objavi Posao
                     </li>
                     <li
-                      className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl hover:ease-in-out"
+                      className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300"
                       onClick={handleLogOut}
                     >
                       <HiOutlineLogout className="text-primary mr-2" />

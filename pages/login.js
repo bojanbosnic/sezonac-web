@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useRouter } from "next/router";
+import { MdAlternateEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
+
 import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function LogIn({ loggedIn }) {
@@ -10,6 +13,7 @@ export default function LogIn({ loggedIn }) {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter("");
+  
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -45,32 +49,38 @@ export default function LogIn({ loggedIn }) {
               <label htmlFor="email_id" className="font-medium text-black">
                 Email
               </label>
-              <div>
+              <div className="relative">
                 <input
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                   id="email_id"
-                  className="input_field_login"
+                  className="input_field_login relative pl-10 z-10"
                   type="email"
                   placeholder="ime.prezime@example.com"
                   name="inputField"
                 />
+                <label htmlFor="email_id">
+                  <MdAlternateEmail className="absolute z-20 top-[28px] text-primary left-[14px]" />
+                </label>
               </div>
             </div>
             <div className="my-12" style={{ margin: "1.5rem 0" }}>
               <label htmlFor="password_id" className="font-medium text-black">
                 Lozinka
               </label>
-              <div>
+              <div className="relative">
                 <input
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                   id="password_id"
-                  className="input_field_login"
+                  className="input_field_login relative pl-10 z-10"
                   type="password"
                   placeholder="••••••"
                   name="inputField"
                 />
+                <label htmlFor="password_id">
+                  <RiLockPasswordFill className="absolute z-20 top-[28px] text-primary left-[14px]" />
+                </label>
               </div>
             </div>
             <div className="text-black font-medium my-4">

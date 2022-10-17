@@ -7,6 +7,10 @@ import { useContext } from "react";
 import { addDoc, collection, setDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import PostJobInput from "../PostJobInput";
+import { FaBuilding, FaGlobeAmericas, FaAddressCard } from "react-icons/fa";
+import { HiLocationMarker } from "react-icons/hi";
+import { MdAlternateEmail, MdOutlineAccessTimeFilled } from "react-icons/md";
+import { RiMoneyDollarCircleFill } from "react-icons/ri";
 
 const Interface = () => {
   const { currentUser } = useContext(AuthContext);
@@ -56,12 +60,14 @@ const Interface = () => {
             jobName="Naslov Posla"
             placeHolder="Barmen"
             inputType="text"
+            icon={<FaAddressCard className="absolute z-20 top-[28px] text-primary left-[8px]" />}
             handleJobFun={(e) => handleJob("title", e.target.value)}
           />
           <PostJobInput
             jobName="Lokacija"
             placeHolder="Beograd, Knjeginje Ljubice 5 11000"
             inputType="text"
+            icon={<HiLocationMarker className="absolute z-20 top-[28px] text-primary left-[8px]" />}
             handleJobFun={(e) => handleJob("location", e.target.value)}
           />
         </div>
@@ -69,14 +75,16 @@ const Interface = () => {
         <div className="my-8 grid grid-cols-2 gap-4">
           <PostJobInput
             jobName="Satnica"
-            placeHolder="$5"
+            placeHolder="5"
             inputType="number"
+            icon={<RiMoneyDollarCircleFill className="absolute z-20 top-[28px] text-primary left-[8px]" />}
             handleJobFun={(e) => handleJob("money", e.target.value)}
           />
           <PostJobInput
             jobName="Radno Vrijeme"
             placeHolder="8 sati"
             inputType="number"
+            icon={<MdOutlineAccessTimeFilled className="absolute z-20 top-[28px] text-primary left-[8px]" />}
             handleJobFun={(e) => handleJob("workDuration", e.target.value)}
           />
         </div>
@@ -85,12 +93,14 @@ const Interface = () => {
             jobName="Website"
             placeHolder="www.hotelexamle.com"
             inputType="text"
+            icon={<FaGlobeAmericas className="absolute z-20 top-[28px] text-primary left-[8px]" />}
             handleJobFun={(e) => handleJob("website", e.target.value)}
           />
           <PostJobInput
             jobName="Email Adresa"
             placeHolder="hotel.example@example.com"
             inputType="email"
+            icon={<MdAlternateEmail className="absolute z-20 top-[28px] text-primary left-[8px]" />}
             handleJobFun={(e) => handleJob("email", e.target.value)}
           />
         </div>

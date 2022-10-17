@@ -22,14 +22,11 @@
   }
 
   p {
-    @apply font-normal;
+    @apply font-normal text-black;
   }
 
   li {
     @apply font-normal;
-  }
-  p {
-    @apply text-black;
   }
 
   .heading3 {
@@ -60,7 +57,5 @@
 
 .placeholder-color::placeholder {
   color: primary;
-  font-weight: normal;
+  font-weight: 400;
 }
-
-

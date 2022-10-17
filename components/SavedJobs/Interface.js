@@ -22,7 +22,7 @@ const Interface = ({ savedJobID }) => {
   const { currentUser } = useContext(AuthContext);
   const { uid } = currentUser;
   const [sacuvaniPoslovi, setSacuvaniPoslovi] = useState([]);
-  
+
   const getUserData = async () => {
     const userSavedJobs = [];
     const usersRef = collection(db, "/users");
@@ -32,8 +32,6 @@ const Interface = ({ savedJobID }) => {
     querySnapshot.forEach((doc) => {
       userSavedJobs.push(...doc.data().savedJobs);
     });
-
-    setSavedJobsID(userSavedJobs);
   };
 
   const getSavedJobs = () => {
@@ -66,10 +64,6 @@ const Interface = ({ savedJobID }) => {
       <div className="px-6">
         {sacuvaniPoslovi.map((datas) => (
           <div className="flex items-center relative ">
-            <div className="mb-44 absolute sm:mb-[5.5rem]">
-              <button className="hover:underline">Remove</button>
-            </div>
-            <input className="absolute left-[4%]" type="checkbox" />
             <div
               onClick={() => {
                 setSavedDatas(datas), setShowModal(true);

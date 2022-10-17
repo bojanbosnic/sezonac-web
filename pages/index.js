@@ -4,7 +4,7 @@ import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 import styles from "../styles/home.module.css";
 import { FiLogIn } from "react-icons/fi";
-import barmen_picture from "../assets/ilustrations/commercial_photo_barmen.webp";
+import picture from "../assets/ilustrations/we1.png";
 const token =
   typeof window !== "undefined" ? localStorage.getItem("Token") : null;
 
@@ -14,7 +14,7 @@ export default function Home({ loggedIn }) {
       <div className={styles.wrapper}>
         <div className="container mx-auto sm:px-8">
           <Navbar loggedIn={!!token} />
-          <main className="flex items-center z-20 grid grid-cols-2 gap-4  justify-between lg:justify-center   sm:h-screen">
+          <main className="flex items-center z-20 mt-20  justify-between lg:justify-center sm:h-screen">
             <div className="text-left md:my-8">
               <div>
                 <h1 className="leading-normal sm:text-4xl">
@@ -49,7 +49,7 @@ export default function Home({ loggedIn }) {
                     <a>
                       <Button
                         name="Objavi Posao"
-                        bgColor="bg-primary"
+                        bgColor="bg-black"
                         hover="hover:bg-sky-700"
                         textColor="text-white"
                         paddingY="py-4 md:py-4"
@@ -76,9 +76,7 @@ export default function Home({ loggedIn }) {
               </div>
             </div>
             <div>
-              <div className="flex justify-between">
-                <Image src={barmen_picture} className="relative"/>
-              </div>
+              <Image src={picture} />
             </div>
           </main>
         </div>
