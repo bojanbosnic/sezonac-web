@@ -8,14 +8,13 @@ import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
 
-const Modal = ({ show, onClose, jobss, getUserData, isUpdating }) => {
+const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
   const [isBrowser, setIsBrowser] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const { currentUser } = useContext(AuthContext);
   const [updateJobs, setUpdateJobs] = useState([]);
-  const poslovi = [jobss];
+  const poslovi = [jobsForModal];
 
-  console.log("UPDATED JOBS ID", updateJobs.ID);
   const handleClose = (e) => {
     e.preventDefault();
     onClose();
@@ -25,6 +24,7 @@ const Modal = ({ show, onClose, jobss, getUserData, isUpdating }) => {
     e.preventDefault();
 
     let fieldToEdit = doc(db, `/${currentUser.uid}`, updateJobs.ID);
+    console.log("neznam abdejt", fieldToEdit)
     updateDoc(fieldToEdit, {
       title: updateJobs.title,
       city: updateJobs.city,
@@ -33,17 +33,6 @@ const Modal = ({ show, onClose, jobss, getUserData, isUpdating }) => {
       duration: updateJobs.duration,
       info: updateJobs.info,
     })
-      .then(() => {
-        let filedglobaledit = doc(db, `/GlobalJobs`, updateJobs.ID);
-        updateDoc(filedglobaledit, {
-          title: updateJobs.title,
-          city: updateJobs.city,
-          money: updateJobs.money,
-          time: updateJobs.time,
-          duration: updateJobs.duration,
-          info: updateJobs.info,
-        });
-      })
       .then(() => {
         let filedsavedledit = doc(
           db,
@@ -115,13 +104,10 @@ const Modal = ({ show, onClose, jobss, getUserData, isUpdating }) => {
   }, []);
 
   const modalContent = show ? (
-    <div className="z-20 fixed w-full h-full top-0 left-0 bg-dark">
+    <div className="z-20 fixed w-full h-full top-0 left-0 bg-black">
       <div className="z-40 w-full absolute top-0 left-0 min-h-full min-w-full p-6">
         {poslovi.map((job) => (
-          <div className="rounded border bg-primary overflow-y-auto h-[90vh]">
-            <div className="px-4 py-2 border border-t-0 border-x-0 border-b">
-              ID: {job.id}
-            </div>
+          <div className="rounded border bg-primary overflow-y-auto snap-y h-[90vh]">
             <div className="padding-wrapp px-4 my-8">
               <div className="flex justify-between flex-wrap">
                 <div>
@@ -135,8 +121,7 @@ const Modal = ({ show, onClose, jobss, getUserData, isUpdating }) => {
                   <div className="flex">
                     <div className="w-[70%] relative flex items-center  ml-6 my-8 sm:justify-center md:flex-wrap border border-white p-4 ">
                       <div className="w-[50%] border border-white p-6 flex flex-col">
-                        <span className="mb-1 text-sm">Choose image</span>
-                    <img src={job.photo}/>
+                        <img src={job.photo} />
                       </div>
                       <div className="ml-4">
                         {isUpdate ? (

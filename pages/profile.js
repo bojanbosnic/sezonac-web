@@ -25,8 +25,10 @@ import {
   where,
   getDoc,
   collectionGroup,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import { async } from "@firebase/util";
 
 // const token =
 //   typeof window !== "undefined" ? localStorage.getItem("Token") : null;
@@ -39,7 +41,6 @@ export default function Profile({ loggedIn }) {
   const [image, setImage] = useState(currentUser.photoURL);
   const router = useRouter();
   const [page, setPage] = useState("page1");
-
   const [savedJobID, setSavedJobsID] = useState([]);
 
   const myPages = () => {
@@ -86,9 +87,7 @@ export default function Profile({ loggedIn }) {
     }
   };
 
-  console.log("UUIIIDDD- >", uid);
-
-  const getUserData = async () => {
+  const getUserSaved = async () => {
     const userSavedJobs = [];
     const usersRef = collection(db, "/users");
     const q = query(usersRef, where("userID", "==", uid));
@@ -101,8 +100,41 @@ export default function Profile({ loggedIn }) {
     setSavedJobsID(userSavedJobs);
   };
 
+  // const getUserData = async () => {
+  //   const jobovi = [];
+  //   const jobsRef = collection(db, "jobs");
+
+  //   const api = query(jobsRef, where("creatorID", "==", uid));
+
+  //   const querySnapshot = await getDocs(api);
+
+  //   querySnapshot.forEach((doc, index) => {
+  //     jobovi.push({ ...doc.data() });
+  //   });
+
+  //   setUsersJobs(jobovi);
+  // };
+  // console.log("Ovo mi treba", usersJobs);
+
+  const updateProfilePhoto = async () => {
+    const q = query(collection(db, "cities"), where("creatorID", "==", uid));
+
+
+
+    // querySnapshot.forEach((doc, index) => {
+      updateDoc(q, {
+        photo: image,
+      }).catch((error) => console.log(error));
+    // });
+  };
+
   useEffect(() => {
-    getUserData();
+    updateProfilePhoto();
+  }, [image]);
+
+  useEffect(() => {
+    getUserSaved();
+    // getUserData();
   }, []);
 
   // sve tefun

@@ -24,7 +24,8 @@ const Interface = () => {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [fireData, setFireData] = useState([]);
-  const [mapedJobs, setMapedJobs] = useState([]);
+  const [jobsForModal, setJobsForModal] = useState([]);
+  const [isUpdating, setIsUpdating] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const getUserData = async () => {
@@ -42,8 +43,11 @@ const Interface = () => {
     setFireData(jobovi);
   };
 
+
+
   useEffect(() => {
     getUserData();
+    setIsUpdating(true);
   }, []);
 
   return (
@@ -55,7 +59,7 @@ const Interface = () => {
           <div className="flex items-center relative">
             <div
               onClick={() => {
-                setJobss(jobs), setShowModal(true);
+                setJobsForModal(jobs), setShowModal(true);
               }}
               className="border rounded-3xl bg-secondary text-black w-full flex items-center my-8 px-6 sm:p-0"
             >
@@ -66,22 +70,19 @@ const Interface = () => {
                 </span>
               </div>
             </div>
-            <button
-              onClick={() => deleteDocument(jobs.jobID)}
-              className="ml-4"
-            >
+            <button onClick={() => deleteDocument(jobs.jobID)} className="ml-4">
               <RiDeleteBin2Line fontSize="2rem" />
             </button>
           </div>
         ))}
       </div>
-      {/* <Modal
+      <Modal
         getUserData={getUserData}
-        jobss={jobss}
+        jobsForModal={jobsForModal}
         show={showModal}
         isUpdating={isUpdating}
         onClose={() => setShowModal(false)}
-      /> */}
+      />
     </div>
   );
 };
