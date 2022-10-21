@@ -34,7 +34,7 @@ const Jobs = ({ loggedIn }) => {
     getUserData();
   }, []);
   return (
-    <div className="bg-[#f3f5f0] h-screen">
+    <div className="bg-[#f3f5f0] overflow-y-visible">
       <div className="container sm:p-4">
         <Navbar loggedIn={!!token} />
         <main>

@@ -89,10 +89,3 @@ const Interface = () => {
 
 export default Interface;
 
-// const checkboxDeleteDocument = (id) => {
-//   if (checked) {
-//     deleteDocument(id);
-//   } else {
-//     alert("Please first check checkbox and now delete!");
-//   }
-// };

@@ -4,18 +4,17 @@ import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 import styles from "../styles/home.module.css";
 import { FiLogIn } from "react-icons/fi";
-import picture from "../assets/ilustrations/we1.png";
-const token =
-  typeof window !== "undefined" ? localStorage.getItem("Token") : null;
+import picture from "../assets/ilustrations/right-pic-2.jpg";
+import { useEffect } from "react";
 
-export default function Home({ loggedIn }) {
+const Home = ({ loggedIn }) => {
   return (
     <>
       <div className={styles.wrapper}>
         <div className="container mx-auto sm:px-8">
-          <Navbar loggedIn={!!token} />
-          <main className="flex items-center z-20 mt-20  justify-between lg:justify-center sm:h-screen">
-            <div className="text-left md:my-8">
+          <Navbar loggedIn={loggedIn} />
+          <main className="flex items-center lg:flex-wrap z-20 mt-20  justify-between  ">
+            <div className="w-3/5 text-left lg:w-full lg:mb-8">
               <div>
                 <h1 className="leading-normal sm:text-4xl">
                   Tražiš{" "}
@@ -75,12 +74,20 @@ export default function Home({ loggedIn }) {
                 )}
               </div>
             </div>
-            <div>
-              <Image src={picture} />
+            <div  className={styles.initialImage}>
+              <Image
+                layout="responsive"
+                className={styles.initialImage}
+                src={picture}
+                quality={100}
+                alt="Initial photo"
+              />
             </div>
           </main>
         </div>
       </div>
     </>
   );
-}
+};
+
+export default Home;

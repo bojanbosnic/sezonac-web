@@ -17,6 +17,13 @@
   background-position: top center;
 }
 
+.initialImage {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
 .card_hover {
   transition: transform 0.5s;
 }

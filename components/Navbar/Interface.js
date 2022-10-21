@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import logo from "../../assets/logos/logo.png";
 import { auth } from "../../firebase";
 import Link from "next/link";
@@ -44,7 +44,7 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
             <>
               <li>
                 <Link href="/profile">
-                  <a>{displayName}</a>
+                  <a>Profil</a>
                 </Link>
               </li>
             </>

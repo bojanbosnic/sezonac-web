@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { signOut } from "firebase/auth";
 import { updateProfile } from "firebase/auth";
@@ -15,6 +16,7 @@ import Page1 from "../components/PrivateJobs";
 import Page2 from "../components/SavedJobs";
 import Page4 from "../components/PostTheJob";
 import Navbar from "../components/Navbar";
+import userIcon from "../assets/ilustrations/2.jpg";
 
 import {
   getDocs,
@@ -116,28 +118,28 @@ export default function Profile({ loggedIn }) {
   // };
   // console.log("Ovo mi treba", usersJobs);
 
-  const updateProfilePhoto = async () => {
-    const q = query(collection(db, "cities"), where("creatorID", "==", uid));
+  // const updateProfilePhoto = async () => {
+  //   let filedtoedit = query(
+  //     doc(db, "jobs"),
+  //     where("creatorID", "==", uid)
+  //   );
+  //   // querySnapshot.forEach((doc, index) => {
+  //   updateDoc(filedtoedit, {
+  //     photo: image,
+  //   }).catch((error) => console.log(error));
+  //   // });
+  // };
 
-
-
-    // querySnapshot.forEach((doc, index) => {
-      updateDoc(q, {
-        photo: image,
-      }).catch((error) => console.log(error));
-    // });
-  };
-
-  useEffect(() => {
-    updateProfilePhoto();
-  }, [image]);
+  // useEffect(() => {
+  //   updateProfilePhoto();
+  // }, [image]);
 
   useEffect(() => {
     getUserSaved();
     // getUserData();
   }, []);
 
-  // sve tefun
+  let src = image ? image : userIcon.src;
 
   useEffect(() => {
     if (!loggedIn) {
@@ -157,33 +159,42 @@ export default function Profile({ loggedIn }) {
           <main className="flex justify-between lg:flex-wrap mt-2">
             <div className="w-1/5 bg-secondary lg:w-full my-8 mr-8 block rounded-3xl">
               <div className=" h-full p-[30px]  lg:flex lg:items-center sm:block">
+                <div className="flex items-center justify-center">
+                  <FaUserAlt className="text-primary mr-2" />
+                  <h3 className="m-0">{currentUser.displayName}</h3>
+                </div>
                 <div>
-                  <div className="flex realtive items-center border border-white my-8 px-4  lg:py-14">
+                  <div className="flex realtive  border border-white mt-8 p-4 rounded-xl   lg:py-14">
                     <div className="text-center overflow-hidden">
-                      <img
-                        src={image}
-                        alt="User profile picture"
-                        style={{ margin: "2rem 0" }}
-                      />
-                      <input
-                        onChange={(e) => {
-                          handleImage(e);
-                        }}
-                        className=""
-                        type="file"
-                        id="myImage"
-                        name="profile_img"
-                        accept="image/png, image/jpg"
+                      <Image
+                        loader={() => src}
+                        src={src}
+                        width={800}
+                        height={800}
                       />
                     </div>
+                  </div>
+                  <div className="relative text-center my-4 mb-6">
+                    <input
+                      onChange={(e) => {
+                        handleImage(e);
+                      }}
+                      className="w-1 h-1 absolute opacity-0"
+                      type="file"
+                      id="myImage"
+                      name="profile_img"
+                      accept="image/png, image/jpg"
+                    />
+                    <label
+                      htmlFor="myImage"
+                      className="bg-primary rounded-xl text-white font-medium text-sm py-2 px-4"
+                    >
+                      Objavi Sliku
+                    </label>
                   </div>
                 </div>
                 <div>
                   <ul>
-                    <li className="flex items-center px-4 py-2">
-                      <FaUserAlt className="text-primary mr-2" />
-                      <h3 className="m-0">{currentUser.displayName}</h3>
-                    </li>
                     <li
                       className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300"
                       onClick={() => setPage("page1")}

@@ -42,7 +42,7 @@
   }
 
   .submit_btn_form {
-    @apply py-5 px-6 border-none mb-4 bg-primary text-white font-medium  rounded-lg;
+    @apply py-5 px-6 border-none my-8 bg-primary text-white font-medium  rounded-lg;
   }
 }
 @tailwind components;
