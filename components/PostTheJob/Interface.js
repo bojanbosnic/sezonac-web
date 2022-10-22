@@ -11,6 +11,7 @@ import { FaBuilding, FaGlobeAmericas, FaAddressCard } from "react-icons/fa";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdAlternateEmail, MdOutlineAccessTimeFilled } from "react-icons/md";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
+import { useForm } from "react-hook-form";
 
 const Interface = () => {
   const { currentUser } = useContext(AuthContext);
@@ -25,6 +26,19 @@ const Interface = () => {
   });
 
   const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    setError,
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
   const handleJob = (type, value) => {
     setPostJob({ ...postJob, [type]: value });
@@ -60,14 +74,18 @@ const Interface = () => {
             jobName="Naslov Posla"
             placeHolder="Barmen"
             inputType="text"
-            icon={<FaAddressCard className="absolute z-20 top-[28px] text-primary left-[8px]" />}
+            icon={
+              <FaAddressCard className="absolute z-20 top-[28px] text-primary left-[8px]" />
+            }
             handleJobFun={(e) => handleJob("title", e.target.value)}
           />
           <PostJobInput
             jobName="Lokacija"
             placeHolder="Beograd, Knjeginje Ljubice 5 11000"
             inputType="text"
-            icon={<HiLocationMarker className="absolute z-20 top-[28px] text-primary left-[8px]" />}
+            icon={
+              <HiLocationMarker className="absolute z-20 top-[28px] text-primary left-[8px]" />
+            }
             handleJobFun={(e) => handleJob("location", e.target.value)}
           />
         </div>
@@ -77,14 +95,18 @@ const Interface = () => {
             jobName="Satnica"
             placeHolder="5"
             inputType="number"
-            icon={<RiMoneyDollarCircleFill className="absolute z-20 top-[28px] text-primary left-[8px]" />}
+            icon={
+              <RiMoneyDollarCircleFill className="absolute z-20 top-[28px] text-primary left-[8px]" />
+            }
             handleJobFun={(e) => handleJob("money", e.target.value)}
           />
           <PostJobInput
             jobName="Radno Vrijeme"
             placeHolder="8 sati"
             inputType="number"
-            icon={<MdOutlineAccessTimeFilled className="absolute z-20 top-[28px] text-primary left-[8px]" />}
+            icon={
+              <MdOutlineAccessTimeFilled className="absolute z-20 top-[28px] text-primary left-[8px]" />
+            }
             handleJobFun={(e) => handleJob("workDuration", e.target.value)}
           />
         </div>
@@ -93,14 +115,18 @@ const Interface = () => {
             jobName="Website"
             placeHolder="www.hotelexamle.com"
             inputType="text"
-            icon={<FaGlobeAmericas className="absolute z-20 top-[28px] text-primary left-[8px]" />}
+            icon={
+              <FaGlobeAmericas className="absolute z-20 top-[28px] text-primary left-[8px]" />
+            }
             handleJobFun={(e) => handleJob("website", e.target.value)}
           />
           <PostJobInput
             jobName="Email Adresa"
             placeHolder="hotel.example@example.com"
             inputType="email"
-            icon={<MdAlternateEmail className="absolute z-20 top-[28px] text-primary left-[8px]" />}
+            icon={
+              <MdAlternateEmail className="absolute z-20 top-[28px] text-primary left-[8px]" />
+            }
             handleJobFun={(e) => handleJob("email", e.target.value)}
           />
         </div>

@@ -33,74 +33,71 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container mx-auto sm:px-8">
       <Navbar loggedIn={!!token} />
       <div className="mt-20 md:my-10">
-        <h1 className="md:p-4">Kontaktirajte Nas</h1>
-        <h2 className="font-normal">
+        <h1 className="text-4xl">Kontaktirajte Nas</h1>
+        <h2 className="font-normal text-base">
           Kontaktirajte nas ispod ili nam pošaljite poruku u formi desno mi ćemo
           Vam se javiti čim budemo mogli.
         </h2>
         <main className="flex justify-between items-center  md:flex-wrap">
-          <section className=" w-[50%] lg:w-full">
-            <address>
-              {/* <div className="flex flex-col lg:flex-row flex-wrap shadow-xs shadow-[#3898e28d]  justify-center items-center rounded-3xl p-16 md:p-4"> */}
-              <div className="mr-8 my-14">
-                <div className="border-4 border-[#f2f2f2] hover:border-inherit ease-in-out duration-300 hover:-translate-y-2 my-6 py-6 px-12 flex relative  justify-between rounded-xl">
-                  <div className="bg-secondary rounded py-4 px-3 absolute left-[45px] top-[-20px]">
-                    <MdPhoneAndroid
-                      fontSize="2.5rem"
-                      className="text-[#00ca99]"
-                    />
-                  </div>
-                  <div className="md:text-center ml-24">
-                    <h3 className="my-2">Telefon</h3>
-                    <a
-                      href="tel:+387 555 333"
-                      className="text-[#00ca99] font-normal"
-                    >
-                      +387 555 333
-                    </a>
-                  </div>
+          <address className="w-1/2 mr-12 sm:mr-0 lg:w-full">
+            <div className="my-14">
+              <div className="border-4 border-[#f2f2f2] hover:border-inherit ease-in-out duration-300 hover:-translate-y-2 my-6 py-6 px-12 flex relative  justify-between rounded-xl">
+                <div className="bg-secondary rounded py-4 px-3 absolute left-[45px] top-[-20px]">
+                  <MdPhoneAndroid
+                    fontSize="2.5rem"
+                    className="text-[#00ca99]"
+                  />
+                </div>
+                <div className="ml-24 sm:ml-20">
+                  <h3 className="my-2">Telefon</h3>
+                  <a
+                    href="tel:+387 555 333"
+                    className="text-[#00ca99] font-normal"
+                  >
+                    +387 555 333
+                  </a>
                 </div>
               </div>
-              <div className="mr-8 my-14">
-                <div className="border-4 border-[#f2f2f2] hover:border-inherit ease-in-out duration-300 hover:-translate-y-2 my-6 py-6 px-14 flex relative  justify-between rounded-xl">
-                  <div className="bg-secondary rounded py-4 px-3 absolute left-[45px] top-[-20px]">
-                    <HiMail fontSize="2.5rem" className="text-[#00ca99]" />
-                  </div>
-                  <div className="md:text-center ml-24  ">
-                    <h3 className="my-2">Tehnička Podrška</h3>
-                    <a
-                      href="mailto:hello@gmail.com"
-                      className="text-[#00ca99] font-normal"
-                    >
-                      hello@gmail.com
-                    </a>
-                  </div>
+            </div>
+            <div className="my-14">
+              <div className="border-4 border-[#f2f2f2] hover:border-inherit ease-in-out duration-300 hover:-translate-y-2 my-6 py-6 px-14 flex relative  justify-between rounded-xl">
+                <div className="bg-secondary rounded py-4 px-3 absolute left-[45px] top-[-20px]">
+                  <HiMail fontSize="2.5rem" className="text-[#00ca99]" />
+                </div>
+                <div className="ml-24 sm:ml-20">
+                  <h3 className="my-2">Email</h3>
+                  <a
+                    href="mailto:hello@gmail.com"
+                    className="text-[#00ca99] font-normal"
+                  >
+                    hello@gmail.com
+                  </a>
                 </div>
               </div>
-              <div className="mr-8 my-14">
-                <div className="border-4 border-[#f2f2f2] hover:border-inherit ease-in-out duration-300 hover:-translate-y-2 my-6 py-6 px-10 flex relative  justify-between rounded-xl">
-                  <div className="bg-secondary rounded py-4 px-3 absolute left-[45px] top-[-20px]">
-                    <HiLocationMarker
-                      fontSize="2.5rem"
-                      className="text-[#00ca99] font-normal"
-                    />
-                  </div>
-                  <div className="md:text-center ml-24">
-                    <h3 className="my-2">Lokacija</h3>
-                    <p className="text-[#00ca99]">Ulica Ive Andrića BB</p>
-                  </div>
+            </div>
+            <div className="my-14">
+              <div className="border-4 border-[#f2f2f2] hover:border-inherit ease-in-out duration-300 hover:-translate-y-2 my-6 py-6 px-10 flex relative  justify-between rounded-xl">
+                <div className="bg-secondary rounded py-4 px-3 absolute left-[45px] top-[-20px]">
+                  <HiLocationMarker
+                    fontSize="2.5rem"
+                    className="text-[#00ca99] font-normal"
+                  />
+                </div>
+                <div className="ml-24 sm:ml-20">
+                  <h3 className="my-2">Lokacija</h3>
+                  <p className="text-[#00ca99]">Ulica Ive Andrića BB</p>
                 </div>
               </div>
-            </address>
-          </section>
-          <section className="w-[50%]  lg:w-full">
+            </div>
+          </address>
+          <section className="w-1/2 lg:w-full">
             <form
               ref={form}
               onSubmit={sendEmail}
-              className="z-10 flex flex-col outline-0 py-15  bg-white text-black rounded-lg md:mt-12"
+              className="z-10 flex flex-col outline-0 py-15  bg-white text-black rounded-lg md:mt-0"
             >
               <div className="my-6">
                 <label htmlFor="name_id" className="font-medium text-black">

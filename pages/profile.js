@@ -43,13 +43,14 @@ export default function Profile({ loggedIn }) {
   const [image, setImage] = useState(currentUser.photoURL);
   const router = useRouter();
   const [page, setPage] = useState("page1");
-  const [savedJobID, setSavedJobsID] = useState([]);
+  const [savedJobsID, setSavedJobsID] = useState([]);
+  // const [sacuvaniPoslovi, setSacuvaniPoslovi] = useState([]);
 
   const myPages = () => {
     if (page === "page1") {
       return <Page1 />;
     } else if (page === "page2") {
-      return <Page2 savedJobID={savedJobID} />;
+      return <Page2 savedJobsID={savedJobsID} />;
     } else if (page === "page4") {
       return <Page4 />;
     }
@@ -98,45 +99,12 @@ export default function Profile({ loggedIn }) {
     querySnapshot.forEach((doc) => {
       userSavedJobs.push(...doc.data().savedJobs);
     });
-
     setSavedJobsID(userSavedJobs);
   };
-
-  // const getUserData = async () => {
-  //   const jobovi = [];
-  //   const jobsRef = collection(db, "jobs");
-
-  //   const api = query(jobsRef, where("creatorID", "==", uid));
-
-  //   const querySnapshot = await getDocs(api);
-
-  //   querySnapshot.forEach((doc, index) => {
-  //     jobovi.push({ ...doc.data() });
-  //   });
-
-  //   setUsersJobs(jobovi);
-  // };
-  // console.log("Ovo mi treba", usersJobs);
-
-  // const updateProfilePhoto = async () => {
-  //   let filedtoedit = query(
-  //     doc(db, "jobs"),
-  //     where("creatorID", "==", uid)
-  //   );
-  //   // querySnapshot.forEach((doc, index) => {
-  //   updateDoc(filedtoedit, {
-  //     photo: image,
-  //   }).catch((error) => console.log(error));
-  //   // });
-  // };
-
-  // useEffect(() => {
-  //   updateProfilePhoto();
-  // }, [image]);
+  console.log("Profil", savedJobsID);
 
   useEffect(() => {
     getUserSaved();
-    // getUserData();
   }, []);
 
   let src = image ? image : userIcon.src;
@@ -156,8 +124,8 @@ export default function Profile({ loggedIn }) {
       ) : (
         <div className="container lg:px-8 sm:p-4">
           <Navbar loggedIn={!!loggedIn} />
-          <main className="flex justify-between lg:flex-wrap mt-2">
-            <div className="w-1/5 bg-secondary lg:w-full my-8 mr-8 block rounded-3xl">
+          <main className="flex justify-between my-12  lg:flex-wrap">
+            <div className="w-1/5 bg-secondary lg:w-full mr-8 block rounded-3xl">
               <div className=" h-full p-[30px]  lg:flex lg:items-center sm:block">
                 <div className="flex items-center justify-center">
                   <FaUserAlt className="text-primary mr-2" />
@@ -233,7 +201,7 @@ export default function Profile({ loggedIn }) {
                 </div>
               </div>
             </div>
-            <section className="w-3/4 p-8 bg-[#f5f7f9] rounded-xl my-4 lg:w-full">
+            <section className="w-3/4 p-8 bg-[#f5f7f9] rounded-xl lg:w-full">
               <div className="h-full bg-white rounded-xl border border-white">
                 {myPages()}
               </div>

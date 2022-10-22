@@ -9,8 +9,6 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import { useForm } from "react-hook-form";
 
 export default function LogIn({ loggedIn }) {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
   const {
     register,
     handleSubmit,

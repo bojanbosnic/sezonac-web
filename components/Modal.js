@@ -119,7 +119,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
     <div className="z-20 fixed w-full h-full top-0 left-0 bg-black">
       <div className="z-40 w-full absolute top-0 left-0 min-h-full min-w-full p-6">
         {poslovi.map((job) => (
-          <div className="rounded border bg-primary overflow-y-auto snap-y h-[90vh]">
+          <div className="rounded border bg-white overflow-y-auto snap-y h-[90vh]">
             <div className="padding-wrapp px-4 my-8">
               <div className="flex justify-between flex-wrap">
                 <div>
@@ -130,10 +130,8 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                     <span>Osnovne informacije</span>
                   </div>
                   <div className="flex flex-col">
-                    <div className=" relative flex items-center  my-8 sm:justify-center md:flex-wrap p-4 ">
-                      <div className="w-32 h-32">
-                        <img src={job.photo} alt="company photo" />
-                      </div>
+                    <div className="relative w-48 h-48 flex items-center  my-8 sm:justify-center md:flex-wrap p-4 ">
+                      <img src={job.photo} alt="company photo" />
                     </div>
                     <div className="flex items-center">
                       <h3 className="m-0">Kompanija:</h3>
@@ -221,7 +219,6 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                     </div>
                   </div>
                 </div>
-                {/* ///ovde */}
                 <div>
                   <div className="flex items-center my-2">
                     <span className="mr-2">
@@ -229,151 +226,75 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                     </span>
                     <span>Detaljne informacije</span>
                   </div>
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center my-2"></div>
-                <div className="flex ml-6 my-8">
-                  <div
-                    className="relative overflow-hidden border border-white w-[20%] lg:w-[50%]"
-                    style={{
-                      background:
-                        "linear-gradient(to bottom, transparent 50%, #00214A 50%)",
-                    }}
-                  >
-                    <div className="text-center py-3">
-                      <span>Lokacija</span>
-                    </div>
-                    <div className="absolute h-full w-full  text-center py-3 font-medium bg-white text-primary">
-                      {isUpdate ? (
-                        <>
-                          <input
-                            onChange={(e) =>
-                              setUpdateJobs({
-                                ...updateJobs,
-                                city: e.target.value,
-                              })
-                            }
-                            className="text-black border-2 px-2 border-gray-400"
-                            type={"text"}
-                            placeholder="type text..."
-                            defaultValue={updateJobs.city}
-                          />
-                        </>
-                      ) : (
-                        <span>{job.city}</span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="border mx-8 border-white w-[20%] lg:w-[50%]">
-                    <div className="text-center py-3">
-                      <span>Satnica</span>
-                    </div>
-                    <div className="text-center py-3 font-medium bg-white text-primary">
-                      {isUpdate ? (
-                        <>
-                          <input
-                            onChange={(e) =>
-                              setUpdateJobs({
-                                ...updateJobs,
-                                money: e.target.value,
-                              })
-                            }
-                            className="text-black border-2 px-2 border-gray-400"
-                            type={"text"}
-                            placeholder="type text..."
-                            defaultValue={updateJobs.money}
-                          />
-                        </>
-                      ) : (
-                        <span>{job.money}</span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div className="ml-6 my-8">
-                  <div className="flex justify-between border border-white w-[50%] md:w-full">
-                    <div className="text-center py-1">
-                      <span className="mx-2">Radno vrijeme</span>
-                    </div>
-                    <div className="text-center py-1  bg-white text-primary ">
-                      {isUpdate ? (
-                        <>
-                          <input
-                            onChange={(e) =>
-                              setUpdateJobs({
-                                ...updateJobs,
-                                time: e.target.value,
-                              })
-                            }
-                            className="text-black border-2 px-2 border-gray-400"
-                            type={"text"}
-                            placeholder="type text..."
-                            defaultValue={updateJobs.time}
-                          />
-                        </>
-                      ) : (
-                        <span className="mx-2 font-medium">{job.time}</span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex justify-between border my-4 border-white w-[50%] md:w-full">
-                    <div className="text-center py-1">
-                      <span className="mx-2">Rok trajanja</span>
-                    </div>
-                    <div className="text-center py-1 bg-white text-primary">
-                      {isUpdate ? (
-                        <>
-                          <input
-                            onChange={(e) =>
-                              setUpdateJobs({
-                                ...updateJobs,
-                                duration: e.target.value,
-                              })
-                            }
-                            className="text-black border-2 px-2 border-gray-400"
-                            type={"text"}
-                            placeholder="type text..."
-                            defaultValue={updateJobs.duration}
-                          />
-                        </>
-                      ) : (
-                        <span className="mx-2 font-medium">{job.duration}</span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center my-2">
-                  <span className="mr-2">
-                    <MdOutlineDescription />
-                  </span>
-                  <span>Detaljni opis</span>
-                </div>
-                <div className="flex justify-between items-center ml-6 my-8">
-                  <div className="w-[80%] border border-white p-6">
+                  <div className="flex items-center">
+                    <h3>Lokacija:</h3>
                     {isUpdate ? (
                       <>
                         <input
                           onChange={(e) =>
                             setUpdateJobs({
                               ...updateJobs,
-                              info: e.target.value,
+                              location: e.target.value,
                             })
                           }
                           className="text-black border-2 px-2 border-gray-400"
                           type={"text"}
                           placeholder="type text..."
-                          defaultValue={updateJobs.info}
+                          defaultValue={updateJobs.location}
                         />
                       </>
                     ) : (
-                      <p>{job.info}</p>
+                      <span>{job.location}</span>
                     )}
                   </div>
+                  <div className="flex items-center">
+                    <h3 className="m-0">Satnica: </h3>
+                    {isUpdate ? (
+                      <>
+                        <input
+                          onChange={(e) =>
+                            setUpdateJobs({
+                              ...updateJobs,
+                              money: e.target.value,
+                            })
+                          }
+                          className="text-black border-2 px-2 border-gray-400"
+                          type={"text"}
+                          placeholder="type text..."
+                          defaultValue={updateJobs.money}
+                        />
+                      </>
+                    ) : (
+                      <span>{job.money}</span>
+                    )}
+                  </div>
+                  <div className="flex items-center ">
+                    <h3 className="m-0">Radno vrijeme: </h3>
+                    {isUpdate ? (
+                      <>
+                        <input
+                          onChange={(e) =>
+                            setUpdateJobs({
+                              ...updateJobs,
+                              workDuration: e.target.value,
+                            })
+                          }
+                          className="text-black border-2 px-2 border-gray-400"
+                          type={"text"}
+                          placeholder="type text..."
+                          defaultValue={updateJobs.workDuration}
+                        />
+                      </>
+                    ) : (
+                      <span className="mx-2 font-medium">
+                        {job.workDuration}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="flex justify-between items-center ml-6 my-8">
                   {isUpdating &&
                     privateUpdate(
                       job.jobID,

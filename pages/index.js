@@ -6,14 +6,14 @@ import styles from "../styles/home.module.css";
 import { FiLogIn } from "react-icons/fi";
 import picture from "../assets/ilustrations/right-pic-2.jpg";
 import { useEffect } from "react";
-
+import classNames from "classnames";
 const Home = ({ loggedIn }) => {
   return (
     <>
-      <div className={styles.wrapper}>
+      <div className={classNames(`${styles.wrapper} relative h-screen lg:h-full z-2`)}>
         <div className="container mx-auto sm:px-8">
           <Navbar loggedIn={loggedIn} />
-          <main className="flex items-center lg:flex-wrap z-20 mt-20  justify-between  ">
+          <main className="flex items-center lg:flex-wrap z-20 mt-20  justify-between">
             <div className="w-3/5 text-left lg:w-full lg:mb-8">
               <div>
                 <h1 className="leading-normal sm:text-4xl">
@@ -74,7 +74,7 @@ const Home = ({ loggedIn }) => {
                 )}
               </div>
             </div>
-            <div  className={styles.initialImage}>
+            <div className={classNames(`${styles.initialImage} lg:hidden`)}>
               <Image
                 layout="responsive"
                 className={styles.initialImage}

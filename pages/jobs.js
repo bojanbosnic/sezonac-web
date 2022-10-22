@@ -30,6 +30,8 @@ const Jobs = ({ loggedIn }) => {
     );
   };
 
+  console.log("Global Jobs", globalJobs);
+
   useEffect(() => {
     getUserData();
   }, []);

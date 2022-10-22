@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import Modal from "../Modal";
 import OwnJob from "../OwnJob";
 import LoadingSpinner from "../LoadingSpinner";
+import { MdLocationOn } from "react-icons/md";
 
 import { collectionGroup } from "firebase/firestore";
 
@@ -43,7 +44,12 @@ const Interface = () => {
     setFireData(jobovi);
   };
 
-
+  const deleteDocument = (id) => {
+    let fieldToDelete = doc(db, `/jobs`, id);
+    deleteDoc(fieldToDelete)
+      .then(() => getUserData())
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
     getUserData();
@@ -56,17 +62,19 @@ const Interface = () => {
       <hr />
       <div className="px-6">
         {fireData.map((jobs) => (
-          <div className="flex items-center relative">
+          <div className="flex items-center  relative">
             <div
               onClick={() => {
                 setJobsForModal(jobs), setShowModal(true);
               }}
-              className="border rounded-3xl bg-secondary text-black w-full flex items-center my-8 px-6 sm:p-0"
+              className="border cursor-pointer rounded-3xl bg-secondary text-black w-full flex items-center my-8 px-6 sm:p-0"
             >
               <div className="w-full flex m-8 items-center justify-between sm:flex-wrap sm:m-4 sm:px-4">
-                <span className="mx-4 font-medium">{jobs.title}</span>
-                <span className="mx-4 flex items-center sm:flex-wrap">
-                  <span className="font-medium mx-2">{jobs.jobID}</span>
+                <span className="mx-2 font-medium">{jobs.title}</span>
+                <span className="mx-2 flex items-center sm:flex-wrap">
+                  <MdLocationOn />
+
+                  <span className="font-medium mx-2">{jobs.location}</span>
                 </span>
               </div>
             </div>
@@ -88,4 +96,3 @@ const Interface = () => {
 };
 
 export default Interface;
-

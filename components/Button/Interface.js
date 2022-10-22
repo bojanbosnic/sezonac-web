@@ -14,7 +14,7 @@ function Button({
   return (
     <button
       className={classnames(
-        `${bgColor} ${textColor} ${paddingY} ${paddingX} ${marginRight} flex items-center font-medium border-2 rounded-lg mr-8 text-sm sm:w-full`
+        `${bgColor} ${textColor} ${paddingY} ${paddingX} ${marginRight} flex items-center font-medium border-2 rounded-lg text-sm sm:w-full`
       )}
     >
       {icon}

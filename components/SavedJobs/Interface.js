@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useTransition } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { MdLocationOn } from "react-icons/md";
@@ -8,17 +8,16 @@ import {
   getDocs,
   collection,
   deleteDoc,
-  doc,
   query,
   where,
-  getDoc,
-  collectionGroup,
+  doc,
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import Modal from "../Modal";
 
-const Interface = ({ savedJobID }) => {
-  // const [showModal, setShowModal] = useState(false);
+const Interface = ({ savedJobsID }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [jobsForModal, setJobsForModal] = useState([]);
   const { currentUser } = useContext(AuthContext);
   const { uid } = currentUser;
   const [sacuvaniPoslovi, setSacuvaniPoslovi] = useState([]);
@@ -37,8 +36,7 @@ const Interface = ({ savedJobID }) => {
   const getSavedJobs = () => {
     const finallySavedjobs = [];
     const jobsRef = collection(db, "/jobs");
-    savedJobID.map(async (data) => {
-      console.log("Saved Datas!", data);
+    savedJobsID.map(async (data) => {
       const b = query(jobsRef, where("jobID", "==", data.jobsID));
       console.log("Filtirirani saved jobs", b);
       const queryJobs = await getDocs(b);
@@ -50,12 +48,28 @@ const Interface = ({ savedJobID }) => {
     });
   };
 
+  // const removeDocument = async(id) => {
+  //   console.log("trebalo bih", id);
+
+  //   const userSavedJobs = [];
+  //   const usersRef = collection(db, "/users");
+  //   const q = query(usersRef, where("userID", "==", uid));
+  //   const querySnapshot = await getDocs(q);
+
+  //   querySnapshot.forEach((doc) => {
+  //     userSavedJobs.push(...doc.data().savedJobs);
+  //   });
+  //   // let fieldToDelete = doc(db, `/users`, id);
+  //   // deleteDoc(fieldToDelete)
+  //   //   .then(() => getUserData())
+  //   //   .catch((error) => console.log(error));
+  //   // console.log("REMOVE FUNCTION");
+  // };
+
+  console.log("Sacuvani poslovi: ", savedJobsID);
   useEffect(() => {
     getSavedJobs();
   }, []);
-
-  console.log("Savedjobs id: ", savedJobID);
-  console.log("Sacuvani poslovi: ", sacuvaniPoslovi);
 
   return (
     <div className="relative">
@@ -66,52 +80,44 @@ const Interface = ({ savedJobID }) => {
           <div className="flex items-center relative ">
             <div
               onClick={() => {
-                setSavedDatas(datas), setShowModal(true);
+                setJobsForModal(datas), setShowModal(true);
               }}
-              className="border rounded-3xl bg-secondary text-black w-full flex items-center my-8 px-4 sm:p-0"
+              className="border cursor-pointer rounded-3xl bg-secondary text-black w-full flex items-center my-8 px-4 sm:p-0"
             >
               <div className="mx-8 w-full flex items-center justify-between sm:my-2">
-                <div className="flex flex-col items-center">
-                  <div className="border w-24 h-24 mx-8 sm:mx-8 sm:w-12 sm:h-12">
-                    <img src={datas.photo} />
+                <div className="flex  items-center">
+                  <div className="border p-4  w-24 h-24 sm:mx-8 sm:w-12 sm:h-12">
+                    <img className="rounded-3xl" src={datas.photo} />
                   </div>
+                  <span className="mx-4 font-semibold">{datas.title}</span>
                 </div>
                 <div className="flex items-center sm:flex-wrap">
-                  <span className="mx-4 font-semibold">{datas.title}</span>
                   <div className="flex items-center justify-center">
                     <span className="mx-4 flex items-center sm:flex-wrap">
                       <MdLocationOn />
-                      <span className="ml-2">{datas.profileid}</span>
+                      <span className="ml-2">{datas.location}</span>
                     </span>
                   </div>
                 </div>
               </div>
             </div>
             <button
-              onClick={() => removeDocument(datas.id)}
-              className="ml-4 sm:hidden"
+              onClick={() => removeDocument(datas.jobID)}
+              className="ml-4"
             >
               <RiDeleteBin2Line fontSize="2rem" />
             </button>
           </div>
         ))}
       </div>
-      {/* <Modal
+      <Modal
         getUserData={getUserData}
-        jobss={savedDatas}
+        jobsForModal={jobsForModal}
         show={showModal}
         onClose={() => setShowModal(false)}
-      /> */}
+      />
     </div>
   );
 };
 
 export default Interface;
-
-// const removeDocument = (id) => {
-//   let fieldToDelete = doc(db, `/SavedJobs${currentUser.uid}`, id);
-//   deleteDoc(fieldToDelete)
-//     .then(() => getUserData())
-//     .catch((error) => console.log(error));
-//   console.log("REMOVE FUNCTION");
-// };

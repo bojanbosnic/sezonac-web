@@ -4,13 +4,14 @@ import { db } from "../../firebase";
 import { AuthContext } from "../../Context/AuthContext";
 import { setDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { BsBookmark, BsBookmarkFill, BsJournalBookmark } from "react-icons/bs";
+import { MdDomain } from "react-icons/md";
 
 const Card = (props) => {
   const { id, title, money, city, profileID, loggedIn, photo, website } = props;
   const [isDisabled, setIsDisabled] = useState(false);
   const { currentUser } = useContext(AuthContext);
   const { uid } = currentUser;
-
+  // console.log("Is Saved from server side:", isSaved);
   const saveJob = async () => {
     if (loggedIn) {
       const jobsRef = doc(db, `users`, `${uid}`);
@@ -18,13 +19,15 @@ const Card = (props) => {
         savedJobs: arrayUnion({
           jobsID: id,
           profileid: profileID,
+          isSaved: isSaved,
         }),
       });
       setIsDisabled(true);
     } else {
-      alert("Napravi nalog!!");
+      console.log("Napravi nalog!!");
     }
   };
+
   const btnsFunciton = () => {
     if (!loggedIn) {
       return (
@@ -47,7 +50,7 @@ const Card = (props) => {
           disabled={isDisabled}
           style={{ color: "black" }}
         >
-          Own Job
+          own job
         </button>
       );
     } else {
@@ -77,7 +80,7 @@ const Card = (props) => {
 
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex justify-between cursor-pointer">
         <div className="flex items-center">
           <div
             style={{
