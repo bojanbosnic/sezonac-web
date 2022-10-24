@@ -7,7 +7,8 @@ import { useContext } from "react";
 import {
   getDocs,
   collection,
-  deleteDoc,
+  updateDoc,
+  arrayRemove,
   query,
   where,
   doc,
@@ -38,7 +39,6 @@ const Interface = ({ savedJobsID }) => {
     const jobsRef = collection(db, "/jobs");
     savedJobsID.map(async (data) => {
       const b = query(jobsRef, where("jobID", "==", data.jobsID));
-      console.log("Filtirirani saved jobs", b);
       const queryJobs = await getDocs(b);
 
       queryJobs.forEach((queriedJob) => {
@@ -48,25 +48,21 @@ const Interface = ({ savedJobsID }) => {
     });
   };
 
-  // const removeDocument = async(id) => {
-  //   console.log("trebalo bih", id);
+  console.log(sacuvaniPoslovi);
 
-  //   const userSavedJobs = [];
-  //   const usersRef = collection(db, "/users");
-  //   const q = query(usersRef, where("userID", "==", uid));
-  //   const querySnapshot = await getDocs(q);
+  const removeDocument = async (id, profileID) => {
+    console.log("trebalo bih", id, profileID);
+    const jobsRef = doc(db, "/users", uid);
+    const proba = await updateDoc(jobsRef, {
+      savedJobs: arrayRemove({
+        jobsID: id,
+        profileid: profileID,
+        isSaved: false,
+      }),
+    });
+    getUserData();
+  };
 
-  //   querySnapshot.forEach((doc) => {
-  //     userSavedJobs.push(...doc.data().savedJobs);
-  //   });
-  //   // let fieldToDelete = doc(db, `/users`, id);
-  //   // deleteDoc(fieldToDelete)
-  //   //   .then(() => getUserData())
-  //   //   .catch((error) => console.log(error));
-  //   // console.log("REMOVE FUNCTION");
-  // };
-
-  console.log("Sacuvani poslovi: ", savedJobsID);
   useEffect(() => {
     getSavedJobs();
   }, []);
@@ -84,7 +80,7 @@ const Interface = ({ savedJobsID }) => {
               }}
               className="border cursor-pointer rounded-3xl bg-secondary text-black w-full flex items-center my-8 px-4 sm:p-0"
             >
-              <div className="mx-8 w-full flex items-center justify-between sm:my-2">
+              <div className="mx-8 w-full flex items-center justify-between md:flex-wrap sm:my-2">
                 <div className="flex  items-center">
                   <div className="border p-4  w-24 h-24 sm:mx-8 sm:w-12 sm:h-12">
                     <img className="rounded-3xl" src={datas.photo} />
@@ -102,7 +98,7 @@ const Interface = ({ savedJobsID }) => {
               </div>
             </div>
             <button
-              onClick={() => removeDocument(datas.jobID)}
+              onClick={() => removeDocument(datas.jobID, datas.creatorID)}
               className="ml-4"
             >
               <RiDeleteBin2Line fontSize="2rem" />

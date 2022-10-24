@@ -9,6 +9,7 @@ import styles from "./styles.module.css";
 import Button from "../../components/Button";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext";
+import { FaHome } from "react-icons/fa";
 
 const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
   const { currentUser } = useContext(AuthContext);
@@ -44,7 +45,9 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
             <>
               <li>
                 <Link href="/profile">
-                  <a>Profil</a>
+                  <a>
+                    <FaHome fontSize="1.5rem" />
+                  </a>
                 </Link>
               </li>
             </>

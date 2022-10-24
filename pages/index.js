@@ -10,8 +10,8 @@ import classNames from "classnames";
 const Home = ({ loggedIn }) => {
   return (
     <>
-      <div className={classNames(`${styles.wrapper} relative h-screen lg:h-full z-2`)}>
-        <div className="container mx-auto sm:px-8">
+      <div >
+        <div  className={classNames(`${styles.wrapper} container mx-auto sm:px-8 relative h-screen lg:h-full z-2`)}>
           <Navbar loggedIn={loggedIn} />
           <main className="flex items-center lg:flex-wrap z-20 mt-20  justify-between">
             <div className="w-3/5 text-left lg:w-full lg:mb-8">

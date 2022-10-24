@@ -4,7 +4,7 @@ import Image from "next/image";
 import ReactDOM from "react-dom";
 import { AiOutlineInfoCircle, AiOutlineCloseSquare } from "react-icons/ai";
 import { BiData, BiUserCircle } from "react-icons/bi";
-import { MdOutlineDescription } from "react-icons/md";
+import { IoIosSave } from "react-icons/io";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
@@ -117,9 +117,9 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
 
   const modalContent = show ? (
     <div className="z-20 fixed w-full h-full top-0 left-0 bg-black">
-      <div className="z-40 w-full absolute top-0 left-0 min-h-full min-w-full p-6">
+      <div className="z-40 w-[80%] absolute inset-2/4 -translate-y-2/4 -translate-x-2/4 min-h-full min-w-4/5 p-20">
         {poslovi.map((job) => (
-          <div className="rounded border bg-white overflow-y-auto snap-y h-[90vh]">
+          <div className="rounded border bg-white overflow-y-auto snap-y h-[80vh]">
             <div className="padding-wrapp px-4 my-8">
               <div className="flex justify-between flex-wrap">
                 <div>

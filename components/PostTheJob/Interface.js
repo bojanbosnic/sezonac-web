@@ -69,7 +69,7 @@ const Interface = () => {
       <h1 className="text-xl font-medium mx-6">Objavite Posao</h1>
       <hr />
       <div className="px-6">
-        <div className="my-8 grid grid-cols-2 gap-4">
+        <div className="my-8 grid grid-cols-2 gap-4 md:grid-cols-1">
           <PostJobInput
             jobName="Naslov Posla"
             placeHolder="Barmen"
@@ -90,7 +90,7 @@ const Interface = () => {
           />
         </div>
 
-        <div className="my-8 grid grid-cols-2 gap-4">
+        <div className="my-8 grid grid-cols-2 gap-4 md:grid-cols-1">
           <PostJobInput
             jobName="Satnica"
             placeHolder="5"
@@ -110,7 +110,7 @@ const Interface = () => {
             handleJobFun={(e) => handleJob("workDuration", e.target.value)}
           />
         </div>
-        <div className="my-8 grid grid-cols-2 gap-4">
+        <div className="my-8 grid grid-cols-2 gap-4 md:grid-cols-1">
           <PostJobInput
             jobName="Website"
             placeHolder="www.hotelexamle.com"

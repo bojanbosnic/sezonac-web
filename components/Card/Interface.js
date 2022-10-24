@@ -4,14 +4,17 @@ import { db } from "../../firebase";
 import { AuthContext } from "../../Context/AuthContext";
 import { setDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { BsBookmark, BsBookmarkFill, BsJournalBookmark } from "react-icons/bs";
-import { MdDomain } from "react-icons/md";
+import { TbDeviceFloppy } from "react-icons/tb";
+import { RiBankFill } from "react-icons/ri";
+import { IoIosSave } from "react-icons/io";
 
 const Card = (props) => {
   const { id, title, money, city, profileID, loggedIn, photo, website } = props;
   const [isDisabled, setIsDisabled] = useState(false);
   const { currentUser } = useContext(AuthContext);
   const { uid } = currentUser;
-  // console.log("Is Saved from server side:", isSaved);
+  // console.log("Is Saved from server side:", isDisabled);
+
   const saveJob = async () => {
     if (loggedIn) {
       const jobsRef = doc(db, `users`, `${uid}`);
@@ -19,7 +22,7 @@ const Card = (props) => {
         savedJobs: arrayUnion({
           jobsID: id,
           profileid: profileID,
-          isSaved: isSaved,
+          isSaved: false,
         }),
       });
       setIsDisabled(true);
@@ -37,7 +40,10 @@ const Card = (props) => {
             disabled={isDisabled}
             className="ml-2"
           >
-            <BsBookmark className="text-xl" style={{ color: "red" }} />
+            <TbDeviceFloppy
+              className="text-3xl cursor-not-allowed"
+              style={{ color: "red" }}
+            />
           </button>
         </>
       );
@@ -48,9 +54,9 @@ const Card = (props) => {
             e.stopPropagation();
           }}
           disabled={isDisabled}
-          style={{ color: "black" }}
+          className="text-black text-2xl cursor-default"
         >
-          own job
+          <RiBankFill />
         </button>
       );
     } else {
@@ -62,17 +68,7 @@ const Card = (props) => {
           }}
           disabled={isDisabled}
         >
-          {isDisabled ? (
-            <>
-              <BsBookmarkFill
-                disabled={isDisabled}
-                className="text-xl"
-                style={{ color: "#1967d2" }}
-              />
-            </>
-          ) : (
-            <BsBookmark className="text-xl" style={{ color: "#1967d2" }} />
-          )}
+          <IoIosSave disabled={isDisabled} className="text-2xl text-black" />
         </button>
       );
     }
@@ -80,7 +76,7 @@ const Card = (props) => {
 
   return (
     <>
-      <div className="flex justify-between cursor-pointer">
+      <div className="flex justify-between">
         <div className="flex items-center">
           <div
             style={{
@@ -94,13 +90,12 @@ const Card = (props) => {
           <div className="flex flex-col ml-4">
             <h3 className="m-0">{title}</h3>
             <div className="flex items-center mt-2">
-              <HiOutlineLocationMarker className="text-[#00ca99]" />
-              <p className="text-[#00ca99] ml-2">{city}</p>
+              <HiOutlineLocationMarker className="text-green" />
+              <p className="text-green ml-2">{city}</p>
             </div>
           </div>
         </div>
-
-        <div className=" z-10">{btnsFunciton()}</div>
+        <div className="z-10">{btnsFunciton()}</div>
       </div>
       <div className="mt-12">
         <div className="flex items-center justify-between">

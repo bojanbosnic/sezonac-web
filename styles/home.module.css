@@ -1,21 +1,16 @@
-.wrapper::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
+.wrapper {
   background-image: url("../assets/ilustrations/bg1.jpg");
+  min-height: 100vh;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
-  background-position: top center;
 }
 
 .initialImage {
   width: 480px;
   height: 480px;
   border-radius: 50%;
-
 }
 
 .card_hover {

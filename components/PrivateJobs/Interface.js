@@ -73,7 +73,6 @@ const Interface = () => {
                 <span className="mx-2 font-medium">{jobs.title}</span>
                 <span className="mx-2 flex items-center sm:flex-wrap">
                   <MdLocationOn />
-
                   <span className="font-medium mx-2">{jobs.location}</span>
                 </span>
               </div>

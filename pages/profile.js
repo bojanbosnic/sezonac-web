@@ -30,10 +30,6 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
-import { async } from "@firebase/util";
-
-// const token =
-//   typeof window !== "undefined" ? localStorage.getItem("Token") : null;
 
 export default function Profile({ loggedIn }) {
   const { currentUser } = useContext(AuthContext);
@@ -44,7 +40,6 @@ export default function Profile({ loggedIn }) {
   const router = useRouter();
   const [page, setPage] = useState("page1");
   const [savedJobsID, setSavedJobsID] = useState([]);
-  // const [sacuvaniPoslovi, setSacuvaniPoslovi] = useState([]);
 
   const myPages = () => {
     if (page === "page1") {
@@ -75,6 +70,7 @@ export default function Profile({ loggedIn }) {
         "create object url: ",
         URL.createObjectURL(e.target.files[0])
       );
+
       setImage(URL.createObjectURL(e.target.files[0]));
 
       console.log("slika: ", e.target.files);
@@ -101,7 +97,8 @@ export default function Profile({ loggedIn }) {
     });
     setSavedJobsID(userSavedJobs);
   };
-  console.log("Profil", savedJobsID);
+
+  console.log("Ovo", savedJobsID);
 
   useEffect(() => {
     getUserSaved();
@@ -125,15 +122,15 @@ export default function Profile({ loggedIn }) {
         <div className="container lg:px-8 sm:p-4">
           <Navbar loggedIn={!!loggedIn} />
           <main className="flex justify-between my-12  lg:flex-wrap">
-            <div className="w-1/5 bg-secondary lg:w-full mr-8 block rounded-3xl">
-              <div className=" h-full p-[30px]  lg:flex lg:items-center sm:block">
+            <div className="w-1/5 bg-secondary  lg:w-full mr-8 block rounded-3xl lg:mr-0 lg:mb-8">
+              <div className=" h-full p-[30px] lg:flex lg:justify-around  lg:items-center md:justify-center sm:block">
+                <div>
                 <div className="flex items-center justify-center">
                   <FaUserAlt className="text-primary mr-2" />
                   <h3 className="m-0">{currentUser.displayName}</h3>
                 </div>
-                <div>
-                  <div className="flex realtive  border border-white mt-8 p-4 rounded-xl   lg:py-14">
-                    <div className="text-center overflow-hidden">
+                  <div className="flex justify-center lg:w-[350px] md:w-full realtive border border-white mt-8 p-4 rounded-xl lg:py-12">
+                    <div className="text-center lg:w-[80%]  overflow-hidden">
                       <Image
                         loader={() => src}
                         src={src}
