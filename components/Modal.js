@@ -8,6 +8,8 @@ import { IoIosSave } from "react-icons/io";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
+import classNames from "classnames";
+import styles from "../styles/home.module.css";
 
 const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
   const [isBrowser, setIsBrowser] = useState(false);
@@ -116,25 +118,31 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
   }, []);
 
   const modalContent = show ? (
-    <div className="z-20 fixed w-full h-full top-0 left-0 bg-black">
+    <div className="z-20 fixed w-full h-full top-0 left-0 bg-[#000000f7]">
       <div className="z-40 w-[80%] absolute inset-2/4 -translate-y-2/4 -translate-x-2/4 min-h-full min-w-4/5 p-20">
         {poslovi.map((job) => (
-          <div className="rounded border bg-white overflow-y-auto snap-y h-[80vh]">
+          <div className="rounded bg-white overflow-y-auto snap-y h-[80vh]">
             <div className="padding-wrapp px-4 my-8">
-              <div className="flex justify-between flex-wrap">
-                <div>
-                  <div className="flex items-center my-2">
-                    <span className="mr-2">
-                      <AiOutlineInfoCircle />
-                    </span>
-                    <span>Osnovne informacije</span>
-                  </div>
-                  <div className="flex flex-col">
-                    <div className="relative w-48 h-48 flex items-center  my-8 sm:justify-center md:flex-wrap p-4 ">
-                      <img src={job.photo} alt="company photo" />
-                    </div>
-                    <div className="flex items-center">
-                      <h3 className="m-0">Kompanija:</h3>
+              <div className="grid-rows-1 flex items-center my-2">
+                <span className="mr-2">
+                  <BiData />
+                </span>
+                <span>Detaljne informacije</span>
+              </div>
+              <div className="relative grid-rows-1  w-48 h-48 flex items-center  my-8 sm:justify-center md:flex-wrap">
+                <img src={job.photo} alt="company photo" />
+              </div>
+              <div className="grid grid-cols-2 gap-12 md:grid-cols-1 ">
+                <div className="border-2 border-black">
+                  <div className="grid grid-cols-1 gap-4 flex flex-col">
+                    <div
+                      className={classNames(
+                        `${styles.linearGradient} flex justify-between items-center border-2 py-2 px-3 border-black rounded-3xl`
+                      )}
+                    >
+                      <div>
+                        <h3 className="m-0">Kompanija</h3>
+                      </div>
                       {isUpdate ? (
                         <>
                           <input
@@ -154,8 +162,14 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                         <span className="font-medium ml-4">{job.company}</span>
                       )}
                     </div>
-                    <div className="flex items-center">
-                      <h3 className="m-0">Zanimanje:</h3>
+                    <div
+                      className={classNames(
+                        `${styles.linearGradient} flex justify-between items-center border-2 py-2 px-3 border-black rounded-3xl`
+                      )}
+                    >
+                      <div>
+                        <h3 className="m-0">Zanimanje</h3>
+                      </div>
                       {isUpdate ? (
                         <>
                           <input
@@ -175,8 +189,14 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                         <span className="font-medium ml-4">{job.title}</span>
                       )}
                     </div>
-                    <div className="flex items-center">
-                      <h3 className="m-0">Email:</h3>
+                    <div
+                      className={classNames(
+                        `${styles.linearGradient} flex justify-between items-center border-2 py-2 px-3 border-black rounded-3xl`
+                      )}
+                    >
+                      <div>
+                        <h3 className="m-0">Email</h3>
+                      </div>
                       {isUpdate ? (
                         <>
                           <input
@@ -196,8 +216,14 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                         <span className="font-medium ml-4">{job.email}</span>
                       )}
                     </div>
-                    <div className="flex items-center">
-                      <h3 className="m-0">Website:</h3>
+                    <div
+                      className={classNames(
+                        `${styles.linearGradient} flex justify-between items-center border-2 py-2 px-3 border-black rounded-3xl`
+                      )}
+                    >
+                      <div>
+                        <h3 className="m-0">Website</h3>
+                      </div>
                       {isUpdate ? (
                         <>
                           <input
@@ -219,15 +245,15 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                     </div>
                   </div>
                 </div>
-                <div>
-                  <div className="flex items-center my-2">
-                    <span className="mr-2">
-                      <BiData />
-                    </span>
-                    <span>Detaljne informacije</span>
-                  </div>
-                  <div className="flex items-center">
-                    <h3>Lokacija:</h3>
+                <div className="grid grid-cols-1 gap-4 border-2 border-black">
+                  <div
+                    className={classNames(
+                      `${styles.linearGradient} flex justify-between items-center border-2 py-2 px-3 border-black rounded-3xl`
+                    )}
+                  >
+                    <div>
+                      <h3 className="m-0">Lokacija</h3>
+                    </div>
                     {isUpdate ? (
                       <>
                         <input
@@ -247,8 +273,14 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                       <span>{job.location}</span>
                     )}
                   </div>
-                  <div className="flex items-center">
-                    <h3 className="m-0">Satnica: </h3>
+                  <div
+                    className={classNames(
+                      `${styles.linearGradient} flex justify-between items-center border-2 py-2 px-3 border-black rounded-3xl`
+                    )}
+                  >
+                    <div>
+                      <h3 className="m-0">Satnica </h3>
+                    </div>
                     {isUpdate ? (
                       <>
                         <input
@@ -268,8 +300,14 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                       <span>{job.money}</span>
                     )}
                   </div>
-                  <div className="flex items-center ">
-                    <h3 className="m-0">Radno vrijeme: </h3>
+                  <div
+                    className={classNames(
+                      `${styles.linearGradient} flex justify-between items-center border-2 py-2 px-3 border-black rounded-3xl`
+                    )}
+                  >
+                    <div>
+                      <h3 className="m-0">Radno vrijeme</h3>
+                    </div>
                     {isUpdate ? (
                       <>
                         <input

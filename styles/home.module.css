@@ -21,3 +21,8 @@
   box-shadow: #00000029 0 10px 36px, #0000000f 0 0 0 1px;
   transform: translateY(-10px);
 }
+
+.linearGradient {
+  background-color: #013a6b;
+  background-image: -webkit-linear-gradient(0deg, #1967d2 50%, #fff 50%);
+}

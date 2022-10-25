@@ -1,19 +1,41 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { db } from "../../firebase";
 import { AuthContext } from "../../Context/AuthContext";
-import { setDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
-import { BsBookmark, BsBookmarkFill, BsJournalBookmark } from "react-icons/bs";
-import { TbDeviceFloppy } from "react-icons/tb";
+import {
+  setDoc,
+  doc,
+  updateDoc,
+  arrayUnion,
+  getDocs,
+  collection,
+  query,
+  where,
+} from "firebase/firestore";
 import { RiBankFill } from "react-icons/ri";
 import { IoIosSave } from "react-icons/io";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Card = (props) => {
-  const { id, title, money, city, profileID, loggedIn, photo, website } = props;
-  const [isDisabled, setIsDisabled] = useState(false);
+  const {
+    id,
+    title,
+    money,
+    city,
+    profileID,
+    loggedIn,
+    photo,
+    website,
+    getCorrect,
+    savedJobs1,
+  } = props;
   const { currentUser } = useContext(AuthContext);
+  const [isDisabled, setIsDisabled] = useState(false);
   const { uid } = currentUser;
-  // console.log("Is Saved from server side:", isDisabled);
+  console.log("Srbija", savedJobs1);
+  const [savedJobsID, setSavedJobsID] = useState([])
+  console.log("jebiga", savedJobsID)
 
   const saveJob = async () => {
     if (loggedIn) {
@@ -22,7 +44,7 @@ const Card = (props) => {
         savedJobs: arrayUnion({
           jobsID: id,
           profileid: profileID,
-          isSaved: false,
+          isSaved: true,
         }),
       });
       setIsDisabled(true);
@@ -30,6 +52,28 @@ const Card = (props) => {
       console.log("Napravi nalog!!");
     }
   };
+
+  const getUserSaved = async () => {
+    const userSavedJobs = [];
+    const usersRef = collection(db, "/users");
+    const q = query(usersRef, where("userID", "==", currentUser.uid));
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+      userSavedJobs.push(...doc.data().savedJobs);
+    });
+    setSavedJobsID(userSavedJobs);
+  };
+
+  const showToastMessage = () => {
+    toast.success("Success Notification !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
+  useEffect(() => {
+    getUserSaved();
+  }, []);
 
   const btnsFunciton = () => {
     if (!loggedIn) {
@@ -65,10 +109,16 @@ const Card = (props) => {
           onClick={(e) => {
             e.stopPropagation();
             saveJob();
+            getCorrect(profileID);
+            showToastMessage();
           }}
           disabled={isDisabled}
         >
-          <IoIosSave disabled={isDisabled} className="text-2xl text-black" />
+          {savedJobs1 ? (
+            <IoIosSave className="text-2xl text-primary" />
+          ) : (
+            <IoIosSave className="text-2xl text-black" />
+          )}
         </button>
       );
     }
@@ -76,7 +126,7 @@ const Card = (props) => {
 
   return (
     <>
-      <div className="flex justify-between">
+      <div className="relative flex justify-between">
         <div className="flex items-center">
           <div
             style={{

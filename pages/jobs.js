@@ -3,13 +3,14 @@ import Card from "../components/Card/Interface";
 import Navbar from "../components/Navbar";
 import styles from "../styles/home.module.css";
 import classNames from "classnames";
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, query, where, collection } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../Context/AuthContext";
 import { useContext } from "react";
 import { FiSearch } from "react-icons/fi";
 import Modal from "../components/Modal";
 import userIcon from "../assets/ilustrations/2.jpg";
+import { ToastContainer, toast } from "react-toastify";
 
 const token =
   typeof window !== "undefined" ? localStorage.getItem("Token") : null;
@@ -20,6 +21,8 @@ const Jobs = ({ loggedIn }) => {
   const [searchData, setSearchData] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [globalDatas, setGlobalDatas] = useState([]);
+  const [savedJobsID, setSavedJobsID] = useState([]);
+  const [savedJobs, setSavedJobs] = useState();
 
   const getUserData = async () => {
     await getDocs(collection(db, `/jobs`)).then((response) =>
@@ -31,15 +34,36 @@ const Jobs = ({ loggedIn }) => {
     );
   };
 
-  console.log("Smece", globalJobs)
+  const getUserSaved = async () => {
+    const userSavedJobs = [];
+    const usersRef = collection(db, "/users");
+    const q = query(usersRef, where("userID", "==", currentUser.uid));
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+      userSavedJobs.push(...doc.data().savedJobs);
+    });
+    setSavedJobsID(userSavedJobs);
+  };
+
+  const getSavedJobs = (creatorID) => {
+    console.log("return correct!", creatorID);
+    setSavedJobs(
+      savedJobsID
+        .filter((data) => data.profileid === creatorID)
+        .map((datas) => datas.isSaved)
+    );
+  };
 
   useEffect(() => {
     getUserData();
+    getUserSaved();
   }, []);
   return (
     <div className="container bg-[#f3f5f0] h-full min-h-screen sm:p-4">
       <Navbar loggedIn={!!token} />
       <main>
+        <ToastContainer />
         <div className="flex justify-center">
           <div className="p-8 rounded-2xl  border-rounded w-4/5">
             <div className="flex justify-center items-center">
@@ -80,10 +104,6 @@ const Jobs = ({ loggedIn }) => {
                     setShowModal(true);
                   }}
                 >
-                  {console.log(
-                    "Slika provjera;",
-                    datas
-                  )}
                   <Card
                     id={datas.jobID}
                     title={datas.title}
@@ -95,6 +115,8 @@ const Jobs = ({ loggedIn }) => {
                     loggedIn={loggedIn}
                     photo={datas.photo === null ? userIcon.src : datas.photo}
                     company={datas.company}
+                    getCorrect={getSavedJobs}
+                    savedJobs1={savedJobs}
                   />
                 </div>
               </>
@@ -111,5 +133,3 @@ const Jobs = ({ loggedIn }) => {
   );
 };
 export default Jobs;
-
-//shadow-xs shadow-[#3898e28d]
