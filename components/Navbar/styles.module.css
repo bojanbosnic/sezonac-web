@@ -1,21 +1,22 @@
 .spanAnimation::before {
   width: 28px;
   height: 3px;
-  background-color: #000;
   display: block;
   transition: 0.3s;
+  background-color: black;
 }
 .spanAnimation::after {
   width: 28px;
   height: 3px;
-  background-color: #000;
   display: block;
   transition: 0.3s;
+  background-color: black;
 }
 
 .spanAnimation::before {
   content: "";
   transform: translateY(-9px);
+  background-color: black;
 }
 
 .spanAnimation::after {
@@ -28,9 +29,11 @@
 }
 .togglerOpen span:before {
   transform: translateY(0px) rotate(45deg);
+  background-color: white;
 }
 .togglerOpen span:after {
   transform: translateY(-3px) rotate(-45deg);
+  background-color: white;
 }
 
 @media (max-width: 767px) {
@@ -40,7 +43,7 @@
     height: calc(100vh - 60px);
     left: 0;
     top: 60px;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.95);
     max-height: 0;
@@ -49,10 +52,10 @@
   }
 
   .siteNavbar ul li {
-    width: 100%;
     text-align: center;
     margin-top: 1rem;
     font-size: 2rem;
+    color: white;
   }
 
   .siteNavbar .open {

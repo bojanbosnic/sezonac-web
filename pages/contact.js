@@ -5,15 +5,30 @@ import { HiLocationMarker, HiMail } from "react-icons/hi";
 import { FaUserAlt } from "react-icons/fa";
 import { TbMessage2 } from "react-icons/tb";
 import emailjs from "@emailjs/browser";
+import { useForm } from "react-hook-form";
 
 const token =
   typeof window !== "undefined" ? localStorage.getItem("Token") : null;
 
 const ContactUs = () => {
   const form = useRef();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    setError,
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+  
+
   const sendEmail = (e) => {
     e.preventDefault();
-
+    console.log("EmailJS", emailjs);
     emailjs
       .sendForm(
         "service_zi6shac",

@@ -3,7 +3,15 @@ import Card from "../components/Card/Interface";
 import Navbar from "../components/Navbar";
 import styles from "../styles/home.module.css";
 import classNames from "classnames";
-import { getDocs, query, where, collection } from "firebase/firestore";
+import {
+  getDocs,
+  query,
+  where,
+  collection,
+  doc,
+  updateDoc,
+  arrayUnion,
+} from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../Context/AuthContext";
 import { useContext } from "react";
@@ -21,10 +29,8 @@ const Jobs = ({ loggedIn }) => {
   const [searchData, setSearchData] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [globalDatas, setGlobalDatas] = useState([]);
-  const [savedJobsID, setSavedJobsID] = useState([]);
-  const [savedJobs, setSavedJobs] = useState();
 
-  const getUserData = async () => {
+  const getGlobalDatas = async () => {
     await getDocs(collection(db, `/jobs`)).then((response) =>
       setGlobalJobs(
         response.docs.map((datas) => {
@@ -43,22 +49,62 @@ const Jobs = ({ loggedIn }) => {
     querySnapshot.forEach((doc) => {
       userSavedJobs.push(...doc.data().savedJobs);
     });
-    setSavedJobsID(userSavedJobs);
+
+    return userSavedJobs;
   };
 
-  const getSavedJobs = (creatorID) => {
-    console.log("return correct!", creatorID);
-    setSavedJobs(
-      savedJobsID
-        .filter((data) => data.profileid === creatorID)
-        .map((datas) => datas.isSaved)
-    );
+  const getSavedJobs = async () => {
+    const ovdeIduTatriposlaStoImas = await getUserSaved();
+
+    const finallySavedjobs = [];
+    const jobsRef = collection(db, "/jobs");
+    ovdeIduTatriposlaStoImas.map(async (data) => {
+      const b = query(jobsRef, where("jobID", "==", data.jobsID));
+      const queryJobs = await getDocs(b);
+
+      queryJobs.forEach((queriedJob) => {
+        finallySavedjobs.push({ ...queriedJob.data() });
+      });
+    });
+    return finallySavedjobs;
+  };
+
+  const getUserData = async () => {
+    const dzobsara = await getSavedJobs(); // vraca nam sacuvane poslove sa svim podacima: company, email, title, money, location itd.
+
+    await getDocs(collection(db, `/jobs`)).then((response) => {
+      const globalJobsArr = response.docs.map((globalJobItem) => {
+        const findSavedJobs = dzobsara.find((savedJob) => {
+          return savedJob.jobID === globalJobItem.data().jobID;
+        });
+
+        console.log("FIND saved jobs: ", findSavedJobs);
+
+        if (findSavedJobs) {
+          return { ...findSavedJobs, isSaved: true };
+        } else {
+          return {
+            ...globalJobItem.data(),
+            id: globalJobItem.id,
+            isSaved: false,
+          };
+        }
+      });
+
+      setGlobalJobs(globalJobsArr);
+    });
   };
 
   useEffect(() => {
-    getUserData();
-    getUserSaved();
+    if (loggedIn) {
+      getSavedJobs();
+      getUserData();
+    } else {
+      getGlobalDatas();
+    }
   }, []);
+
+
   return (
     <div className="container bg-[#f3f5f0] h-full min-h-screen sm:p-4">
       <Navbar loggedIn={!!token} />
@@ -115,8 +161,7 @@ const Jobs = ({ loggedIn }) => {
                     loggedIn={loggedIn}
                     photo={datas.photo === null ? userIcon.src : datas.photo}
                     company={datas.company}
-                    getCorrect={getSavedJobs}
-                    savedJobs1={savedJobs}
+                    isSaved={datas.isSaved}
                   />
                 </div>
               </>

@@ -13,11 +13,8 @@ import { AuthContext } from "../../Context/AuthContext";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { useRouter } from "next/router";
 import Modal from "../Modal";
-import OwnJob from "../OwnJob";
 import LoadingSpinner from "../LoadingSpinner";
 import { MdLocationOn } from "react-icons/md";
-
-import { collectionGroup } from "firebase/firestore";
 
 const Interface = () => {
   const { currentUser } = useContext(AuthContext);

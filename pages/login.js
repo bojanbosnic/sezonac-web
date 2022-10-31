@@ -17,6 +17,7 @@ export default function LogIn({ loggedIn }) {
     setError,
   } = useForm({
     defaultValues: {
+      firstName: "",
       email: "",
       password: "",
     },
@@ -35,7 +36,7 @@ export default function LogIn({ loggedIn }) {
       case "Firebase: Error (auth/wrong-password).":
         setError("password", {
           type: "server",
-          message: "Pogresna lozinka",
+          message: "Pogresna",
         });
         break;
 
@@ -94,7 +95,9 @@ export default function LogIn({ loggedIn }) {
                 />
 
                 {errors.email?.type === "required" && (
-                  <p role="alert">Email is required</p>
+                  <p className="text-red-600" role="alert">
+                    Email is required
+                  </p>
                 )}
 
                 <label htmlFor="email_id">
@@ -121,9 +124,11 @@ export default function LogIn({ loggedIn }) {
                   placeholder="••••••"
                   type="password"
                 />
-                <p>{errors.password?.message}</p>
+                <p className="text-red-600">{errors.password?.message}</p>
                 {errors.password?.type === "required" && (
-                  <p role="alert">Password is required</p>
+                  <p className="text-red-600" role="alert">
+                    Password is required
+                  </p>
                 )}
 
                 {errors.password?.type === "server" && errors.password.message}
@@ -141,7 +146,7 @@ export default function LogIn({ loggedIn }) {
               Nemaš nalog?{" "}
               <Link href="/register">
                 <a>
-                  <span style={{ color: "red" }}> Registruj se </span>
+                  <span className="text-red-600"> Registruj se </span>
                 </a>
               </Link>
             </div>

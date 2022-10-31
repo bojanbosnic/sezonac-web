@@ -10,8 +10,12 @@ import classNames from "classnames";
 const Home = ({ loggedIn }) => {
   return (
     <>
-      <div >
-        <div  className={classNames(`${styles.wrapper} container mx-auto sm:px-8 relative h-screen lg:h-full z-2`)}>
+      <div>
+        <div
+          className={classNames(
+            `${styles.wrapper} container mx-auto sm:px-8 relative h-screen lg:h-full z-2`
+          )}
+        >
           <Navbar loggedIn={loggedIn} />
           <main className="flex items-center lg:flex-wrap z-20 mt-20  justify-between">
             <div className="w-3/5 text-left lg:w-full lg:mb-8">
@@ -43,21 +47,7 @@ const Home = ({ loggedIn }) => {
                     />
                   </a>
                 </Link>
-                {loggedIn ? (
-                  <Link href="/profile">
-                    <a>
-                      <Button
-                        name="Objavi Posao"
-                        bgColor="bg-black"
-                        hover="hover:bg-sky-700"
-                        textColor="text-white"
-                        paddingY="py-4 md:py-4"
-                        paddingX="px-8"
-                        marginRight="mr-4"
-                      />
-                    </a>
-                  </Link>
-                ) : (
+                {!loggedIn && (
                   <Link href="/register">
                     <a>
                       <Button

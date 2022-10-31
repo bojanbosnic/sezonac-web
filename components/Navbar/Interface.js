@@ -80,7 +80,7 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
         onClick={toggleFun}
       >
         <span
-          className={`${styles.spanAnimation} togglerOpen w-7 h-1 bg-white block ease-in-out duration-300`}
+          className={`${styles.spanAnimation} togglerOpen w-7 h-1 bg-[#000] block ease-in-out duration-300`}
         ></span>
       </button>
     </nav>

@@ -122,51 +122,51 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
       <div className="z-40 w-[80%] absolute inset-2/4 -translate-y-2/4 -translate-x-2/4 min-h-full min-w-4/5 p-20">
         {poslovi.map((job) => (
           <div className="rounded bg-white overflow-y-auto snap-y h-[80vh]">
-            <div className="padding-wrapp px-4 my-8">
-              <div className="grid-rows-1 flex items-center my-2">
+            <div className="bg-primary relative p-8">
+              <div className="flex text-white items-center">
                 <span className="mr-2">
                   <BiData />
                 </span>
-                <span>Detaljne informacije</span>
+                <span className="font-normal">Detaljne informacije</span>
               </div>
-              <div className="relative grid-rows-1  w-48 h-48 flex items-center  my-8 sm:justify-center md:flex-wrap">
-                <img src={job.photo} alt="company photo" />
+              <div
+                className="absolute top-2 right-4 cursor-pointer text-white"
+                onClick={handleClose}
+              >
+                X
+              </div>
+            </div>
+            <div className=" flex items-center padding-wrapp px-4 my-8">
+              <div className="relative grid-rows-1   w-48 h-48 flex flex-col  my-8 sm:justify-center md:flex-wrap">
+                <img
+                  src={job.photo}
+                  className="rounded-full"
+                  alt="company photo"
+                />
+                <div className="mt-4">
+                  {isUpdate ? (
+                    <>
+                      <input
+                        onChange={(e) =>
+                          setUpdateJobs({
+                            ...updateJobs,
+                            company: e.target.value,
+                          })
+                        }
+                        type={"text"}
+                        placeholder="type text..."
+                        defaultValue={updateJobs.company}
+                      />
+                    </>
+                  ) : (
+                    <span className="font-medium ml-4">{job.company}</span>
+                  )}
+                </div>
               </div>
               <div className="grid grid-cols-2 gap-12 md:grid-cols-1 ">
-                <div className="border-2 border-black">
+                <div>
                   <div className="grid grid-cols-1 gap-4 flex flex-col">
-                    <div
-                      className={classNames(
-                        `${styles.linearGradient} flex justify-between items-center border-2 py-2 px-3 border-black rounded-3xl`
-                      )}
-                    >
-                      <div>
-                        <h3 className="m-0">Kompanija</h3>
-                      </div>
-                      {isUpdate ? (
-                        <>
-                          <input
-                            onChange={(e) =>
-                              setUpdateJobs({
-                                ...updateJobs,
-                                company: e.target.value,
-                              })
-                            }
-                            className="text-black border-2 px-2 border-gray-400"
-                            type={"text"}
-                            placeholder="type text..."
-                            defaultValue={updateJobs.company}
-                          />
-                        </>
-                      ) : (
-                        <span className="font-medium ml-4">{job.company}</span>
-                      )}
-                    </div>
-                    <div
-                      className={classNames(
-                        `${styles.linearGradient} flex justify-between items-center border-2 py-2 px-3 border-black rounded-3xl`
-                      )}
-                    >
+                    <div className="flex items-center py-2 px-3">
                       <div>
                         <h3 className="m-0">Zanimanje</h3>
                       </div>
@@ -179,7 +179,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                                 title: e.target.value,
                               })
                             }
-                            className="text-black border-2 px-2 border-gray-400"
+                            className="text-black px-2"
                             type={"text"}
                             placeholder="type text..."
                             defaultValue={updateJobs.title}
@@ -189,11 +189,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                         <span className="font-medium ml-4">{job.title}</span>
                       )}
                     </div>
-                    <div
-                      className={classNames(
-                        `${styles.linearGradient} flex justify-between items-center border-2 py-2 px-3 border-black rounded-3xl`
-                      )}
-                    >
+                    <div className="flex items-center py-2 px-3">
                       <div>
                         <h3 className="m-0">Email</h3>
                       </div>
@@ -206,7 +202,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                                 email: e.target.value,
                               })
                             }
-                            className="text-black border-2 px-2 border-gray-400"
+                            className="text-black px-2"
                             type={"text"}
                             placeholder="type text..."
                             defaultValue={updateJobs.email}
@@ -216,11 +212,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                         <span className="font-medium ml-4">{job.email}</span>
                       )}
                     </div>
-                    <div
-                      className={classNames(
-                        `${styles.linearGradient} flex justify-between items-center border-2 py-2 px-3 border-black rounded-3xl`
-                      )}
-                    >
+                    <div className="flex items-center  py-2 px-3">
                       <div>
                         <h3 className="m-0">Website</h3>
                       </div>
@@ -230,27 +222,23 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                             onChange={(e) =>
                               setUpdateJobs({
                                 ...updateJobs,
-                                webiste: e.target.value,
+                                website: e.target.value,
                               })
                             }
-                            className="text-black border-2 px-2 border-gray-400"
+                            className="text-black"
                             type={"text"}
                             placeholder="type text..."
-                            defaultValue={updateJobs.webiste}
+                            defaultValue={updateJobs.website}
                           />
                         </>
                       ) : (
-                        <span className="font-medium ml-4">{job.webiste}</span>
+                        <span className="font-medium ml-4">{job.website}</span>
                       )}
                     </div>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 gap-4 border-2 border-black">
-                  <div
-                    className={classNames(
-                      `${styles.linearGradient} flex justify-between items-center border-2 py-2 px-3 border-black rounded-3xl`
-                    )}
-                  >
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="flex items-center py-2 px-3">
                     <div>
                       <h3 className="m-0">Lokacija</h3>
                     </div>
@@ -263,7 +251,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                               location: e.target.value,
                             })
                           }
-                          className="text-black border-2 px-2 border-gray-400"
+                          className="text-black px-2 border-gray-400"
                           type={"text"}
                           placeholder="type text..."
                           defaultValue={updateJobs.location}
@@ -273,11 +261,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                       <span>{job.location}</span>
                     )}
                   </div>
-                  <div
-                    className={classNames(
-                      `${styles.linearGradient} flex justify-between items-center border-2 py-2 px-3 border-black rounded-3xl`
-                    )}
-                  >
+                  <div className="flex justify-between items-center py-2 px-3">
                     <div>
                       <h3 className="m-0">Satnica </h3>
                     </div>
@@ -300,11 +284,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                       <span>{job.money}</span>
                     )}
                   </div>
-                  <div
-                    className={classNames(
-                      `${styles.linearGradient} flex justify-between items-center border-2 py-2 px-3 border-black rounded-3xl`
-                    )}
-                  >
+                  <div className="flex items-center py-2 px-3">
                     <div>
                       <h3 className="m-0">Radno vrijeme</h3>
                     </div>
@@ -331,27 +311,19 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                   </div>
                 </div>
               </div>
-              <div>
-                <div className="flex justify-between items-center ml-6 my-8">
-                  {isUpdating &&
-                    privateUpdate(
-                      job.jobID,
-                      job.title,
-                      job.location,
-                      job.money,
-                      job.email,
-                      job.webiste,
-                      job.company,
-                      job.workDuration
-                    )}
-                  <div
-                    className="flex items-end cursor-pointer"
-                    onClick={handleClose}
-                  >
-                    <AiOutlineCloseSquare fontSize="4rem" />
-                  </div>
-                </div>
-              </div>
+            </div>
+            <div className="flex justify-between items-center ml-6 my-8">
+              {isUpdating &&
+                privateUpdate(
+                  job.jobID,
+                  job.title,
+                  job.location,
+                  job.money,
+                  job.email,
+                  job.website,
+                  job.company,
+                  job.workDuration
+                )}
             </div>
           </div>
         ))}

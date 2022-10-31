@@ -12,8 +12,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { RiBankFill } from "react-icons/ri";
-import { IoIosSave } from "react-icons/io";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -27,18 +26,15 @@ const Card = (props) => {
     loggedIn,
     photo,
     website,
-    getCorrect,
-    savedJobs1,
+    isSaved,
   } = props;
   const { currentUser } = useContext(AuthContext);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(isSaved);
   const { uid } = currentUser;
-  console.log("Srbija", savedJobs1);
-  const [savedJobsID, setSavedJobsID] = useState([])
-  console.log("jebiga", savedJobsID)
 
   const saveJob = async () => {
     if (loggedIn) {
+      console.log("POSO SACUVAN")
       const jobsRef = doc(db, `users`, `${uid}`);
       await updateDoc(jobsRef, {
         savedJobs: arrayUnion({
@@ -53,27 +49,12 @@ const Card = (props) => {
     }
   };
 
-  const getUserSaved = async () => {
-    const userSavedJobs = [];
-    const usersRef = collection(db, "/users");
-    const q = query(usersRef, where("userID", "==", currentUser.uid));
-    const querySnapshot = await getDocs(q);
-
-    querySnapshot.forEach((doc) => {
-      userSavedJobs.push(...doc.data().savedJobs);
-    });
-    setSavedJobsID(userSavedJobs);
-  };
-
   const showToastMessage = () => {
     toast.success("Success Notification !", {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
 
-  useEffect(() => {
-    getUserSaved();
-  }, []);
 
   const btnsFunciton = () => {
     if (!loggedIn) {
@@ -84,7 +65,7 @@ const Card = (props) => {
             disabled={isDisabled}
             className="ml-2"
           >
-            <TbDeviceFloppy
+            <BsBookmark
               className="text-3xl cursor-not-allowed"
               style={{ color: "red" }}
             />
@@ -92,32 +73,21 @@ const Card = (props) => {
         </>
       );
     } else if (currentUser.uid === profileID) {
-      return (
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-          disabled={isDisabled}
-          className="text-black text-2xl cursor-default"
-        >
-          <RiBankFill />
-        </button>
-      );
+      return;
     } else {
       return (
         <button
           onClick={(e) => {
             e.stopPropagation();
             saveJob();
-            getCorrect(profileID);
             showToastMessage();
           }}
           disabled={isDisabled}
         >
-          {savedJobs1 ? (
-            <IoIosSave className="text-2xl text-primary" />
+          {isSaved || isDisabled ? (
+            <BsBookmarkFill className="text-2xl text-primary" />
           ) : (
-            <IoIosSave className="text-2xl text-black" />
+            <BsBookmark className="text-2xl text-primary" />
           )}
         </button>
       );

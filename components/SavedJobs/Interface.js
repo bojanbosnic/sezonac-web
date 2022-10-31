@@ -22,7 +22,6 @@ const Interface = ({ savedJobsID }) => {
   const { currentUser } = useContext(AuthContext);
   const { uid } = currentUser;
   const [sacuvaniPoslovi, setSacuvaniPoslovi] = useState([]);
-  console.log("Ovo mi treba", savedJobsID);
   const getUserData = async () => {
     const userSavedJobs = [];
     const usersRef = collection(db, "/users");
@@ -48,16 +47,13 @@ const Interface = ({ savedJobsID }) => {
     });
   };
 
-  console.log(sacuvaniPoslovi);
-
   const removeDocument = async (id, profileID) => {
-    console.log("trebalo bih", id, profileID);
     const jobsRef = doc(db, "/users", uid);
     const proba = await updateDoc(jobsRef, {
       savedJobs: arrayRemove({
         jobsID: id,
         profileid: profileID,
-        isSaved: false,
+        isSaved: true,
       }),
     });
     getUserData();
