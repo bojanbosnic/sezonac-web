@@ -92,11 +92,12 @@ export default function LogIn({ loggedIn }) {
                   id="email_id"
                   className="input_field_login relative pl-10 z-10"
                   placeholder="ime.prezime@example.com"
+                  type="email"
                 />
 
                 {errors.email?.type === "required" && (
                   <p className="text-red-600" role="alert">
-                    Email is required
+                    Upišite Email!
                   </p>
                 )}
 
@@ -127,7 +128,7 @@ export default function LogIn({ loggedIn }) {
                 <p className="text-red-600">{errors.password?.message}</p>
                 {errors.password?.type === "required" && (
                   <p className="text-red-600" role="alert">
-                    Password is required
+                    Upišite Lozinku!
                   </p>
                 )}
 

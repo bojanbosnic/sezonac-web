@@ -59,7 +59,7 @@ const Interface = () => {
     window.location.reload(false);
   };
 
-  console.log("errors -->> ", errors);
+  // console.log("errors -->> ", errors);
 
   return (
     <div>
@@ -74,7 +74,7 @@ const Interface = () => {
               name="title"
               placeHolder="Barmen"
               inputType="text"
-              error={errors}
+              error={errors.title?.message}
               rules={{
                 required: {
                   value: true,
@@ -93,19 +93,16 @@ const Interface = () => {
             <PostJobInput
               register={register}
               jobName="Lokacija"
+              name="location"
               placeHolder="Beograd, Knjeginje Ljubice 5 11000"
               inputType="text"
+              error={errors.title?.message}
               rules={{
                 required: {
                   value: true,
                   message: "Ovo polje je obavezno.",
                 },
-                minLength: {
-                  value: 6,
-                  message: "Minimalna vrijednost je 6 slova!",
-                },
               }}
-              name="location"
               icon={
                 <HiLocationMarker className="absolute z-20 top-[28px] text-primary left-[8px]" />
               }
@@ -118,14 +115,11 @@ const Interface = () => {
               jobName="Satnica"
               placeHolder="5"
               inputType="number"
+              error={errors.money?.message}
               rules={{
                 required: {
                   value: true,
                   message: "Ovo polje je obavezno.",
-                },
-                minLength: {
-                  value: 6,
-                  message: "Minimalna vrijednost je 6 slova!",
                 },
               }}
               name="money"
@@ -138,14 +132,11 @@ const Interface = () => {
               jobName="Radno Vrijeme"
               placeHolder="8 sati"
               inputType="number"
+              error={errors.workDuration?.message}
               rules={{
                 required: {
                   value: true,
                   message: "Ovo polje je obavezno.",
-                },
-                minLength: {
-                  value: 6,
-                  message: "Minimalna vrijednost je 6 slova!",
                 },
               }}
               name="workDuration"
@@ -160,14 +151,11 @@ const Interface = () => {
               jobName="Website"
               placeHolder="www.hotelexamle.com"
               inputType="text"
+              error={errors.website?.message}
               rules={{
                 required: {
                   value: true,
                   message: "Ovo polje je obavezno.",
-                },
-                minLength: {
-                  value: 6,
-                  message: "Minimalna vrijednost je 6 slova!",
                 },
               }}
               name="website"
@@ -180,14 +168,11 @@ const Interface = () => {
               jobName="Email Adresa"
               placeHolder="hotel.example@example.com"
               inputType="email"
+              error={errors.email?.message}
               rules={{
                 required: {
                   value: true,
                   message: "Ovo polje je obavezno.",
-                },
-                minLength: {
-                  value: 6,
-                  message: "Minimalna vrijednost je 6 slova!",
                 },
               }}
               name="email"

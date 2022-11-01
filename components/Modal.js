@@ -119,7 +119,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
 
   const modalContent = show ? (
     <div className="z-20 fixed w-full h-full top-0 left-0 bg-[#000000f7]">
-      <div className="z-40 w-[80%] absolute inset-2/4 -translate-y-2/4 -translate-x-2/4 min-h-full min-w-4/5 p-20">
+      <div className="z-40 w-[80%] absolute inset-2/4 -translate-y-2/4 -translate-x-2/4 min-h-full p-4">
         {poslovi.map((job) => (
           <div className="rounded bg-white overflow-y-auto snap-y h-[80vh]">
             <div className="bg-primary relative p-8">
@@ -130,17 +130,20 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                 <span className="font-normal">Detaljne informacije</span>
               </div>
               <div
-                className="absolute top-2 right-4 cursor-pointer text-white"
+                className="absolute top-2 right-8 cursor-pointer text-white"
                 onClick={handleClose}
               >
                 X
               </div>
             </div>
-            <div className=" flex items-center padding-wrapp px-4 my-8">
-              <div className="relative grid-rows-1   w-48 h-48 flex flex-col  my-8 sm:justify-center md:flex-wrap">
+            {/* <div class="flex-none ...">01</div>
+            <div class="flex-1 w-64 ...">02</div>
+            <div class="flex-1 w-32 ...">03</div> */}
+            <div className="flex items-center justify-between flex-wrap lg:justify-center p-8 my-8">
+              <div className="relative flex flex-col justify-center items-center my-8 sm:justify-center">
                 <img
                   src={job.photo}
-                  className="rounded-full"
+                  className="rounded-full w-48 h-48"
                   alt="company photo"
                 />
                 <div className="mt-4">
@@ -163,81 +166,80 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                   )}
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-12 md:grid-cols-1 ">
-                <div>
-                  <div className="grid grid-cols-1 gap-4 flex flex-col">
-                    <div className="flex items-center py-2 px-3">
-                      <div>
-                        <h3 className="m-0">Zanimanje</h3>
-                      </div>
-                      {isUpdate ? (
-                        <>
-                          <input
-                            onChange={(e) =>
-                              setUpdateJobs({
-                                ...updateJobs,
-                                title: e.target.value,
-                              })
-                            }
-                            className="text-black px-2"
-                            type={"text"}
-                            placeholder="type text..."
-                            defaultValue={updateJobs.title}
-                          />
-                        </>
-                      ) : (
-                        <span className="font-medium ml-4">{job.title}</span>
-                      )}
+
+              <div className="flex justify-between lg:flex-wrap lg:justify-center">
+                <div className="mr-28 lg:mr-0">
+                  <div className="flex items-center py-2 px-3">
+                    <div>
+                      <h3 className="m-0">Zanimanje</h3>
                     </div>
-                    <div className="flex items-center py-2 px-3">
-                      <div>
-                        <h3 className="m-0">Email</h3>
-                      </div>
-                      {isUpdate ? (
-                        <>
-                          <input
-                            onChange={(e) =>
-                              setUpdateJobs({
-                                ...updateJobs,
-                                email: e.target.value,
-                              })
-                            }
-                            className="text-black px-2"
-                            type={"text"}
-                            placeholder="type text..."
-                            defaultValue={updateJobs.email}
-                          />
-                        </>
-                      ) : (
-                        <span className="font-medium ml-4">{job.email}</span>
-                      )}
+                    {isUpdate ? (
+                      <>
+                        <input
+                          onChange={(e) =>
+                            setUpdateJobs({
+                              ...updateJobs,
+                              title: e.target.value,
+                            })
+                          }
+                          className="text-black px-2"
+                          type={"text"}
+                          placeholder="type text..."
+                          defaultValue={updateJobs.title}
+                        />
+                      </>
+                    ) : (
+                      <span className="font-medium ml-4">{job.title}</span>
+                    )}
+                  </div>
+                  <div className="flex items-center py-2 px-3">
+                    <div>
+                      <h3 className="m-0">Email</h3>
                     </div>
-                    <div className="flex items-center  py-2 px-3">
-                      <div>
-                        <h3 className="m-0">Website</h3>
-                      </div>
-                      {isUpdate ? (
-                        <>
-                          <input
-                            onChange={(e) =>
-                              setUpdateJobs({
-                                ...updateJobs,
-                                website: e.target.value,
-                              })
-                            }
-                            className="text-black"
-                            type={"text"}
-                            placeholder="type text..."
-                            defaultValue={updateJobs.website}
-                          />
-                        </>
-                      ) : (
-                        <span className="font-medium ml-4">{job.website}</span>
-                      )}
+                    {isUpdate ? (
+                      <>
+                        <input
+                          onChange={(e) =>
+                            setUpdateJobs({
+                              ...updateJobs,
+                              email: e.target.value,
+                            })
+                          }
+                          className="text-black px-2"
+                          type={"text"}
+                          placeholder="type text..."
+                          defaultValue={updateJobs.email}
+                        />
+                      </>
+                    ) : (
+                      <span className="font-medium ml-4">{job.email}</span>
+                    )}
+                  </div>
+                  <div className="flex items-center  py-2 px-3">
+                    <div>
+                      <h3 className="m-0">Website</h3>
                     </div>
+                    {isUpdate ? (
+                      <>
+                        <input
+                          onChange={(e) =>
+                            setUpdateJobs({
+                              ...updateJobs,
+                              website: e.target.value,
+                            })
+                          }
+                          className="text-black"
+                          type={"text"}
+                          placeholder="type text..."
+                          defaultValue={updateJobs.website}
+                        />
+                      </>
+                    ) : (
+                      <span className="font-medium ml-4">{job.website}</span>
+                    )}
                   </div>
                 </div>
-                <div className="grid grid-cols-1 gap-4">
+                <div>
                   <div className="flex items-center py-2 px-3">
                     <div>
                       <h3 className="m-0">Lokacija</h3>
@@ -251,17 +253,17 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                               location: e.target.value,
                             })
                           }
-                          className="text-black px-2 border-gray-400"
+                          className="text-black"
                           type={"text"}
                           placeholder="type text..."
                           defaultValue={updateJobs.location}
                         />
                       </>
                     ) : (
-                      <span>{job.location}</span>
+                      <span className="ml-4">{job.location}</span>
                     )}
                   </div>
-                  <div className="flex justify-between items-center py-2 px-3">
+                  <div className="flex items-center py-2 px-3">
                     <div>
                       <h3 className="m-0">Satnica </h3>
                     </div>
@@ -274,14 +276,13 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                               money: e.target.value,
                             })
                           }
-                          className="text-black border-2 px-2 border-gray-400"
                           type={"text"}
                           placeholder="type text..."
                           defaultValue={updateJobs.money}
                         />
                       </>
                     ) : (
-                      <span>{job.money}</span>
+                      <span className="ml-4">{job.money}</span>
                     )}
                   </div>
                   <div className="flex items-center py-2 px-3">
@@ -297,14 +298,13 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                               workDuration: e.target.value,
                             })
                           }
-                          className="text-black border-2 px-2 border-gray-400"
                           type={"text"}
                           placeholder="type text..."
                           defaultValue={updateJobs.workDuration}
                         />
                       </>
                     ) : (
-                      <span className="mx-2 font-medium">
+                      <span className="mx-2 font-medium ml-4">
                         {job.workDuration}
                       </span>
                     )}

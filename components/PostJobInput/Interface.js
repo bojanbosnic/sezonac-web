@@ -10,6 +10,11 @@ const Interface = ({
   rules,
   register,
 }) => {
+  console.log("errori", error);
+
+  // error = '' - false
+  // error = 'Email nije dobar.'  - true
+
   return (
     <div>
       <label>{jobName}</label>
@@ -22,11 +27,12 @@ const Interface = ({
         />
         {icon}
       </div>
-      {/* {error.email?.type === "required"  && (
+
+      {error && (
         <p className="text-red-600" role="alert">
-          {error.message}
+          {error}
         </p>
-      )} */}
+      )}
     </div>
   );
 };
