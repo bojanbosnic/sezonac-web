@@ -1,0 +1,72 @@
+.spanAnimation::before {
+  width: 28px;
+  height: 3px;
+  display: block;
+  transition: 0.3s;
+  background-color: black;
+}
+.spanAnimation::after {
+  width: 28px;
+  height: 3px;
+  display: block;
+  transition: 0.3s;
+  background-color: black;
+}
+
+.spanAnimation::before {
+  content: "";
+  transform: translateY(-9px);
+  background-color: black;
+}
+
+.spanAnimation::after {
+  content: "";
+  transform: translateY(6px);
+}
+
+.togglerOpen span {
+  background-color: transparent;
+}
+.togglerOpen span:before {
+  transform: translateY(0px) rotate(45deg);
+  background-color: white;
+}
+.togglerOpen span:after {
+  transform: translateY(-3px) rotate(-45deg);
+  background-color: white;
+}
+
+@media (max-width: 767px) {
+  .siteNavbar ul {
+    position: absolute;
+    width: 100%;
+    height: calc(100vh - 60px);
+    left: 0;
+    top: 60px;
+    flex-direction: column-reverse;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.95);
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.3s;
+  }
+
+  .siteNavbar ul li {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 2rem;
+    color: white;
+  }
+
+  .siteNavbar .open {
+    max-height: 100vh;
+    height: 100vh;
+    overflow: visible;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    padding-top: 50px;
+  }
+}

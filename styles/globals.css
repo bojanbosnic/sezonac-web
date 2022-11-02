@@ -1,16 +1,61 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@tailwind base;
+@layer base {
+  body {
+    @apply font-my_font font-semibold text-black;
+  }
+
+  h1 {
+    @apply text-5xl font-medium my-8;
+  }
+  h2 {
+    @apply text-xl my-8;
+  }
+  h3 {
+    @apply text-lg my-8 text-[#17171d] font-medium;
+  }
+  h4 {
+    @apply font-medium text-black my-8;
+  }
+
+  a {
+    @apply font-medium;
+  }
+
+  p {
+    @apply font-normal text-black;
+  }
+
+  li {
+    @apply font-normal;
+  }
+
+  .heading3 {
+    @apply text-lg;
+  }
+
+  .input_field_contact {
+    @apply w-full pl-10 relative outline-none z-20 border bg-transparent text-black border-secondary rounded-lg py-3;
+  }
+
+  .input_field_login {
+    @apply w-full outline-none bg-secondary font-normal text-black rounded-lg py-4 px-6 my-2;
+  }
+
+  .submit_btn_form {
+    @apply py-5 px-6 border-none my-8 bg-primary text-white font-medium  rounded-lg;
+  }
+}
+@tailwind components;
+
+@layer components {
+  .card {
+    @apply relative p-6 w-[calc(50%-40px)] text-secondary rounded-xl lg:w-full;
+  }
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+@tailwind utilities;
 
-* {
-  box-sizing: border-box;
+.placeholder-color::placeholder {
+  color: primary;
+  font-weight: 400;
 }
