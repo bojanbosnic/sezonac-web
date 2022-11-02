@@ -145,7 +145,7 @@ export default function LogIn({ loggedIn }) {
             <button className="w-full submit_btn_form">Prijavi se</button>
             <div className="pointer text-black font-medium text-center mt-4 mb-8">
               Nemaš nalog?{" "}
-              <Link href="/register">
+              <Link legacyBehavior href="/register">
                 <a>
                   <span className="text-red-600"> Registruj se </span>
                 </a>

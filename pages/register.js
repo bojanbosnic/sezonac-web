@@ -179,7 +179,7 @@ const Register = ({ loggedIn }) => {
             </button>
             <div className="text-center text-black font-medium">
               Već imaš nalog?
-              <Link href="/login">
+              <Link legacyBehavior href="/login">
                 <a>
                   <span className="text-red-600"> Prijavi se ovde </span>
                 </a>

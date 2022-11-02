@@ -34,7 +34,7 @@ const Home = ({ loggedIn }) => {
                 </p>
               </div>
               <div className="flex items-center sm:flex-col">
-                <Link href="/jobs">
+                <Link legacyBehavior href="/jobs">
                   <a>
                     <Button
                       name="Potraži posao"
@@ -47,7 +47,7 @@ const Home = ({ loggedIn }) => {
                   </a>
                 </Link>
                 {!loggedIn && (
-                  <Link href="/register">
+                  <Link legacyBehavior href="/register">
                     <a>
                       <Button
                         name="Registruj se"

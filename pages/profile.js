@@ -88,7 +88,6 @@ export default function Profile({ loggedIn }) {
     setSavedJobsID(userSavedJobs);
   };
 
-
   useEffect(() => {
     if (loggedIn) {
       getUserSaved();
