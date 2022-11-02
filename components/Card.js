@@ -34,7 +34,6 @@ const Card = (props) => {
 
   const saveJob = async () => {
     if (loggedIn) {
-      console.log("POSO SACUVAN")
       const jobsRef = doc(db, `users`, `${uid}`);
       await updateDoc(jobsRef, {
         savedJobs: arrayUnion({
@@ -54,7 +53,6 @@ const Card = (props) => {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
-
 
   const btnsFunciton = () => {
     if (!loggedIn) {

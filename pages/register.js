@@ -40,7 +40,6 @@ const Register = ({ loggedIn }) => {
   const router = useRouter();
 
   const customErrors = (error) => {
-    console.log("custom erro", error.message);
     if (error.message == "Firebase: Error (auth/email-already-in-use).") {
       setError("email", {
         type: "server",
@@ -50,7 +49,6 @@ const Register = ({ loggedIn }) => {
   };
 
   const handleRegister = async (data) => {
-    console.log("datas from form hook", data);
     // if (form.password !== form.confirmPassword) {
     //   setConfirmed(false);
     //   return;
@@ -70,7 +68,6 @@ const Register = ({ loggedIn }) => {
       });
       router.push("/profile");
     } catch (error) {
-      // console.log(error.message);
       customErrors(error);
     }
   };

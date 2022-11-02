@@ -24,11 +24,9 @@ const ContactUs = () => {
       password: "",
     },
   });
-  
 
   const sendEmail = (e) => {
     e.preventDefault();
-    console.log("EmailJS", emailjs);
     emailjs
       .sendForm(
         "service_zi6shac",

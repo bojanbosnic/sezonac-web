@@ -52,9 +52,6 @@ const PrivateJobs = () => {
   return (
     <div className="relative">
       <h1 className="text-xl font-medium mx-6">Objavljeni Poslovi</h1>
-      <div className="bg-primary">
-        <LoadingSpinner />
-      </div>
       <hr />
       <div className="px-6">
         {fireData.map((jobs) => (

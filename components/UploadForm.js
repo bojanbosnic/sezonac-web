@@ -16,9 +16,7 @@ const UploadForm = ({ test }) => {
     }
   };
 
-  useEffect(() => {
-    console.log("THIS IS USE EFFECT!");
-  }, [file]);
+  useEffect(() => {}, [file]);
 
   return (
     <div>

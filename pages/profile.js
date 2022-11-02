@@ -88,7 +88,6 @@ export default function Profile({ loggedIn }) {
     setSavedJobsID(userSavedJobs);
   };
 
-  console.log("Ovo", savedJobsID);
 
   useEffect(() => {
     if (loggedIn) {

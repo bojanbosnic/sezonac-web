@@ -69,15 +69,13 @@ const Jobs = ({ loggedIn }) => {
   };
 
   const getUserData = async () => {
-    const dzobsara = await getSavedJobs(); // vraca nam sacuvane poslove sa svim podacima: company, email, title, money, location itd.
+    const savedFiles = await getSavedJobs(); // vraca nam sacuvane poslove sa svim podacima: company, email, title, money, location itd.
 
     await getDocs(collection(db, `/jobs`)).then((response) => {
       const globalJobsArr = response.docs.map((globalJobItem) => {
-        const findSavedJobs = dzobsara.find((savedJob) => {
+        const findSavedJobs = savedFiles.find((savedJob) => {
           return savedJob.jobID === globalJobItem.data().jobID;
         });
-
-        console.log("FIND saved jobs: ", findSavedJobs);
 
         if (findSavedJobs) {
           return { ...findSavedJobs, isSaved: true };

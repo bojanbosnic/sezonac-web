@@ -39,7 +39,6 @@ const PostJob = () => {
   const postJobFun = async (props) => {
     const { title, location, money, workDuration, email, website } = props;
 
-    console.log("Email title", title);
     const jobId = uuidv4();
     const jobRef = doc(db, `/jobs`, jobId);
     await setDoc(jobRef, {
@@ -57,8 +56,6 @@ const PostJob = () => {
 
     window.location.reload(false);
   };
-
-  // console.log("errors -->> ", errors);
 
   return (
     <div>

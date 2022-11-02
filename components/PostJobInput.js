@@ -10,7 +10,6 @@ const PostJobInput = ({
   rules,
   register,
 }) => {
-  console.log("errori", error);
 
   // error = '' - false
   // error = 'Email nije dobar.'  - true
