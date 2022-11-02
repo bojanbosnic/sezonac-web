@@ -5,7 +5,6 @@ import Navbar from "../components/Navbar";
 import styles from "../styles/home.module.css";
 import { FiLogIn } from "react-icons/fi";
 import picture from "../assets/ilustrations/right-pic-2.jpg";
-import { useEffect } from "react";
 import classNames from "classnames";
 const Home = ({ loggedIn }) => {
   return (

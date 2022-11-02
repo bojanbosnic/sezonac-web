@@ -14,7 +14,6 @@ function MyApp({ Component, pageProps }) {
         <Head>
           <title>Sezonac</title>
         </Head>
-        {/* <Navbar loggedIn={!!token} /> */}
         <Component loggedIn={!!token} test={test} {...pageProps} />
       </AuthProvider>
     </>

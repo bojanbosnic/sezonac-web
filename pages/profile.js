@@ -12,23 +12,13 @@ import { AiFillFileMarkdown, AiOutlineGlobal } from "react-icons/ai";
 import { FaSave, FaUserAlt } from "react-icons/fa";
 import { RiFileUploadFill } from "react-icons/ri";
 import { HiOutlineLogout } from "react-icons/hi";
-import Page1 from "../components/PrivateJobs";
-import Page2 from "../components/SavedJobs";
-import Page4 from "../components/PostTheJob";
+import PrivateJobs from "../components/PrivateJobs";
+import SavedJobs from "../components/SavedJobs";
+import PostJob from "../components/PostJob";
 import Navbar from "../components/Navbar";
 import userIcon from "../assets/ilustrations/2.jpg";
 
-import {
-  getDocs,
-  collection,
-  deleteDoc,
-  doc,
-  query,
-  where,
-  getDoc,
-  collectionGroup,
-  updateDoc,
-} from "firebase/firestore";
+import { getDocs, collection, doc, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 
 export default function Profile({ loggedIn }) {
@@ -43,11 +33,11 @@ export default function Profile({ loggedIn }) {
 
   const myPages = () => {
     if (page === "page1") {
-      return <Page1 />;
+      return <PrivateJobs />;
     } else if (page === "page2") {
-      return <Page2 savedJobsID={savedJobsID} />;
-    } else if (page === "page4") {
-      return <Page4 />;
+      return <SavedJobs savedJobsID={savedJobsID} />;
+    } else if (page === "page3") {
+      return <PostJob />;
     }
   };
 
@@ -101,7 +91,9 @@ export default function Profile({ loggedIn }) {
   console.log("Ovo", savedJobsID);
 
   useEffect(() => {
-    getUserSaved();
+    if (loggedIn) {
+      getUserSaved();
+    }
   }, []);
 
   let src = image ? image : userIcon.src;
@@ -125,10 +117,10 @@ export default function Profile({ loggedIn }) {
             <div className="w-1/5 bg-secondary  lg:w-full mr-8 block rounded-3xl lg:mr-0 lg:mb-8">
               <div className=" h-full p-[30px] lg:flex lg:justify-around  lg:items-center md:justify-center sm:block">
                 <div>
-                <div className="flex items-center justify-center">
-                  <FaUserAlt className="text-primary mr-2" />
-                  <h3 className="m-0">{currentUser.displayName}</h3>
-                </div>
+                  <div className="flex items-center justify-center">
+                    <FaUserAlt className="text-primary mr-2" />
+                    <h3 className="m-0">{currentUser.displayName}</h3>
+                  </div>
                   <div className="flex justify-center lg:w-[350px] md:w-full realtive border border-white mt-8 p-4 rounded-xl lg:py-12">
                     <div className="text-center lg:w-[80%]  overflow-hidden">
                       <Image
@@ -182,7 +174,7 @@ export default function Profile({ loggedIn }) {
                     </a>
                     <li
                       className="flex items-center px-4  py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300"
-                      onClick={() => setPage("page4")}
+                      onClick={() => setPage("page3")}
                     >
                       <RiFileUploadFill className="text-primary mr-2" />
                       Objavi Posao

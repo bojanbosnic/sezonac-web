@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 
-function Button({
+const Button = ({
   name,
   textColor,
   bgColor,
@@ -10,7 +10,7 @@ function Button({
   paddingX,
   marginRight,
   icon,
-}) {
+}) => {
   return (
     <button
       className={classnames(
@@ -21,6 +21,6 @@ function Button({
       {name}
     </button>
   );
-}
+};
 
 export default Button;

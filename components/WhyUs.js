@@ -1,9 +1,9 @@
 import Image from "next/image";
-import icon1 from "../../assets/ilustrations/icon1.png";
-import icon2 from "../../assets/ilustrations/icon2.png";
-import icon3 from "../../assets/ilustrations/icon3.png";
+import icon1 from "../assets/ilustrations/icon1.png";
+import icon2 from "../assets/ilustrations/icon2.png";
+import icon3 from "../assets/ilustrations/icon3.png";
 
-const Interface = () => {
+const WhyUs = () => {
   return (
     <div className="flex justify-between flex-wrap my-8 md:flex-wrap">
       <div className="flex justify-between md:flex-wrap">
@@ -54,4 +54,4 @@ const Interface = () => {
   );
 };
 
-export default Interface;
+export default WhyUs;

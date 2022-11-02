@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { MdLocationOn } from "react-icons/md";
-import { AuthContext } from "../../Context/AuthContext";
+import { AuthContext } from "../Context/AuthContext";
 import { useContext } from "react";
 import {
   getDocs,
@@ -13,10 +13,10 @@ import {
   where,
   doc,
 } from "firebase/firestore";
-import { db } from "../../firebase";
-import Modal from "../Modal";
+import { db } from "../firebase";
+import Modal from "./Modal";
 
-const Interface = ({ savedJobsID }) => {
+const SavedJobs = ({ savedJobsID }) => {
   const [showModal, setShowModal] = useState(false);
   const [jobsForModal, setJobsForModal] = useState([]);
   const { currentUser } = useContext(AuthContext);
@@ -112,4 +112,4 @@ const Interface = ({ savedJobsID }) => {
   );
 };
 
-export default Interface;
+export default SavedJobs;

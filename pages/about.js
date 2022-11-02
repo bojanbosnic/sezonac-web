@@ -17,19 +17,32 @@ export default function AboutUs() {
           </div>
           <ul className="text-2xl">
             <li className="flex items-center my-4">
-              <BsCheckCircleFill fontSize="1rem" className="mr-2 text-primary" /> Povjerenje &
-              Kvalitetan Posao
+              <BsCheckCircleFill
+                fontSize="1rem"
+                className="mr-2 text-primary"
+              />{" "}
+              Povjerenje & Kvalitetan Posao
             </li>
             <li className="flex items-center my-4">
-              <BsCheckCircleFill fontSize="1rem" className="mr-2 text-primary" />
+              <BsCheckCircleFill
+                fontSize="1rem"
+                className="mr-2 text-primary"
+              />
               Internacionalni Posao
             </li>
             <li className="flex items-center my-4">
-              <BsCheckCircleFill fontSize="1rem" className="mr-2 text-primary" /> Top Kompanije
+              <BsCheckCircleFill
+                fontSize="1rem"
+                className="mr-2 text-primary"
+              />{" "}
+              Top Kompanije
             </li>
             <li className="flex items-center my-4">
-              <BsCheckCircleFill fontSize="1rem" className="mr-2 text-primary" /> Bez Dodatne
-              Naknade
+              <BsCheckCircleFill
+                fontSize="1rem"
+                className="mr-2 text-primary"
+              />{" "}
+              Bez Dodatne Naknade
             </li>
           </ul>
         </div>

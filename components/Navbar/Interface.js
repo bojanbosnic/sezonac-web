@@ -6,7 +6,7 @@ import Image from "next/image";
 import classNames from "classnames";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
-import Button from "../../components/Button";
+import Button from "../Button";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { FaHome } from "react-icons/fa";

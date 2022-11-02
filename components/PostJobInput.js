@@ -1,6 +1,6 @@
 import React from "react";
 
-const Interface = ({
+const PostJobInput = ({
   jobName,
   placeHolder,
   inputType,
@@ -37,4 +37,4 @@ const Interface = ({
   );
 };
 
-export default Interface;
+export default PostJobInput;

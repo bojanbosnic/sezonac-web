@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Card from "../components/Card/Interface";
+import Card from "../components/Card";
 import Navbar from "../components/Navbar";
 import styles from "../styles/home.module.css";
-import classNames from "classnames";
 import {
   getDocs,
   query,
@@ -103,7 +102,6 @@ const Jobs = ({ loggedIn }) => {
       getGlobalDatas();
     }
   }, []);
-
 
   return (
     <div className="container bg-[#f3f5f0] h-full min-h-screen sm:p-4">

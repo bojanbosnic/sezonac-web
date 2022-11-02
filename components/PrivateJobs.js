@@ -6,25 +6,21 @@ import {
   doc,
   query,
   where,
-  onSnapshot,
 } from "firebase/firestore";
-import { db } from "../../firebase";
-import { AuthContext } from "../../Context/AuthContext";
+import { db } from "../firebase";
+import { AuthContext } from "../Context/AuthContext";
 import { RiDeleteBin2Line } from "react-icons/ri";
-import { useRouter } from "next/router";
-import Modal from "../Modal";
-import LoadingSpinner from "../LoadingSpinner";
+import Modal from "./Modal";
+import LoadingSpinner from "./LoadingSpinner";
 import { MdLocationOn } from "react-icons/md";
 
-const Interface = () => {
+const PrivateJobs = () => {
   const { currentUser } = useContext(AuthContext);
   const { uid } = currentUser;
-  const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [fireData, setFireData] = useState([]);
   const [jobsForModal, setJobsForModal] = useState([]);
   const [isUpdating, setIsUpdating] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const getUserData = async () => {
     const jobovi = [];
@@ -56,6 +52,9 @@ const Interface = () => {
   return (
     <div className="relative">
       <h1 className="text-xl font-medium mx-6">Objavljeni Poslovi</h1>
+      <div className="bg-primary">
+        <LoadingSpinner />
+      </div>
       <hr />
       <div className="px-6">
         {fireData.map((jobs) => (
@@ -91,4 +90,4 @@ const Interface = () => {
   );
 };
 
-export default Interface;
+export default PrivateJobs;

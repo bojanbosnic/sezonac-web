@@ -1,19 +1,18 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
-import { db } from "../../firebase";
+import { db } from "../firebase";
 import { v4 as uuidv4 } from "uuid";
-import { AuthContext } from "../../Context/AuthContext";
+import { AuthContext } from "../Context/AuthContext";
 import { useContext } from "react";
-import { addDoc, collection, setDoc, doc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/router";
-import PostJobInput from "../PostJobInput";
-import { FaBuilding, FaGlobeAmericas, FaAddressCard } from "react-icons/fa";
+import PostJobInput from "./PostJobInput";
+import { FaGlobeAmericas, FaAddressCard } from "react-icons/fa";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdAlternateEmail, MdOutlineAccessTimeFilled } from "react-icons/md";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { useForm } from "react-hook-form";
 
-const Interface = () => {
+const PostJob = () => {
   const { currentUser } = useContext(AuthContext);
   const { uid, photoURL, displayName } = currentUser;
 
@@ -190,4 +189,4 @@ const Interface = () => {
   );
 };
 
-export default Interface;
+export default PostJob;

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
-import { db } from "../../firebase";
-import { AuthContext } from "../../Context/AuthContext";
+import { db } from "../firebase";
+import { AuthContext } from "../Context/AuthContext";
 import {
   setDoc,
   doc,
