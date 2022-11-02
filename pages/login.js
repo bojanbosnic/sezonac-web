@@ -3,84 +3,151 @@ import React, { useEffect, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useRouter } from "next/router";
+import { MdAlternateEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { useForm } from "react-hook-form";
 
 export default function LogIn({ loggedIn }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    setError,
+  } = useForm({
+    defaultValues: {
+      firstName: "",
+      email: "",
+      password: "",
+    },
+  });
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter("");
-  const handleLogin = async (e) => {
-    e.preventDefault();
+
+  const customErrors = (error) => {
+    switch (error.message) {
+      case "Firebase: Error (auth/user-not-found).":
+        setError("password", {
+          type: "server",
+          message: "User ne postoji!",
+        });
+        break;
+      case "Firebase: Error (auth/wrong-password).":
+        setError("password", {
+          type: "server",
+          message: "Pogresna",
+        });
+        break;
+
+      default:
+        console.log("Postoji problem");
+    }
+  };
+  const handleLogin = async (data) => {
+    console.log(data);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, data.email, data.password);
       router.push("/profile");
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
+      customErrors(error);
     }
   };
 
+  // console.log(watch("email"));
+
   useEffect(() => {
     if (loggedIn) {
-      router.push("/");
+      router.push("/profile");
     } else {
-      setIsLoading(true);
+      setIsLoading(false);
     }
   }, []);
 
   return (
     <div className="container">
-      {!isLoading ? (
+      {isLoading ? (
         <LoadingSpinner />
       ) : (
         <main className="flex justify-center items-center flex-col">
           <section className="text-center">
             <h1>Prijavite se</h1>
-            <h2>Molimo vas da u formi ispod upišete svoje podatke</h2>
+            <h2 className="font-normal">
+              Molimo vas da u formi ispod upišete svoje podatke
+            </h2>
           </section>
-          <form className="w-1/2 text-white md:w-full">
+          <form
+            onSubmit={handleSubmit(handleLogin)}
+            className="w-1/2 text-white md:w-full"
+          >
             <div className="my-12">
-              <label htmlFor="email_id">Email</label>
-              <div>
+              <label htmlFor="email_id" className="font-medium text-black">
+                Email
+              </label>
+              <div className="relative">
                 <input
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
+                  {...register("email", { required: true, server: true })}
+                  aria-invalid={errors.email ? "true" : "false"}
                   id="email_id"
-                  className="input_field_login"
+                  className="input_field_login relative pl-10 z-10"
+                  placeholder="ime.prezime@example.com"
                   type="email"
-                  placeholder="Unesi svoj email"
-                  name="inputField"
                 />
+
+                {errors.email?.type === "required" && (
+                  <p className="text-red-600" role="alert">
+                    Upišite Email!
+                  </p>
+                )}
+
+                <label htmlFor="email_id">
+                  <MdAlternateEmail className="absolute z-20 top-[28px] text-primary left-[14px]" />
+                </label>
               </div>
             </div>
             <div className="my-12" style={{ margin: "1.5rem 0" }}>
-              <label htmlFor="password_id">Lozinka</label>
-              <div>
+              <label htmlFor="password_id" className="font-medium text-black">
+                Lozinka
+              </label>
+              <div className="relative">
                 <input
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
+                  {...register("password", {
+                    required: true,
+                    minLength: {
+                      value: 6,
+                      message: "Minimalna vrijednost je 6 slova!",
+                    },
+                  })}
+                  aria-invalid={errors.password ? "true" : "false"}
                   id="password_id"
-                  className="input_field_login"
-                  type="password"
+                  className="input_field_login relative pl-10 z-10"
                   placeholder="••••••"
-                  name="inputField"
+                  type="password"
                 />
+                <p className="text-red-600">{errors.password?.message}</p>
+                {errors.password?.type === "required" && (
+                  <p className="text-red-600" role="alert">
+                    Upišite Lozinku!
+                  </p>
+                )}
+
+                {errors.password?.type === "server" && errors.password.message}
+
+                <label htmlFor="password_id">
+                  <RiLockPasswordFill className="absolute z-20 top-[28px] text-primary left-[14px]" />
+                </label>
               </div>
             </div>
-            <div>
+            <div className="text-black font-medium my-4">
               <a href="#">Zaboravio/la si lozinku?</a>
             </div>
-            <button
-              onClick={handleLogin}
-              className="w-full py-5 px-6 border-none mt-12 mb-4 bg-secondary text-white pointer rounded-lg"
-            >
-              Prijavi se
-            </button>
-            <div style={{ textAlign: "center" }}>
+            <button className="w-full submit_btn_form">Prijavi se</button>
+            <div className="pointer text-black font-medium text-center mt-4 mb-8">
               Nemaš nalog?{" "}
-              <Link href="/register">
+              <Link legacyBehavior href="/register">
                 <a>
-                  <span style={{ color: "red" }}> Registruj se besplatno </span>
+                  <span className="text-red-600"> Registruj se </span>
                 </a>
               </Link>
             </div>

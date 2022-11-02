@@ -1,0 +1,28 @@
+.wrapper {
+  background-image: url("../assets/ilustrations/bg1.jpg");
+  min-height: 100vh;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.initialImage {
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+}
+
+.card_hover {
+  transition: transform 0.5s;
+}
+
+.card_hover:hover {
+  box-shadow: #00000029 0 10px 36px, #0000000f 0 0 0 1px;
+  transform: translateY(-10px);
+}
+
+.linearGradient {
+  background-color: #013a6b;
+  background-image: -webkit-linear-gradient(0deg, #1967d2 50%, #fff 50%);
+}

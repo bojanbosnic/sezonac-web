@@ -1,10 +1,11 @@
-
 module.exports = {
   content: ["./pages/**/*.{html,js}", "./components/**/*.{html,js}"],
   theme: {
     container: {
       padding: "4rem",
-   
+    },
+    fontFamily: {
+      my_font: ["Rubik", "sans-serif"],
     },
     screens: {
       xl: { max: "1200px" },
@@ -22,10 +23,16 @@ module.exports = {
 
     extend: {
       colors: {
-        primary: "#00214A",
-        secondary: "#707070",
+        primary: "#1967d2",
+        secondary: "#dbe6f7",
         white: "#fff",
-        dark:  'rgb(0 0 0 / 93%)',
+        black: "#3c3c3c",
+        green: "#00ca99",
+      },
+
+      boxShadow: {
+        sm: "1px 5px 26px 5px",
+        xs: "0px 0px 25px",
       },
     },
   },

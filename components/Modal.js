@@ -1,30 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { doc, updateDoc } from "firebase/firestore";
+import Image from "next/image";
 import ReactDOM from "react-dom";
 import { AiOutlineInfoCircle, AiOutlineCloseSquare } from "react-icons/ai";
 import { BiData, BiUserCircle } from "react-icons/bi";
-import { MdOutlineDescription } from "react-icons/md";
+import { IoIosSave } from "react-icons/io";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
-import UploadForm from "./UploadForm";
+import classNames from "classnames";
+import styles from "../styles/home.module.css";
 
-const Modal = ({
-  show,
-  onClose,
-  children,
-  jobss,
-  getUserData,
-  set,
-  isUpdating,
-}) => {
+const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
   const [isBrowser, setIsBrowser] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const { currentUser } = useContext(AuthContext);
   const [updateJobs, setUpdateJobs] = useState([]);
-  const poslovi = [jobss];
+  const poslovi = [jobsForModal];
 
-  console.log("UPDATED JOBS ID", updateJobs.ID);
   const handleClose = (e) => {
     e.preventDefault();
     onClose();
@@ -33,42 +26,17 @@ const Modal = ({
   const updateFields = (e) => {
     e.preventDefault();
 
-    let fieldToEdit = doc(db, `/${currentUser.uid}`, updateJobs.ID);
-    updateDoc(fieldToEdit, {
-      title: updateJobs.title,
-      city: updateJobs.city,
-      money: updateJobs.money,
-      time: updateJobs.time,
-      duration: updateJobs.duration,
-      info: updateJobs.info,
-    })
-      .then(() => {
-        let filedglobaledit = doc(db, `/GlobalJobs`, updateJobs.ID);
-        updateDoc(filedglobaledit, {
-          title: updateJobs.title,
-          city: updateJobs.city,
-          money: updateJobs.money,
-          time: updateJobs.time,
-          duration: updateJobs.duration,
-          info: updateJobs.info,
-        });
-      })
-      .then(() => {
-        let filedsavedledit = doc(
-          db,
-          `/SavedJobs${currentUser.uid}`,
-          updateJobs.ID
-        );
-        updateDoc(filedsavedledit, {
-          title: updateJobs.title,
-          city: updateJobs.city,
-          money: updateJobs.money,
-          time: updateJobs.time,
-          duration: updateJobs.duration,
-          info: updateJobs.info,
-        });
-      })
+    let fieldToEdit = doc(db, `/jobs`, updateJobs.ID);
 
+    updateDoc(fieldToEdit, {
+      company: updateJobs.company,
+      title: updateJobs.title,
+      email: updateJobs.email,
+      money: updateJobs.money,
+      workDuration: updateJobs.workDuration,
+      website: updateJobs.webiste,
+      location: updateJobs.location,
+    })
       .then(() => {
         setIsUpdate(false);
         getUserData();
@@ -77,20 +45,40 @@ const Modal = ({
       .catch((error) => console.log(error));
   };
 
-  const getDatas = (id, title, city, money, time, duration, info) => {
+  const getDatas = (
+    id,
+    title,
+    location,
+    money,
+    email,
+    webiste,
+    company,
+    workDuration
+  ) => {
     setUpdateJobs({
       ID: id,
       title: title,
-      city: city,
+      location: location,
       money: money,
-      time: time,
-      duration: duration,
-      info: info,
+      email: email,
+      webiste: webiste,
+      company: company,
+      workDuration: workDuration,
     });
     setIsUpdate(true);
   };
 
-  const privateUpdate = (id, title, city, money, time, duration, info) => {
+  //// ^
+  const privateUpdate = (
+    id,
+    title,
+    location,
+    money,
+    email,
+    webiste,
+    company,
+    workDuration
+  ) => {
     if (isUpdate) {
       return (
         <>
@@ -106,7 +94,16 @@ const Modal = ({
           <button
             className="mx-2"
             onClick={() =>
-              getDatas(id, title, city, money, time, duration, info)
+              getDatas(
+                id,
+                title,
+                location,
+                money,
+                email,
+                webiste,
+                company,
+                workDuration
+              )
             }
           >
             Update job
@@ -121,235 +118,212 @@ const Modal = ({
   }, []);
 
   const modalContent = show ? (
-    <div className="z-20 fixed w-full h-full top-0 left-0 bg-dark">
-      <div className="z-40 w-full absolute top-0 left-0 min-h-full min-w-full p-6">
+    <div className="z-20 fixed w-full h-full top-0 left-0 bg-[#000000f7]">
+      <div className="z-40 w-[80%] absolute inset-2/4 -translate-y-2/4 -translate-x-2/4 min-h-full p-4">
         {poslovi.map((job) => (
-          <div className="rounded border bg-primary overflow-y-auto h-[90vh]">
-            <div className="px-4 py-2 border border-t-0 border-x-0 border-b">
-              ID: {job.id}
+          <div className="rounded bg-white overflow-y-auto snap-y h-[80vh]">
+            <div className="bg-primary relative p-8">
+              <div className="flex text-white items-center">
+                <span className="mr-2">
+                  <BiData />
+                </span>
+                <span className="font-normal">Detaljne informacije</span>
+              </div>
+              <div
+                className="absolute top-2 right-8 cursor-pointer text-white"
+                onClick={handleClose}
+              >
+                X
+              </div>
             </div>
-            <div className="padding-wrapp px-4 my-8">
-              <div className="flex justify-between flex-wrap">
-                <div>
-                  <div className="flex items-center my-2">
-                    <span className="mr-2">
-                      <BiUserCircle />
-                    </span>
-                    <span>Objavio</span>
-                  </div>
-                  <div className="flex">
-                    <div className="w-[70%] relative flex items-center  ml-6 my-8 sm:justify-center md:flex-wrap border border-white p-4 ">
-                      <div className="w-[50%] border border-white p-6 flex flex-col">
-                        <span className="mb-1 text-sm">Choose image</span>
-                        <input
-                          className="text-xs"
-                          type="file"
-                          id="myImage"
-                          name="profile_img"
-                          accept="image/png, image/jpg"
-                        />
-                      </div>
-                      <div className="ml-4">
-                        {isUpdate ? (
-                          <>
-                            <input
-                              onChange={(e) =>
-                                setUpdateJobs({
-                                  ...updateJobs,
-                                  title: e.target.value,
-                                })
-                              }
-                              className="text-black border-2 px-2 border-gray-400"
-                              type={"text"}
-                              placeholder="type text..."
-                              defaultValue={updateJobs.title}
-                            />
-                          </>
-                        ) : (
-                          <span className="sm:items-center">{job.title}</span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="slika-hotela">
-                  <div className="w-[14rem] h-[12rem] my-2 border border-white p-6 flex flex-col lg:ml-6">
-               <UploadForm/>
-                  </div>
+            {/* <div class="flex-none ...">01</div>
+            <div class="flex-1 w-64 ...">02</div>
+            <div class="flex-1 w-32 ...">03</div> */}
+            <div className="flex items-center justify-between flex-wrap lg:justify-center p-8 my-8">
+              <div className="relative flex flex-col justify-center items-center my-8 sm:justify-center">
+                <img
+                  src={job.photo}
+                  className="rounded-full w-48 h-48"
+                  alt="company photo"
+                />
+                <div className="mt-4">
+                  {isUpdate ? (
+                    <>
+                      <input
+                        onChange={(e) =>
+                          setUpdateJobs({
+                            ...updateJobs,
+                            company: e.target.value,
+                          })
+                        }
+                        type={"text"}
+                        placeholder="type text..."
+                        defaultValue={updateJobs.company}
+                      />
+                    </>
+                  ) : (
+                    <span className="font-medium ml-4">{job.company}</span>
+                  )}
                 </div>
               </div>
-              <div>
-                <div className="flex items-center my-2">
-                  <span className="mr-2">
-                    <AiOutlineInfoCircle />
-                  </span>
-                  <span>Osnovne informacije</span>
-                </div>
-                <div className="flex ml-6 my-8">
-                  <div
-                    className="relative overflow-hidden border border-white w-[20%] lg:w-[50%]"
-                    style={{
-                      background:
-                        "linear-gradient(to bottom, transparent 50%, #00214A 50%)",
-                    }}
-                  >
-                    <div className="text-center py-3">
-                      <span>Lokacija</span>
+
+              <div className="flex justify-between lg:flex-wrap lg:justify-center">
+                <div className="mr-28 lg:mr-0">
+                  <div className="flex items-center py-2 px-3">
+                    <div>
+                      <h3 className="m-0">Zanimanje</h3>
                     </div>
-                    <div className="absolute h-full w-full  text-center py-3 font-medium bg-white text-primary">
-                      {isUpdate ? (
-                        <>
-                          <input
-                            onChange={(e) =>
-                              setUpdateJobs({
-                                ...updateJobs,
-                                city: e.target.value,
-                              })
-                            }
-                            className="text-black border-2 px-2 border-gray-400"
-                            type={"text"}
-                            placeholder="type text..."
-                            defaultValue={updateJobs.city}
-                          />
-                        </>
-                      ) : (
-                        <span>{job.city}</span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="border mx-8 border-white w-[20%] lg:w-[50%]">
-                    <div className="text-center py-3">
-                      <span>Satnica</span>
-                    </div>
-                    <div className="text-center py-3 font-medium bg-white text-primary">
-                      {isUpdate ? (
-                        <>
-                          <input
-                            onChange={(e) =>
-                              setUpdateJobs({
-                                ...updateJobs,
-                                money: e.target.value,
-                              })
-                            }
-                            className="text-black border-2 px-2 border-gray-400"
-                            type={"text"}
-                            placeholder="type text..."
-                            defaultValue={updateJobs.money}
-                          />
-                        </>
-                      ) : (
-                        <span>{job.money}</span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center my-2">
-                  <span className="mr-2">
-                    <BiData />
-                  </span>
-                  <span>Detaljne informacije</span>
-                </div>
-                <div className="ml-6 my-8">
-                  <div className="flex justify-between border border-white w-[50%] md:w-full">
-                    <div className="text-center py-1">
-                      <span className="mx-2">Radno vrijeme</span>
-                    </div>
-                    <div className="text-center py-1  bg-white text-primary ">
-                      {isUpdate ? (
-                        <>
-                          <input
-                            onChange={(e) =>
-                              setUpdateJobs({
-                                ...updateJobs,
-                                time: e.target.value,
-                              })
-                            }
-                            className="text-black border-2 px-2 border-gray-400"
-                            type={"text"}
-                            placeholder="type text..."
-                            defaultValue={updateJobs.time}
-                          />
-                        </>
-                      ) : (
-                        <span className="mx-2 font-medium">{job.time}</span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex justify-between border my-4 border-white w-[50%] md:w-full">
-                    <div className="text-center py-1">
-                      <span className="mx-2">Rok trajanja</span>
-                    </div>
-                    <div className="text-center py-1 bg-white text-primary">
-                      {isUpdate ? (
-                        <>
-                          <input
-                            onChange={(e) =>
-                              setUpdateJobs({
-                                ...updateJobs,
-                                duration: e.target.value,
-                              })
-                            }
-                            className="text-black border-2 px-2 border-gray-400"
-                            type={"text"}
-                            placeholder="type text..."
-                            defaultValue={updateJobs.duration}
-                          />
-                        </>
-                      ) : (
-                        <span className="mx-2 font-medium">{job.duration}</span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center my-2">
-                  <span className="mr-2">
-                    <MdOutlineDescription />
-                  </span>
-                  <span>Detaljni opis</span>
-                </div>
-                <div className="flex justify-between items-center ml-6 my-8">
-                  <div className="w-[80%] border border-white p-6">
                     {isUpdate ? (
                       <>
                         <input
                           onChange={(e) =>
                             setUpdateJobs({
                               ...updateJobs,
-                              info: e.target.value,
+                              title: e.target.value,
                             })
                           }
-                          className="text-black border-2 px-2 border-gray-400"
+                          className="text-black px-2"
                           type={"text"}
                           placeholder="type text..."
-                          defaultValue={updateJobs.info}
+                          defaultValue={updateJobs.title}
                         />
                       </>
                     ) : (
-                      <p>{job.info}</p>
+                      <span className="font-medium ml-4">{job.title}</span>
                     )}
                   </div>
-                  {isUpdating &&
-                    privateUpdate(
-                      job.id,
-                      job.title,
-                      job.city,
-                      job.money,
-                      job.time,
-                      job.duration,
-                      job.info
+                  <div className="flex items-center py-2 px-3">
+                    <div>
+                      <h3 className="m-0">Email</h3>
+                    </div>
+                    {isUpdate ? (
+                      <>
+                        <input
+                          onChange={(e) =>
+                            setUpdateJobs({
+                              ...updateJobs,
+                              email: e.target.value,
+                            })
+                          }
+                          className="text-black px-2"
+                          type={"text"}
+                          placeholder="type text..."
+                          defaultValue={updateJobs.email}
+                        />
+                      </>
+                    ) : (
+                      <span className="font-medium ml-4">{job.email}</span>
                     )}
-                  <div
-                    className="flex items-end cursor-pointer"
-                    onClick={handleClose}
-                  >
-                    <AiOutlineCloseSquare fontSize="4rem" />
+                  </div>
+                  <div className="flex items-center  py-2 px-3">
+                    <div>
+                      <h3 className="m-0">Website</h3>
+                    </div>
+                    {isUpdate ? (
+                      <>
+                        <input
+                          onChange={(e) =>
+                            setUpdateJobs({
+                              ...updateJobs,
+                              website: e.target.value,
+                            })
+                          }
+                          className="text-black"
+                          type={"text"}
+                          placeholder="type text..."
+                          defaultValue={updateJobs.website}
+                        />
+                      </>
+                    ) : (
+                      <span className="font-medium ml-4">{job.website}</span>
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-center py-2 px-3">
+                    <div>
+                      <h3 className="m-0">Lokacija</h3>
+                    </div>
+                    {isUpdate ? (
+                      <>
+                        <input
+                          onChange={(e) =>
+                            setUpdateJobs({
+                              ...updateJobs,
+                              location: e.target.value,
+                            })
+                          }
+                          className="text-black"
+                          type={"text"}
+                          placeholder="type text..."
+                          defaultValue={updateJobs.location}
+                        />
+                      </>
+                    ) : (
+                      <span className="ml-4">{job.location}</span>
+                    )}
+                  </div>
+                  <div className="flex items-center py-2 px-3">
+                    <div>
+                      <h3 className="m-0">Satnica </h3>
+                    </div>
+                    {isUpdate ? (
+                      <>
+                        <input
+                          onChange={(e) =>
+                            setUpdateJobs({
+                              ...updateJobs,
+                              money: e.target.value,
+                            })
+                          }
+                          type={"text"}
+                          placeholder="type text..."
+                          defaultValue={updateJobs.money}
+                        />
+                      </>
+                    ) : (
+                      <span className="ml-4">{job.money}</span>
+                    )}
+                  </div>
+                  <div className="flex items-center py-2 px-3">
+                    <div>
+                      <h3 className="m-0">Radno vrijeme</h3>
+                    </div>
+                    {isUpdate ? (
+                      <>
+                        <input
+                          onChange={(e) =>
+                            setUpdateJobs({
+                              ...updateJobs,
+                              workDuration: e.target.value,
+                            })
+                          }
+                          type={"text"}
+                          placeholder="type text..."
+                          defaultValue={updateJobs.workDuration}
+                        />
+                      </>
+                    ) : (
+                      <span className="mx-2 font-medium ml-4">
+                        {job.workDuration}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="flex justify-between items-center ml-6 my-8">
+              {isUpdating &&
+                privateUpdate(
+                  job.jobID,
+                  job.title,
+                  job.location,
+                  job.money,
+                  job.email,
+                  job.website,
+                  job.company,
+                  job.workDuration
+                )}
             </div>
           </div>
         ))}

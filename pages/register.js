@@ -1,53 +1,75 @@
 import React, { useState, useEffect } from "react";
-import SignUp from "../components/SignUp";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { auth } from "../firebase";
-import Link from "next/link";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useRouter } from "next/router";
+import createUser from "../utils/createUser";
+import { FaBuilding } from "react-icons/fa";
+import { MdAlternateEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { useForm } from "react-hook-form";
+import Link from "next/link";
 
 const Register = ({ loggedIn }) => {
   const [confirmed, setConfirmed] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [form, setForm] = useState({
-    displayName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+  // const [form, setForm] = useState({
+  //   displayName: "",
+  //   email: "",
+  //   password: "",
+  //   confirmPassword: "",
+  // });
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    setError,
+  } = useForm({
+    defaultValues: {
+      firstName: "",
+      email: "",
+      password: "",
+    },
   });
 
   const { currentUser, setCurrentUser } = useContext(AuthContext);
 
   const router = useRouter();
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    if (form.password !== form.confirmPassword) {
-      setConfirmed(false);
-      return;
-    }
-    setConfirmed(true);
-
-    try {
-      await createUserWithEmailAndPassword(auth, form.email, form.password);
-      console.log("User after register", auth.currentUser.displayName);
-      await updateProfile(auth.currentUser, { displayName: form.displayName });
-      console.log("User after update profile", auth.currentUser.displayName);
-      setCurrentUser({ ...currentUser, displayName: form.displayName });
-
-      router.push("/profile");
-    } catch (error) {
-      console.log(error);
+  const customErrors = (error) => {
+    if (error.message == "Firebase: Error (auth/email-already-in-use).") {
+      setError("email", {
+        type: "server",
+        message: "Email je već u upotrebi!",
+      });
     }
   };
 
-  const handleForm = (type, value) => {
-    setForm({
-      ...form,
-      [type]: value,
-    });
+  const handleRegister = async (data) => {
+    // if (form.password !== form.confirmPassword) {
+    //   setConfirmed(false);
+    //   return;
+    // }
+    // setConfirmed(true);
+
+    try {
+      await createUserWithEmailAndPassword(auth, data.email, data.password);
+      console.log("User after register", auth.currentUser.displayName);
+      await updateProfile(auth.currentUser, { displayName: data.firstName });
+      console.log("User after update profile", auth.currentUser.displayName);
+      setCurrentUser({ ...currentUser, displayName: data.firstName });
+      await createUser({
+        displayName: data.firstName,
+        email: data.email,
+        id: auth.currentUser.uid,
+      });
+      router.push("/profile");
+    } catch (error) {
+      customErrors(error);
+    }
   };
 
   useEffect(() => {
@@ -66,57 +88,104 @@ const Register = ({ loggedIn }) => {
         <main className="flex justify-center items-center flex-col my-9">
           <section className="text-center">
             <h1>Registruj se</h1>
-            <h2>Molimo vas da u formi ispod upišete svoje podatke</h2>
+            <h2 className="font-normal">
+              Molimo vas da u formi ispod upišete svoje podatke
+            </h2>
           </section>
 
-          <SignUp
-            name="Firma"
-            placeHolder="Upisi naziv firme"
-            funkcija={(e) => handleForm("displayName", e.target.value)}
-            vrednost={form.displayName}
-            type="text"
-          />
-
-          <SignUp
-            name="Email"
-            placeHolder="Email"
-            funkcija={(e) => handleForm("email", e.target.value)}
-            vrednost={form.email}
-            type="email"
-          />
-
-          <SignUp
-            name="Lozinka"
-            placeHolder="Upisi Lozinku"
-            funkcija={(e) => handleForm("password", e.target.value)}
-            vrednost={form.password}
-            type="password"
-          />
-
-          <SignUp
-            name="Potvrdi Lozinku"
-            placeHolder="Ponovi lozinku"
-            funkcija={(e) => handleForm("confirmPassword", e.target.value)}
-            vrednost={form.confirmPassword}
-            type="password"
-          />
-
-          {!confirmed && <h1>Lozinke se ne poklapaju!!</h1>}
-
-          <button
-            onClick={handleRegister}
-            className="w-full py-5 px-6 border-none mb-4 bg-secondary text-white pointer rounded-lg"
+          <form
+            onSubmit={handleSubmit(handleRegister)}
+            className="w-2/4 text-white md:w-full"
           >
-            Registruj se
-          </button>
-          <div className="text-center">
-            Već imaš nalog?
-            <Link href="/login">
-              <a>
-                <span className="text-red-600"> Prijavi se ovde </span>
-              </a>
-            </Link>
-          </div>
+            <div className="my-4">
+              <label htmlFor="id" className="font-medium text-black">
+                Firma
+              </label>
+              <div className="relative">
+                <input
+                  {...register("firstName", { required: true, server: true })}
+                  className="input_field_login relative pl-10 z-10"
+                  id="title_id"
+                  placeHolder="Naziv firme"
+                  type="text"
+                />
+                {errors.firstName?.type === "required" && (
+                  <p className="text-red-600" role="alert">
+                    Title is required
+                  </p>
+                )}
+
+                <label htmlFor="id">
+                  <FaBuilding className="absolute z-20 top-[28px] text-primary left-[12px]" />
+                </label>
+              </div>
+            </div>
+            <div className="my-4">
+              <label htmlFor="id" className="font-medium text-black">
+                Email
+              </label>
+              <div className="relative">
+                <input
+                  {...register("email", { required: true, server: true })}
+                  className="input_field_login relative pl-10 z-10"
+                  id="title_id"
+                  placeHolder="ime.example@gmail.com"
+                  type="email"
+                />
+                {errors.email?.type === "required" && (
+                  <p className="text-red-600" role="alert">
+                    Email is required
+                  </p>
+                )}
+                {errors.email?.type === "server" && errors.email.message}
+                <label htmlFor="id">
+                  <MdAlternateEmail className="absolute z-20 top-[28px] text-primary left-[12px]" />
+                </label>
+              </div>
+            </div>
+            <div className="my-4">
+              <label htmlFor="id" className="font-medium text-black">
+                Lozinka
+              </label>
+              <div className="relative">
+                <input
+                  {...register("password", {
+                    required: true,
+                    minLength: {
+                      value: 6,
+                      message: "Minimalna vrijednost je 6 slova!",
+                    },
+                  })}
+                  className="input_field_login relative pl-10 z-10"
+                  id="title_id"
+                  placeHolder="● ● ● ● ● ●"
+                  type="password"
+                />
+                <p className="text-red-600">{errors.password?.message}</p>
+                {errors.password?.type === "required" && (
+                  <p className="text-red-600" role="alert">
+                    Password is required
+                  </p>
+                )}
+
+                <label htmlFor="id">
+                  <RiLockPasswordFill className="absolute z-20 top-[28px] text-primary left-[12px]" />
+                </label>
+              </div>
+            </div>
+
+            <button className="w-full  py-5 px-6 border-none mb-4 bg-primary text-white font-medium pointer rounded-lg">
+              Registruj se
+            </button>
+            <div className="text-center text-black font-medium">
+              Već imaš nalog?
+              <Link legacyBehavior href="/login">
+                <a>
+                  <span className="text-red-600"> Prijavi se ovde </span>
+                </a>
+              </Link>
+            </div>
+          </form>
         </main>
       )}
     </div>

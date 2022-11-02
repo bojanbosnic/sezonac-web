@@ -6,15 +6,15 @@ import Head from "next/head";
 function MyApp({ Component, pageProps }) {
   const token =
     typeof window !== "undefined" ? localStorage.getItem("Token") : null;
-console.log("token", token )
+
+  const test = "test123";
   return (
     <>
       <AuthProvider>
         <Head>
           <title>Sezonac</title>
         </Head>
-        <Navbar loggedIn={!!token} />
-        <Component loggedIn={!!token} {...pageProps} />
+        <Component loggedIn={!!token} test={test} {...pageProps} />
       </AuthProvider>
     </>
   );
