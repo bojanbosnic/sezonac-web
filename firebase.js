@@ -13,7 +13,7 @@ const firebaseConfig = {
   projectId: "project-sezonac",
   storageBucket: "project-sezonac.appspot.com",
   messagingSenderId: "495150965627",
-  appId: "1:495150965627:web:661df0ba5e2edf1b0453de"
+  appId: "1:495150965627:web:661df0ba5e2edf1b0453de",
 };
 
 // Initialize Firebase
