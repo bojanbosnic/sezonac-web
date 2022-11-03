@@ -18,7 +18,7 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
 
   return (
     <nav className="flex bg-transparent justify-between items-center">
-      <Link href="/">
+      <Link href="/" legacyBehavior>
         sezonac.ba
         {/* <Image src={logo} alt="sezonac-logo" /> */}
       </Link>
@@ -32,12 +32,12 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
         >
           <li className=" mr-4">
             <Link href="/about">
-              <a>O Nama</a>
+              O Nama
             </Link>
           </li>
           <li className=" mr-4">
             <Link href="/contact">
-              <a>Kontakt</a>
+              Kontakt
             </Link>
           </li>
 
@@ -45,9 +45,9 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
             <>
               <li>
                 <Link href="/profile">
-                  <a>
-                    <FaHome fontSize="1.5rem" />
-                  </a>
+
+                  <FaHome fontSize="1.5rem" />
+
                 </Link>
               </li>
             </>
@@ -55,16 +55,16 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
             <>
               <li className="mx-3">
                 <Link href="/login">
-                  <a>
-                    <Button
-                      name="Prijavi se"
-                      textColor="text-white"
-                      bgColor="bg-primary"
-                      hover="hover:bg-sky-700"
-                      paddingY="py-3"
-                      paddingX="px-5"
-                    />
-                  </a>
+
+                  <Button
+                    name="Prijavi se"
+                    textColor="text-white"
+                    bgColor="bg-primary"
+                    hover="hover:bg-sky-700"
+                    paddingY="py-3"
+                    paddingX="px-5"
+                  />
+
                 </Link>
               </li>
             </>
