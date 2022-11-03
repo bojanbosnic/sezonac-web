@@ -70,7 +70,7 @@ const SavedJobs = ({ savedJobsID }) => {
       <hr />
       <div className="px-6">
         {sacuvaniPoslovi.map((datas) => (
-          <div className="flex items-center relative ">
+          <div key={datas.jobID} className="flex items-center relative ">
             <div
               onClick={() => {
                 setJobsForModal(datas), setShowModal(true);
@@ -80,7 +80,11 @@ const SavedJobs = ({ savedJobsID }) => {
               <div className="mx-8 w-full flex items-center justify-between md:flex-wrap sm:my-2">
                 <div className="flex  items-center">
                   <div className="border p-4  w-24 h-24 sm:mx-8 sm:w-12 sm:h-12">
-                    <Image className="rounded-3xl" src={datas.photo} alt="company-owner-pc" />
+                    <Image
+                      className="rounded-3xl"
+                      src={datas.photo}
+                      alt="company-owner-pc"
+                    />
                   </div>
                   <span className="mx-4 font-semibold">{datas.title}</span>
                 </div>

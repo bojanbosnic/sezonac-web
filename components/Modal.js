@@ -15,6 +15,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
   const { currentUser } = useContext(AuthContext);
   const [updateJobs, setUpdateJobs] = useState([]);
   const poslovi = [jobsForModal];
+  console.log("error resolved KEY", poslovi);
 
   const handleClose = (e) => {
     e.preventDefault();
@@ -120,7 +121,10 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
     <div className="z-20 fixed w-full h-full top-0 left-0 bg-[#000000f7]">
       <div className="z-40 w-[80%] absolute inset-2/4 -translate-y-2/4 -translate-x-2/4 min-h-full p-4">
         {poslovi.map((job) => (
-          <div className="rounded bg-white overflow-y-auto snap-y h-[80vh]">
+          <div
+            key={job.jobID}
+            className="rounded bg-white overflow-y-auto snap-y h-[80vh]"
+          >
             <div className="bg-primary relative p-8">
               <div className="flex text-white items-center">
                 <span className="mr-2">
@@ -139,6 +143,8 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
               <div className="relative flex flex-col justify-center items-center my-8 sm:justify-center">
                 <Image
                   src={job.photo}
+                  width={500}
+                  height={500}
                   className="rounded-full w-48 h-48"
                   alt="company photo"
                 />

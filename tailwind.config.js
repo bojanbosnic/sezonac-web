@@ -1,5 +1,8 @@
 module.exports = {
-  content: ["./pages/**/*.{html,js}", "./components/**/*.{html,js}"],
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     container: {
       padding: "4rem",

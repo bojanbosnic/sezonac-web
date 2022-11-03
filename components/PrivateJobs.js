@@ -56,7 +56,7 @@ const PrivateJobs = () => {
       <hr />
       <div className="px-6">
         {fireData.map((jobs) => (
-          <div className="flex items-center  relative">
+          <div key={jobs.jobID} className="flex items-center  relative">
             <div
               onClick={() => {
                 setJobsForModal(jobs), setShowModal(true);
