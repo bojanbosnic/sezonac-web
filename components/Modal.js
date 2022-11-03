@@ -141,6 +141,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
             </div>
             <div className="flex items-center justify-between flex-wrap lg:justify-center p-8 my-8">
               <div className="relative flex flex-col justify-center items-center my-8 sm:justify-center">
+                {console.log("SLIDZA", job.photo)}
                 <Image
                   src={job.photo}
                   width={500}
