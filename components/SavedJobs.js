@@ -3,6 +3,8 @@ import Image from "next/image";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { MdLocationOn } from "react-icons/md";
 import { AuthContext } from "../Context/AuthContext";
+import userIcon from "../assets/ilustrations/2.jpg";
+
 import { useContext } from "react";
 import {
   getDocs,
@@ -71,6 +73,7 @@ const SavedJobs = ({ savedJobsID }) => {
       <div className="px-6">
         {sacuvaniPoslovi.map((datas) => (
           <div key={datas.jobID} className="flex items-center relative ">
+            {console.log(datas.photo)}
             <div
               onClick={() => {
                 setJobsForModal(datas), setShowModal(true);
@@ -82,7 +85,9 @@ const SavedJobs = ({ savedJobsID }) => {
                   <div className="border p-4  w-24 h-24 sm:mx-8 sm:w-12 sm:h-12">
                     <Image
                       className="rounded-3xl"
-                      src={datas.photo}
+                      width={500}
+                      height={500}
+                      src={datas.photo === null ? userIcon.src : datas.photo}
                       alt="company-owner-pc"
                     />
                   </div>

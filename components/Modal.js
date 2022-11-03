@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
+import userIcon from "../assets/ilustrations/2.jpg";
 import ReactDOM from "react-dom";
-import { AiOutlineInfoCircle, AiOutlineCloseSquare } from "react-icons/ai";
 import { BiData, BiUserCircle } from "react-icons/bi";
-import { IoIosSave } from "react-icons/io";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
@@ -141,9 +140,8 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
             </div>
             <div className="flex items-center justify-between flex-wrap lg:justify-center p-8 my-8">
               <div className="relative flex flex-col justify-center items-center my-8 sm:justify-center">
-                {console.log("SLIDZA", job.photo)}
                 <Image
-                  src={job.photo}
+                  src={job.photo === null ? userIcon.src : job.photo}
                   width={500}
                   height={500}
                   className="rounded-full w-48 h-48"
