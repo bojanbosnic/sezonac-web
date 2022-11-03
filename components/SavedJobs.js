@@ -61,6 +61,7 @@ const SavedJobs = ({ savedJobsID }) => {
 
   useEffect(() => {
     getSavedJobs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -79,7 +80,7 @@ const SavedJobs = ({ savedJobsID }) => {
               <div className="mx-8 w-full flex items-center justify-between md:flex-wrap sm:my-2">
                 <div className="flex  items-center">
                   <div className="border p-4  w-24 h-24 sm:mx-8 sm:w-12 sm:h-12">
-                    <img className="rounded-3xl" src={datas.photo} />
+                    <Image className="rounded-3xl" src={datas.photo} alt="company-owner-pc" />
                   </div>
                   <span className="mx-4 font-semibold">{datas.title}</span>
                 </div>

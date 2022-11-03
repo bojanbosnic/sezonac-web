@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import WhyUs from "../components/WhyUs";
 import { BsCheckCircleFill } from "react-icons/bs";
 import Navbar from "../components/Navbar";

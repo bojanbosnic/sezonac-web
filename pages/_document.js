@@ -9,10 +9,10 @@ export default function Document() {
         <link rel="stylesheet" href="build/tailwind.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
+        {/* <link
           href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,600&family=Rubik:wght@300;400;500&family=Ubuntu&display=swap"
           rel="stylesheet"
-        />
+        /> */}
       </Head>
       <body className="">
         <Main />

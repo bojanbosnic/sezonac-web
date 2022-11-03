@@ -15,12 +15,7 @@ import Link from "next/link";
 const Register = ({ loggedIn }) => {
   const [confirmed, setConfirmed] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  // const [form, setForm] = useState({
-  //   displayName: "",
-  //   email: "",
-  //   password: "",
-  //   confirmPassword: "",
-  // });
+ 
   const {
     register,
     handleSubmit,
@@ -49,11 +44,7 @@ const Register = ({ loggedIn }) => {
   };
 
   const handleRegister = async (data) => {
-    // if (form.password !== form.confirmPassword) {
-    //   setConfirmed(false);
-    //   return;
-    // }
-    // setConfirmed(true);
+
 
     try {
       await createUserWithEmailAndPassword(auth, data.email, data.password);
@@ -78,6 +69,7 @@ const Register = ({ loggedIn }) => {
     } else {
       setIsLoading(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

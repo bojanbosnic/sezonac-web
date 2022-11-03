@@ -8,8 +8,6 @@ import { IoIosSave } from "react-icons/io";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
-import classNames from "classnames";
-import styles from "../styles/home.module.css";
 
 const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
   const [isBrowser, setIsBrowser] = useState(false);
@@ -115,6 +113,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
 
   useEffect(() => {
     setIsBrowser(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const modalContent = show ? (
@@ -136,12 +135,9 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                 X
               </div>
             </div>
-            {/* <div class="flex-none ...">01</div>
-            <div class="flex-1 w-64 ...">02</div>
-            <div class="flex-1 w-32 ...">03</div> */}
             <div className="flex items-center justify-between flex-wrap lg:justify-center p-8 my-8">
               <div className="relative flex flex-col justify-center items-center my-8 sm:justify-center">
-                <img
+                <Image
                   src={job.photo}
                   className="rounded-full w-48 h-48"
                   alt="company photo"

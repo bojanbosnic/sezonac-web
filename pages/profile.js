@@ -92,6 +92,7 @@ export default function Profile({ loggedIn }) {
     if (loggedIn) {
       getUserSaved();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let src = image ? image : userIcon.src;
@@ -126,6 +127,7 @@ export default function Profile({ loggedIn }) {
                         src={src}
                         width={800}
                         height={800}
+                        alt="user-picture"
                       />
                     </div>
                   </div>

@@ -16,7 +16,9 @@ const UploadForm = ({ test }) => {
     }
   };
 
-  useEffect(() => {}, [file]);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [file]);
 
   return (
     <div>

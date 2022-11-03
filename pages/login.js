@@ -63,6 +63,7 @@ export default function LogIn({ loggedIn }) {
     } else {
       setIsLoading(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

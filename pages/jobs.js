@@ -99,6 +99,7 @@ const Jobs = ({ loggedIn }) => {
     } else {
       getGlobalDatas();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
