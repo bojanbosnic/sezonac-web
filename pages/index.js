@@ -33,7 +33,7 @@ const Home = ({ loggedIn }) => {
                   mjesto za vas!
                 </p>
               </div>
-              <div className="flex items-center sm:flex-col">
+              <div className="flex items-center">
                 <Link legacyBehavior href="/jobs">
                   <a>
                     <Button

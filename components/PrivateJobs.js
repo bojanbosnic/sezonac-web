@@ -54,7 +54,7 @@ const PrivateJobs = () => {
     <div className="relative">
       <h1 className="text-xl font-medium mx-6">Objavljeni Poslovi</h1>
       <hr />
-      <div className="px-6">
+      <div className="px-6 sm:px-2">
         {fireData.map((jobs) => (
           <div key={jobs.jobID} className="flex items-center  relative">
             <div
@@ -71,7 +71,7 @@ const PrivateJobs = () => {
                 </span>
               </div>
             </div>
-            <button onClick={() => deleteDocument(jobs.jobID)} className="ml-4">
+            <button onClick={() => deleteDocument(jobs.jobID)} className="ml-4 sm:ml-2">
               <RiDeleteBin2Line fontSize="2rem" />
             </button>
           </div>

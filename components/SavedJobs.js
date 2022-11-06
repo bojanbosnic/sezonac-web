@@ -51,7 +51,7 @@ const SavedJobs = ({ savedJobsID }) => {
 
   const removeDocument = async (id, profileID) => {
     const jobsRef = doc(db, "/users", uid);
-    const proba = await updateDoc(jobsRef, {
+    await updateDoc(jobsRef, {
       savedJobs: arrayRemove({
         jobsID: id,
         profileid: profileID,
@@ -70,7 +70,7 @@ const SavedJobs = ({ savedJobsID }) => {
     <div className="relative">
       <h3 className="mx-6 text-xl font-medium">Sacuvani Poslovi</h3>
       <hr />
-      <div className="px-6">
+      <div className="px-6 sm:px-2">
         {sacuvaniPoslovi.map((datas) => (
           <div key={datas.jobID} className="flex items-center relative ">
             {console.log(datas.photo)}
@@ -80,9 +80,9 @@ const SavedJobs = ({ savedJobsID }) => {
               }}
               className="border cursor-pointer rounded-3xl bg-secondary text-black w-full flex items-center my-8 px-4 sm:p-0"
             >
-              <div className="mx-8 w-full flex items-center justify-between md:flex-wrap sm:my-2">
+              <div className="m-2 w-full flex items-center justify-between md:flex-wrap sm:my-2 sm:justify-center">
                 <div className="flex  items-center">
-                  <div className="border p-4  w-24 h-24 sm:mx-8 sm:w-12 sm:h-12">
+                  <div className="border p-4 w-24 h-24  ">
                     <Image
                       className="rounded-3xl"
                       width={500}
@@ -105,7 +105,7 @@ const SavedJobs = ({ savedJobsID }) => {
             </div>
             <button
               onClick={() => removeDocument(datas.jobID, datas.creatorID)}
-              className="ml-4"
+              className="ml-4 sm:ml-2"
             >
               <RiDeleteBin2Line fontSize="2rem" />
             </button>
