@@ -176,7 +176,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                 </div>
               </div>
               <div className="flex justify-between lg:flex-wrap lg:justify-center">
-                <div className="mr-28 lg:mr-0">
+                <div className="mr-28 lg:mr-0 md:w-full">
                   <div className="flex items-center py-2 px-3">
                     <MdBusinessCenter className="text-primary text-2xl" />
                     <div className="ml-4">
@@ -253,7 +253,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                     </div>
                   </div>
                 </div>
-                <div>
+                <div className="mr-28 lg:mr-0 md:w-full">
                   <div className="flex items-center py-2 px-3">
                     <HiLocationMarker className="text-primary text-2xl" />
                     <div className="ml-4">
@@ -320,7 +320,9 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                           />
                         </>
                       ) : (
-                        <h3 className="m-0 font-medium">{job.workDuration} hr</h3>
+                        <h3 className="m-0 font-medium">
+                          {job.workDuration} hr
+                        </h3>
                       )}
                     </div>
                   </div>
