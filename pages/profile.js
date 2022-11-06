@@ -106,101 +106,99 @@ export default function Profile({ loggedIn }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <>
-      {isLoading ? (
-        <LoadingSpinner />
-      ) : (
-        <div className="container lg:px-8 sm:p-4">
-          <Navbar loggedIn={!!loggedIn} />
-          <main className="flex justify-between my-12  lg:flex-wrap">
-            <div className="w-1/5 bg-secondary  lg:w-full mr-8 block rounded-3xl lg:mr-0 lg:mb-8">
-              <div className=" h-full p-[30px] lg:flex lg:justify-around  lg:items-center md:justify-center sm:block">
-                <div>
-                  <div className="flex items-center justify-center">
-                    <FaUserAlt className="text-primary mr-2" />
-                    <h3 className="m-0">{currentUser.displayName}</h3>
-                  </div>
-                  <div className="flex justify-center lg:w-[350px] md:w-full realtive border border-white mt-8 p-4 rounded-xl lg:py-12">
-                    <div className="text-center lg:w-[80%]  overflow-hidden">
-                      <Image
-                        loader={() => src}
-                        src={src}
-                        width={800}
-                        height={800}
-                        alt="user-picture"
-                      />
-                    </div>
-                  </div>
-                  <div className="relative text-center my-4 mb-6">
-                    <input
-                      onChange={(e) => {
-                        handleImage(e);
-                      }}
-                      className="w-1 h-1 absolute opacity-0"
-                      type="file"
-                      id="myImage"
-                      name="profile_img"
-                      accept="image/png, image/jpg"
+  return <>
+    {isLoading ? (
+      <LoadingSpinner />
+    ) : (
+      <div className="container lg:px-8 sm:p-4">
+        <Navbar loggedIn={!!loggedIn} />
+        <main className="flex justify-between my-12  lg:flex-wrap">
+          <div className="w-1/5 bg-secondary  lg:w-full mr-8 block rounded-3xl lg:mr-0 lg:mb-8">
+            <div className=" h-full p-[30px] lg:flex lg:justify-around  lg:items-center md:justify-center sm:block">
+              <div>
+                <div className="flex items-center justify-center">
+                  <FaUserAlt className="text-primary mr-2" />
+                  <h3 className="m-0">{currentUser.displayName}</h3>
+                </div>
+                <div className="flex justify-center lg:w-[350px] md:w-full realtive border border-white mt-8 p-4 rounded-xl lg:py-12">
+                  <div className="text-center lg:w-[80%]  overflow-hidden">
+                    <Image
+                      loader={() => src}
+                      src={src}
+                      width={800}
+                      height={800}
+                      alt="user-picture"
                     />
-                    <label
-                      htmlFor="myImage"
-                      className="bg-primary rounded-xl text-white font-medium text-sm py-2 px-4"
-                    >
-                      Objavi Sliku
-                    </label>
                   </div>
                 </div>
-                <div>
-                  <ul>
-                    <li
-                      className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300"
-                      onClick={() => setPage("page1")}
-                    >
-                      <AiFillFileMarkdown className="text-primary mr-2" />
-                      Moji Poslovi
-                    </li>
-                    <li
-                      className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300"
-                      onClick={() => setPage("page2")}
-                    >
-                      <FaSave className="text-primary mr-2" />
-                      Sačuvani Poslovi
-                    </li>
-                    <Link href="/jobs">
-                      <a>
-                        <li className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300">
-                          <AiOutlineGlobal className="text-primary mr-2" />
-                          Globalni Poslovi
-                        </li>
-                      </a>
-                    </Link>
-                    <li
-                      className="flex items-center px-4  py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300"
-                      onClick={() => setPage("page3")}
-                    >
-                      <RiFileUploadFill className="text-primary mr-2" />
-                      Objavi Posao
-                    </li>
-                    <li
-                      className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300"
-                      onClick={handleLogOut}
-                    >
-                      <HiOutlineLogout className="text-primary mr-2" />
-                      Odjavi Se
-                    </li>
-                  </ul>
+                <div className="relative text-center my-4 mb-6">
+                  <input
+                    onChange={(e) => {
+                      handleImage(e);
+                    }}
+                    className="w-1 h-1 absolute opacity-0"
+                    type="file"
+                    id="myImage"
+                    name="profile_img"
+                    accept="image/png, image/jpg"
+                  />
+                  <label
+                    htmlFor="myImage"
+                    className="bg-primary rounded-xl text-white font-medium text-sm py-2 px-4"
+                  >
+                    Objavi Sliku
+                  </label>
                 </div>
+              </div>
+              <div>
+                <ul>
+                  <li
+                    className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300"
+                    onClick={() => setPage("page1")}
+                  >
+                    <AiFillFileMarkdown className="text-primary mr-2" />
+                    Moji Poslovi
+                  </li>
+                  <li
+                    className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300"
+                    onClick={() => setPage("page2")}
+                  >
+                    <FaSave className="text-primary mr-2" />
+                    Sačuvani Poslovi
+                  </li>
+                  <Link href="/jobs">
+
+                    <li className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300">
+                      <AiOutlineGlobal className="text-primary mr-2" />
+                      Globalni Poslovi
+                    </li>
+
+                  </Link>
+                  <li
+                    className="flex items-center px-4  py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300"
+                    onClick={() => setPage("page3")}
+                  >
+                    <RiFileUploadFill className="text-primary mr-2" />
+                    Objavi Posao
+                  </li>
+                  <li
+                    className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300"
+                    onClick={handleLogOut}
+                  >
+                    <HiOutlineLogout className="text-primary mr-2" />
+                    Odjavi Se
+                  </li>
+                </ul>
               </div>
             </div>
-            <section className="w-3/4 p-8 bg-[#f5f7f9] rounded-xl lg:w-full">
-              <div className="h-full bg-white rounded-xl border border-white">
-                {myPages()}
-              </div>
-            </section>
-          </main>
-        </div>
-      )}
-    </>
-  );
+          </div>
+          <section className="w-3/4 p-8 bg-[#f5f7f9] rounded-xl lg:w-full">
+            <div className="h-full bg-white rounded-xl border border-white">
+              {myPages()}
+            </div>
+          </section>
+        </main>
+      </div>
+    )}
+  </>;
 }

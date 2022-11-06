@@ -43,18 +43,16 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
 
           {loggedIn ? (
             <>
-              <li>
-                <Link href="/profile">
-
+              <li className="cursor-pointer">
+                <Link href="/profile" legacyBehavior>
                   <FaHome fontSize="1.5rem" />
-
                 </Link>
               </li>
             </>
           ) : (
             <>
               <li className="mx-3">
-                <Link href="/login">
+                <Link href="/login" legacyBehavior>
 
                   <Button
                     name="Prijavi se"

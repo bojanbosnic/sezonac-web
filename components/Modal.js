@@ -9,9 +9,11 @@ import {
   MdBusinessCenter,
   MdEmail,
   MdOutlineAccessTimeFilled,
+  MdUpdate,
 } from "react-icons/md";
 import { HiLocationMarker } from "react-icons/hi";
 import { FaGlobeAmericas } from "react-icons/fa";
+import { GrUpdate } from "react-icons/gr";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../firebase";
@@ -88,17 +90,20 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
     if (isUpdate) {
       return (
         <>
-          <button onClick={updateFields} className="mx-2">
-            Update
+          <button onClick={updateFields} className="flex items-center ml-2 mr-12">
+            <span>
+              <GrUpdate className="mr-2" />
+            </span>
+            <span>Update</span>
           </button>
-          <button onClick={() => setIsUpdate(false)}>Close</button>
+          <button onClick={() => setIsUpdate(false)}>X</button>
         </>
       );
     } else {
       return (
         <>
           <button
-            className="mx-2"
+            className="mx-2 flex items-center"
             onClick={() =>
               getDatas(
                 id,
@@ -112,7 +117,10 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
               )
             }
           >
-            Update job
+            <span>
+              <MdUpdate className="mr-2 text-xl" />
+            </span>
+            <span>Update job</span>
           </button>
         </>
       );
@@ -329,7 +337,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-between items-center ml-6 my-8">
+            <div className="flex items-center ml-6 my-8">
               {isUpdating &&
                 privateUpdate(
                   job.jobID,
