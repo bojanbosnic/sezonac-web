@@ -30,7 +30,7 @@ module.exports = {
         secondary: "#dbe6f7",
         white: "#fff",
         black: "#3c3c3c",
-        green: "#00ca99",
+        green: "#666666",
       },
 
       boxShadow: {
