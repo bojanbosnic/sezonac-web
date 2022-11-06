@@ -30,39 +30,37 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
             } my-5 flex p-0 items-center list-none text-black md:my-0`
           )}
         >
-          <li className=" mr-4">
-            <Link href="/about">
-              O Nama
-            </Link>
+          <li className="mr-4">
+            <Link href="/about">O Nama</Link>
           </li>
-          <li className=" mr-4">
-            <Link href="/contact">
-              Kontakt
-            </Link>
+          <li className="mr-4">
+            <Link href="/contact">Kontakt</Link>
           </li>
 
           {loggedIn ? (
             <>
-              <li className="cursor-pointer">
+              <li className="cursor-pointer md:mr-4">
                 <Link href="/profile" legacyBehavior>
-                  <FaHome fontSize="1.5rem" />
+                  <a>
+                    <FaHome fontSize="1.5rem" />
+                  </a>
                 </Link>
               </li>
             </>
           ) : (
             <>
-              <li className="mx-3">
+              <li className="ml-3 md:ml-0 md:mr-4">
                 <Link href="/login" legacyBehavior>
-
-                  <Button
-                    name="Prijavi se"
-                    textColor="text-white"
-                    bgColor="bg-primary"
-                    hover="hover:bg-sky-700"
-                    paddingY="py-3"
-                    paddingX="px-5"
-                  />
-
+                  <a>
+                    <Button
+                      name="Prijavi se"
+                      textColor="text-white"
+                      bgColor="bg-primary"
+                      hover="hover:bg-sky-700"
+                      paddingY="py-3"
+                      paddingX="px-5"
+                    />
+                  </a>
                 </Link>
               </li>
             </>
@@ -73,7 +71,7 @@ const Interface = ({ toggleFun, toggleValue, loggedIn }) => {
         className={classNames(
           `${
             toggleValue && styles.togglerOpen
-          } border-3 border-white m-3 bg-transparent cursor-pointer h-9  z-10 hidden  md:block `
+          } border-3 border-white m-3 bg-transparent cursor-pointer h-9  z-30 hidden  md:block `
         )}
         onClick={toggleFun}
       >
