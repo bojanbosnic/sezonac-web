@@ -167,12 +167,14 @@ export default function Profile({ loggedIn }) {
                       <FaSave className="text-primary mr-2" />
                       Sačuvani Poslovi
                     </li>
-                    <a href="/jobs">
-                      <li className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300">
-                        <AiOutlineGlobal className="text-primary mr-2" />
-                        Globalni Poslovi
-                      </li>
-                    </a>
+                    <Link href="/jobs">
+                      <a>
+                        <li className="flex items-center px-4 py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300">
+                          <AiOutlineGlobal className="text-primary mr-2" />
+                          Globalni Poslovi
+                        </li>
+                      </a>
+                    </Link>
                     <li
                       className="flex items-center px-4  py-[0.8rem] cursor-pointer hover:bg-white hover:rounded-3xl ease-in-out duration-300"
                       onClick={() => setPage("page3")}
