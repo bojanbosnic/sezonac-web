@@ -49,7 +49,7 @@ const Card = (props) => {
   };
 
   const showToastMessage = () => {
-    toast.success("Success Notification !", {
+    toast.success("Posao je sačuvan!", {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
