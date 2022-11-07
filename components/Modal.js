@@ -133,12 +133,12 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
   }, []);
 
   const modalContent = show ? (
-    <div className="z-20 fixed w-full h-full top-0 left-0 bg-[#000000f7]">
-      <div className="z-40 w-[80%] absolute inset-2/4 -translate-y-2/4 -translate-x-2/4 min-h-full p-4">
+    <div className="z-20 fixed w-full h-full top-0 left-0 bg-[#000000f7] z-40">
+      <div className="z-40 w-[80%] absolute inset-2/4 -translate-y-2/4 -translate-x-2/4 min-h-full p-4 sm:w-full">
         {poslovi.map((job) => (
           <div
             key={job.jobID}
-            className="rounded bg-secondary overflow-y-auto snap-y h-[80vh]"
+            className="rounded bg-secondary overflow-y-auto snap-y h-[90vh] sm:h-full"
           >
             <div className="bg-primary relative p-8">
               <div className="flex text-white items-center">

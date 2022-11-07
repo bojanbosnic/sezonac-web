@@ -18,7 +18,7 @@ const PrivateJobs = () => {
   const { currentUser } = useContext(AuthContext);
   const { uid } = currentUser;
   const [showModal, setShowModal] = useState(false);
-  const [fireData, setFireData] = useState([]);
+  const [ownJobs, setOwnJobs] = useState([]);
   const [jobsForModal, setJobsForModal] = useState([]);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -34,7 +34,7 @@ const PrivateJobs = () => {
       jobovi.push({ ...doc.data() });
     });
 
-    setFireData(jobovi);
+    setOwnJobs(jobovi);
   };
 
   const deleteDocument = (id) => {
@@ -47,7 +47,7 @@ const PrivateJobs = () => {
   useEffect(() => {
     getUserData();
     setIsUpdating(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -55,27 +55,38 @@ const PrivateJobs = () => {
       <h1 className="text-xl font-medium mx-6">Objavljeni Poslovi</h1>
       <hr />
       <div className="px-6 sm:px-2">
-        {fireData.map((jobs) => (
-          <div key={jobs.jobID} className="flex items-center  relative">
-            <div
-              onClick={() => {
-                setJobsForModal(jobs), setShowModal(true);
-              }}
-              className="border cursor-pointer rounded-3xl bg-secondary text-black w-full flex items-center my-8 px-6 sm:p-0"
-            >
-              <div className="w-full flex m-8 items-center justify-between sm:flex-wrap sm:m-4 sm:px-4">
-                <span className="mx-2 font-medium">{jobs.title}</span>
-                <span className="mx-2 flex items-center sm:flex-wrap">
-                  <MdLocationOn />
-                  <span className="font-medium mx-2">{jobs.location}</span>
-                </span>
+        {ownJobs.length === 0 ? (
+          <>
+            <p className="mt-8 font-medium text-green">Nema poslova...</p>
+          </>
+        ) : (
+          <>
+            {ownJobs.map((jobs) => (
+              <div key={jobs.jobID} className="flex items-center  relative">
+                <div
+                  onClick={() => {
+                    setJobsForModal(jobs), setShowModal(true);
+                  }}
+                  className="border cursor-pointer rounded-3xl bg-secondary text-black w-full flex items-center my-8 px-6 sm:p-0"
+                >
+                  <div className="w-full flex m-8 items-center justify-between sm:flex-wrap sm:m-4 sm:px-4">
+                    <span className="mx-2 font-medium">{jobs.title}</span>
+                    <span className="mx-2 flex items-center sm:flex-wrap">
+                      <MdLocationOn />
+                      <span className="font-medium mx-2">{jobs.location}</span>
+                    </span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => deleteDocument(jobs.jobID)}
+                  className="ml-4 sm:ml-2"
+                >
+                  <RiDeleteBin2Line fontSize="2rem" />
+                </button>
               </div>
-            </div>
-            <button onClick={() => deleteDocument(jobs.jobID)} className="ml-4 sm:ml-2">
-              <RiDeleteBin2Line fontSize="2rem" />
-            </button>
-          </div>
-        ))}
+            ))}
+          </>
+        )}
       </div>
       <Modal
         getUserData={getUserData}

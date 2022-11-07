@@ -71,46 +71,53 @@ const SavedJobs = ({ savedJobsID }) => {
       <h3 className="mx-6 text-xl font-medium">Sacuvani Poslovi</h3>
       <hr />
       <div className="px-6 sm:px-2">
-        {sacuvaniPoslovi.map((datas) => (
-          <div key={datas.jobID} className="flex items-center relative ">
-            {console.log(datas.photo)}
-            <div
-              onClick={() => {
-                setJobsForModal(datas), setShowModal(true);
-              }}
-              className="border cursor-pointer rounded-3xl bg-secondary text-black w-full flex items-center my-8 px-4 sm:p-0"
-            >
-              <div className="m-2 w-full flex items-center justify-between md:flex-wrap sm:my-2 sm:justify-center">
-                <div className="flex  items-center">
-                  <div className="border p-4 w-24 h-24  ">
-                    <Image
-                      className="rounded-3xl"
-                      width={500}
-                      height={500}
-                      src={datas.photo === null ? userIcon.src : datas.photo}
-                      alt="company-owner-pc"
-                    />
-                  </div>
-                  <span className="mx-4 font-semibold">{datas.title}</span>
-                </div>
-                <div className="flex items-center sm:flex-wrap">
-                  <div className="flex items-center justify-center">
-                    <span className="mx-4 flex items-center sm:flex-wrap">
-                      <MdLocationOn />
-                      <span className="ml-2">{datas.location}</span>
-                    </span>
-                  </div>
-                </div>
+   {sacuvaniPoslovi.length === 0? (
+    <>
+    <p className="mt-8 font-medium text-green">Nema poslova...</p>
+    </>
+   ):(
+    <>
+    {sacuvaniPoslovi.map((datas) => (
+      <div key={datas.jobID} className="flex items-center relative ">
+        <div
+          onClick={() => {
+            setJobsForModal(datas), setShowModal(true);
+          }}
+          className="border cursor-pointer rounded-3xl bg-secondary text-black w-full flex items-center my-8 px-4 sm:p-0"
+        >
+          <div className="m-2 w-full flex items-center justify-between md:flex-wrap sm:my-2 sm:justify-center">
+            <div className="flex  items-center">
+              <div className="border p-4 w-24 h-24  ">
+                <Image
+                  className="rounded-3xl"
+                  width={500}
+                  height={500}
+                  src={datas.photo === null ? userIcon.src : datas.photo}
+                  alt="company-owner-pc"
+                />
+              </div>
+              <span className="mx-4 font-semibold">{datas.title}</span>
+            </div>
+            <div className="flex items-center sm:flex-wrap">
+              <div className="flex items-center justify-center">
+                <span className="mx-4 flex items-center sm:flex-wrap">
+                  <MdLocationOn />
+                  <span className="ml-2">{datas.location}</span>
+                </span>
               </div>
             </div>
-            <button
-              onClick={() => removeDocument(datas.jobID, datas.creatorID)}
-              className="ml-4 sm:ml-2"
-            >
-              <RiDeleteBin2Line fontSize="2rem" />
-            </button>
           </div>
-        ))}
+        </div>
+        <button
+          onClick={() => removeDocument(datas.jobID, datas.creatorID)}
+          className="ml-4 sm:ml-2"
+        >
+          <RiDeleteBin2Line fontSize="2rem" />
+        </button>
+      </div>
+    ))}
+    </>
+   )}
       </div>
       <Modal
         getUserData={getUserData}
