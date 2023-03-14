@@ -23,6 +23,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
   const [isUpdate, setIsUpdate] = useState(false);
   const { currentUser } = useContext(AuthContext);
   const [updateJobs, setUpdateJobs] = useState([]);
+  ///^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   const poslovi = [jobsForModal];
   console.log("error resolved KEY", poslovi);
 
@@ -90,7 +91,10 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
     if (isUpdate) {
       return (
         <>
-          <button onClick={updateFields} className="flex items-center ml-2 mr-12">
+          <button
+            onClick={updateFields}
+            className="flex items-center ml-2 mr-12"
+          >
             <span>
               <GrUpdate className="mr-2" />
             </span>
@@ -122,6 +126,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
             </span>
             <span>Update job</span>
           </button>
+          {/* ovo je prvi klik gdje vraca iz stejta u polja */}
         </>
       );
     }
@@ -133,7 +138,7 @@ const Modal = ({ show, onClose, jobsForModal, getUserData, isUpdating }) => {
   }, []);
 
   const modalContent = show ? (
-    <div className="z-20 fixed w-full h-full top-0 left-0 bg-[#000000f7] z-40">
+    <div className=" fixed w-full h-full top-0 left-0 bg-[#000000f7] z-40">
       <div className="z-40 w-[80%] absolute inset-2/4 -translate-y-2/4 -translate-x-2/4 min-h-full p-4 sm:w-full">
         {poslovi.map((job) => (
           <div
